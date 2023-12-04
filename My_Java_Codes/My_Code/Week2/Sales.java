@@ -12,7 +12,7 @@ public class Sales {
         int totalSales = 0;
         int maxSale = Integer.MIN_VALUE;
         int minSale = Integer.MAX_VALUE;
-        int maxSalesperson=0, minSalesperson=0;
+        int maxSalesperson = 0, minSalesperson = 0;
 
         for (int i = 0; i < SALESPEOPLE; i++) {
             System.out.print("Enter the sales for salesperson " + (i + 1) + ": ");
@@ -21,12 +21,12 @@ public class Sales {
 
             if (sales[i] > maxSale) {
                 maxSale = sales[i];
-                maxSalesperson = i+1;
+                maxSalesperson = i + 1;
             }
 
             if (sales[i] < minSale) {
                 minSale = sales[i];
-                minSalesperson = i+1;
+                minSalesperson = i + 1;
             }
         }
 
