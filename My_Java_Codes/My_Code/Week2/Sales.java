@@ -1,92 +1,61 @@
 package My_Code.Week2;
-// import java.util.*;
-
-// public class Sales {
-//  public static void main(String[] args)
-//  {
-//  final int SALESPEOPLE = 5;
-//  int[] sales = new int[SALESPEOPLE];
-// int sum;
-//  Scanner sc = new Scanner(System.in);
-//  for (int i=0; i<sales.length; i++)
-//  {
-//  System.out.print("Enter sales for salesperson "+i+": ");
-//  sales[i] = sc.nextInt();
-//  }
-//  System.out.println("\nSalesperson Sales");
-//  System.out.println("                     ");
-//  sum = 0;
-//  for (int i=0; i<sales.length; i++)
-//  {
-//  System.out.println(" " + i + " " + sales[i]);
-//  sum += sales[i];
-//  }
-//  System.out.println("\nTotal sales: " + sum);
-//  sc.close();
-//  }
-// }
 
 import java.util.Scanner;
 
 public class Sales {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
 
         System.out.print("Enter the number of salespeople: ");
-        int numSalespeople = scanner.nextInt();
-        int[] sales = new int[numSalespeople];
+        int SALESPEOPLE = scan.nextInt();
+        int[] sales = new int[SALESPEOPLE];
         int totalSales = 0;
         int maxSale = Integer.MIN_VALUE;
         int minSale = Integer.MAX_VALUE;
+        int maxSalesperson=0, minSalesperson=0;
 
-        for (int i = 0; i < numSalespeople; i++) {
+        for (int i = 0; i < SALESPEOPLE; i++) {
             System.out.print("Enter the sales for salesperson " + (i + 1) + ": ");
-            sales[i] = scanner.nextInt();
+            sales[i] = scan.nextInt();
             totalSales += sales[i];
 
             if (sales[i] > maxSale) {
                 maxSale = sales[i];
+                maxSalesperson = i+1;
             }
 
             if (sales[i] < minSale) {
                 minSale = sales[i];
+                minSalesperson = i+1;
             }
         }
 
-        double averageSale = (double) totalSales / numSalespeople;
+        double averageSale = (double) totalSales / SALESPEOPLE;
 
         System.out.println("\nSales Report:");
-        for (int i = 0; i < numSalespeople; i++) {
-            System.out.println("Salesperson " + (i + 1) + " had sales of ₹" + sales[i]);
+        for (int i = 0; i < SALESPEOPLE; i++) {
+            System.out.println("Salesperson " + (i + 1) + " had sales of $" + sales[i]);
         }
 
-        System.out.println("\nTotal sales: ₹" + totalSales);
-        System.out.println("Average sale: ₹" + averageSale);
-        System.out.println("Salesperson with the highest sale: Salesperson " + (findSalespersonId(sales, maxSale) + 1) + " with ₹" + maxSale);
-        System.out.println("Salesperson with the lowest sale: Salesperson " + (findSalespersonId(sales, minSale) + 1) + " with ₹" + minSale);
+        System.out.println("\nTotal sales: $" + totalSales);
+        System.out.println("Average sale: $" + averageSale);
+        System.out.println("Salesperson " + maxSalesperson + " had the highest sale with $" + maxSale);
+        System.out.println("Salesperson " + minSalesperson + " had the lowest sale with $" + minSale);
 
         System.out.print("\nEnter a value: ");
-        int value = scanner.nextInt();
+        int value = scan.nextInt();
         int numSalesExceeded = 0;
 
-        System.out.println("\nSalespeople who exceeded ₹" + value + ":");
-        for (int i = 0; i < numSalespeople; i++) {
+        System.out.println("\nSalespeople who exceeded $" + value + ":");
+        for (int i = 0; i < SALESPEOPLE; i++) {
             if (sales[i] > value) {
-                System.out.println("Salesperson " + (i + 1) + " had sales of ₹" + sales[i]);
+                System.out.println("Salesperson " + (i + 1) + " had sales of $" + sales[i]);
                 numSalesExceeded++;
             }
         }
 
-        System.out.println("Total number of salespeople whose sales exceeded ₹" + value + ": " + numSalesExceeded);
-        scanner.close();
+        System.out.println("Total number of salespeople whose sales exceeded $" + value + ": " + numSalesExceeded);
+        scan.close();
     }
 
-    private static int findSalespersonId(int[] sales, int sale) {
-        for (int i = 0; i < sales.length; i++) {
-            if (sales[i] == sale) {
-                return i;
-            }
-        }
-        return -1;
-    }
 }
