@@ -1,3 +1,4 @@
+//Week 3 program 2
 #include <stdio.h>
 
 #define MAX_TERMS 100

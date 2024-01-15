@@ -1,3 +1,4 @@
+//Week 4 program 2
 #include <stdio.h>
 #include <string.h>
 

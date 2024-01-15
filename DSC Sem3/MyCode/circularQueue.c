@@ -37,7 +37,7 @@ void enqueue(struct circularQueue *q, int val)
     {
         q->r = (q->r + 1) % q->size;
         q->arr[q->r] = val;
-        printf("Enqued element: %d\n", val);
+        printf("Enqueued element: %d\n", val);
     }
 }
 

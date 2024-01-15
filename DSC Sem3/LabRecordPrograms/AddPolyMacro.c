@@ -1,3 +1,4 @@
+//Week 2
 #include <stdio.h>
 
 #define COMPARE_EXPONENT(a, b) ((a) > (b) ? 1 : ((a) < (b) ? -1 : 0))
