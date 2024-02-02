@@ -37,33 +37,40 @@ void postorder(tree_pointer ptr)
     } 
 }
 
-int main() {
-    struct node root, left, right;
+tree_pointer newNode(int item){
+        tree_pointer temp = (tree_pointer) malloc(sizeof(node));
+        temp->data = item;
+        temp->left_child = temp->right_child = NULL;
+        return temp;
+}
 
-    root.data = 1;
-    left.data = 2;
-    right.data = 3;
+tree_pointer insert(tree_pointer node , int key){
+        if(node==NULL){
+                return newNode(key);
+        }
+        else if(key<node->data)
+                node->left_child = insert(node->left_child, key);
+        else if(key<node->data)
+                node->left_child = insert(node->left_child, key);
+        else if(key>node->data)
+                node->right_child = insert(node->right_child , key);
+}
+int main(){
+        tree_pointer root = NULL;
+        root= insert(root,50);
+        insert(root,20);
+        insert(root,40);
+        insert(root,3000);
+        insert(root, 1);
+        insert(root,25);
+        printf("pre:");
 
-    root.left_child = &left;
-    root.right_child = &right;
+        preorder(root);
+        printf("\npost: ");
 
-    left.left_child = NULL;
-    left.right_child = NULL;
+        postorder(root);
+        printf("\nin: ");
 
-    right.left_child = NULL;
-    right.right_child = NULL;
-
-    printf("Inorder traversal: ");
-    inorder(&root);
-    printf("\n");
-
-    printf("Preorder traversal: ");
-    preorder(&root);
-    printf("\n");
-
-    printf("Postorder traversal: ");
-    postorder(&root);
-    printf("\n");
-
-    return 0;
+        inorder(root);
+        return 0;
 }
