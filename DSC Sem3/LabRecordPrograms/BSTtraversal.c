@@ -38,22 +38,19 @@ void postorder(tree_pointer ptr)
 }
 
 tree_pointer newNode(int item){
-        tree_pointer temp = (tree_pointer) malloc(sizeof(node));
-        temp->data = item;
-        temp->left_child = temp->right_child = NULL;
-        return temp;
+    tree_pointer temp = (tree_pointer) malloc(sizeof(*temp));
+    temp->data = item;
+    temp->left_child = temp->right_child = NULL;
+    return temp;
 }
 
-tree_pointer insert(tree_pointer node , int key){
-        if(node==NULL){
-                return newNode(key);
-        }
-        else if(key<node->data)
-                node->left_child = insert(node->left_child, key);
-        else if(key<node->data)
-                node->left_child = insert(node->left_child, key);
-        else if(key>node->data)
-                node->right_child = insert(node->right_child , key);
+tree_pointer insert(tree_pointer temp , int key){
+        if(temp==NULL)
+            return newNode(key);
+        else if(key<temp->data)
+            temp->left_child = insert(temp->left_child, key);
+        else if(key>temp->data)
+            temp->right_child = insert(temp->right_child , key);
 }
 int main(){
         tree_pointer root = NULL;
@@ -63,14 +60,14 @@ int main(){
         insert(root,3000);
         insert(root, 1);
         insert(root,25);
+
         printf("pre:");
-
         preorder(root);
+
         printf("\npost: ");
-
         postorder(root);
-        printf("\nin: ");
 
+        printf("\nin: ");
         inorder(root);
         return 0;
 }
