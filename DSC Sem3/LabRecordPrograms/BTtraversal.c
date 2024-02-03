@@ -38,31 +38,34 @@ void postorder(tree_pointer ptr)
 }
 
 int main() {
-    struct node root, left, right;
+    tree_pointer root, left, right;
+    root = (tree_pointer)malloc(sizeof(*root));
+    left = (tree_pointer)malloc(sizeof(*left));
+    right = (tree_pointer)malloc(sizeof(*right));
 
-    root.data = 1;
-    left.data = 2;
-    right.data = 3;
+    root->data = 2;
+    left->data = 1;
+    right->data = 3;
 
-    root.left_child = &left;
-    root.right_child = &right;
+    root->left_child = left;
+    root->right_child = right;
 
-    left.left_child = NULL;
-    left.right_child = NULL;
+    left->left_child = NULL;
+    left->right_child = NULL;
 
-    right.left_child = NULL;
-    right.right_child = NULL;
+    right->left_child = NULL;
+    right->right_child = NULL;
 
     printf("Inorder traversal: ");
-    inorder(&root);
+    inorder(root);
     printf("\n");
 
     printf("Preorder traversal: ");
-    preorder(&root);
+    preorder(root);
     printf("\n");
 
     printf("Postorder traversal: ");
-    postorder(&root);
+    postorder(root);
     printf("\n");
 
     return 0;
