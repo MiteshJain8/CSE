@@ -58,10 +58,6 @@ int main()
     insert_node(&root, 10);
     insert_node(&root, 5);
     insert_node(&root, 15);
-    insert_node(&root, 3);
-    insert_node(&root, 7);
-    insert_node(&root, 13);
-    insert_node(&root, 17);
 
     tree_pointer result1 = search(root, 10);
     if (result1) {
