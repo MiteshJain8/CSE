@@ -15,7 +15,7 @@ typedef struct element {
 } element;
 
 element *queue;
-int rear = -1, front = -1;
+int rear = 0, front = 0;
 
 void copy(element *src, element *dest, int count) {
     for (int i = 0; i < count; i++) {
@@ -26,17 +26,15 @@ void copy(element *src, element *dest, int count) {
 void queueFull() {
     element *newQueue;
     MALLOC(newQueue, 2 * sizeof(element) * size);
-
     int start = (front + 1) % size;
     if (start < 2) {
-        copy(queue + start, newQueue, size - 1);
+        copy(queue+start, newQueue, size-1);
     } else {
-        copy(queue + start, newQueue, size - start);
-        copy(queue, newQueue + size - start, rear + 1);
+        copy(queue+start, newQueue, size-start);
+        copy(queue, newQueue+size-start, rear+1);
     }
-
     front = 2 * size - 1;
-    rear = size - 2;
+    rear = size - 1;
     size *= 2;
     free(queue);
     queue = newQueue;
@@ -44,7 +42,7 @@ void queueFull() {
 
 void enqueue(element item) {
     rear = (rear + 1) % size;
-    if (rear == size) {
+    if (rear == front) {
         queueFull();
     }
     (queue + rear)->key = item.key;
@@ -55,7 +53,8 @@ element dequeue() {
     element item;
     if (rear == front) {
         printf("Queue is empty\n");
-        exit(0);
+        item.key=-1;
+        return item;
     }
     front = (front + 1) % size;
     item.key = (queue + front)->key;
@@ -70,38 +69,39 @@ void display() {
         return;
     }
     printf("The elements in the queue are: ");
-    for (i = front; i != rear; i = (i + 1) % size)
-        printf("%d ", queue[i + 1].key);
+    for (i = (front+1)%size; i != (rear+1)%size; i = (i + 1) % size)
+        printf("%d ", queue[i].key);
     printf("\n");
 }
 
 int main() {
     element item;
+    int choice;
     MALLOC(queue, sizeof(element) * size);
-    item.key = 10;
-    enqueue(item);
-    item.key = 20;
-    enqueue(item);
-    item.key = 30;
-    enqueue(item);
-    item.key = 40;
-    enqueue(item);
-    item.key = 50;
-    enqueue(item);
-    item.key = 10;
-    enqueue(item);
-    item.key = 20;
-    enqueue(item);
-    item.key = 30;
-    enqueue(item);
-    item.key = 40;
-    enqueue(item);
-    item.key = 50;
-    enqueue(item);
-    printf("Dequeuing element %d\n", dequeue().key);
-    printf("Dequeuing element %d\n", dequeue().key);
-    printf("Dequeuing element %d\n", dequeue().key);
-    item.key = 40;
-    enqueue(item);
+    while (1)
+    {
+        printf("1.Add\t2.Delete\t3.Display\t4.Exit: ");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            printf("Enter item to add");
+            scanf("%d", &item.key);
+            enqueue(item);
+            break;
+        case 2:
+            item = dequeue();
+            if (item.key == -1)
+                printf("Queue Empty");
+            else
+                printf("Item deleted: %d", item.key);
+            break;
+        case 3:
+            display();
+            break;
+        case 4:
+            exit(0);
+        }
+    }
     return 0;
 }

@@ -1,12 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-struct node
+
+typedef struct node
 {
 	int vertex;
 	struct node *next;
 };
-
-struct node *createNode(int v);
 
 struct Graph
 {
