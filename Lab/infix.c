@@ -1,7 +1,6 @@
-//Week 5 program 1
 #include <stdio.h>
-#define max_expr_size 100
-char expr[max_expr_size];
+#define MAX 100
+char expr[MAX];
 typedef enum
 {
     lparen,
@@ -14,14 +13,14 @@ typedef enum
     eos,
     operand
 } precedence;
-precedence stack[max_expr_size];
+precedence stack[MAX];
 int top = -1;
-//  isp (in-stack precedence) and icp (incoming precedence)
+
 int isp[] = {0, 19, 12, 12, 13, 13, 13, 0};
 int icp[] = {20, 19, 12, 12, 13, 13, 13, 0};
 void push(precedence token)
 {
-    if (top >= max_expr_size - 1)
+    if (top >= MAX - 1)
     {
         printf("Stack full");
         return;

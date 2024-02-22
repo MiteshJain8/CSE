@@ -30,7 +30,6 @@ polyptr cpadd(polyptr a, polyptr b)
     lastC = c;
     do
     {
-        // printf("a: %d, b: %d",a->expo,b->expo);
         switch (COMPARE(a->expo, b->expo))
         {
         case -1:
@@ -40,7 +39,6 @@ polyptr cpadd(polyptr a, polyptr b)
         case 0:
             if (startA == a)
                 done = 1;
-            // printf("Equal\n");
             sum = a->coeff + b->coeff;
             if (sum)
                 attach(sum, a->expo, &lastC);
@@ -67,7 +65,7 @@ void printPoly(polyptr a)
     printf("%d x ^ %d", a->coeff, a->expo);
     printf("\n");
 }
-void readPoly2(polyptr *a)
+void readPoly(polyptr *a)
 {
     *a = (polyptr)malloc(sizeof(struct node));
     polyptr temp;
@@ -90,9 +88,9 @@ void readPoly2(polyptr *a)
 int main(void)
 {
     polyptr a, b, c;
-    readPoly2(&a);
+    readPoly(&a);
     printPoly(a);
-    readPoly2(&b);
+    readPoly(&b);
     printPoly(b);
     c = cpadd(a, b);
     printPoly(c);

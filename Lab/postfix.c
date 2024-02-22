@@ -1,8 +1,7 @@
-//Week 5 program 2
 #include <stdio.h>
 #include <stdlib.h>
-#define max_expr_size 100
-char expr[max_expr_size];
+#define MAX 100
+char expr[MAX];
 typedef enum
 {
     lparen,
@@ -15,11 +14,11 @@ typedef enum
     eos,
     operand
 } precedence;
-precedence stack[max_expr_size];
+precedence stack[MAX];
 int top = -1;
 void push(precedence token)
 {
-    if (top >= max_expr_size - 1)
+    if (top >= MAX - 1)
     {
         printf("Stack full");
         return;
@@ -67,8 +66,6 @@ int eval()
     char symbol;
     int op1, op2;
     int n = 0;
-    // token = getToken(&symbol, &n);
-    // while (token != eos)
     for(token=getToken(&symbol, &n); token!=eos; token=getToken(&symbol, &n))
     {
         if (token == operand)
@@ -98,7 +95,6 @@ int eval()
                 printf("Invalid token\n");
             }
         }
-        // token = getToken(&symbol, &n);
     }
     return pop();
 }
