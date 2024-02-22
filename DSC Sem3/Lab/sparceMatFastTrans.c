@@ -73,7 +73,7 @@ int main() {
 
     fastTranspose(a, b);
 
-    printf("Transposed sparse Matrix:\n");
+    printf("Fast Transpose:\n");
     displayMatrix(b);
 
     return 0;

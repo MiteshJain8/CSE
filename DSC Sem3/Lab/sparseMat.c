@@ -37,6 +37,40 @@ void transpose(Term a[], Term b[])
     }
 }
 
+void fastTranspose(Term a[], Term b[]) {
+    int numTerms = a[0].value;
+    int numCols = a[0].col;
+    int colTerm[numCols];
+    int startingPos[numCols];
+
+    b[0].row = a[0].col;
+    b[0].col = a[0].row;
+    b[0].value = a[0].value;
+
+    if (numTerms > 0) {
+        for (int i = 0; i < numCols; i++) {
+            colTerm[i] = 0;
+        }
+
+        for (int i = 1; i <= numTerms; i++) {
+            colTerm[a[i].col]++;
+        }
+
+        startingPos[0] = 1;
+
+        for (int i = 1; i < numCols; i++) {
+            startingPos[i] = startingPos[i - 1] + colTerm[i - 1];
+        }
+
+        for (int i = 1; i <= numTerms; i++) {
+            int j = startingPos[a[i].col]++;
+            b[j].row = a[i].col;
+            b[j].col = a[i].row;
+            b[j].value = a[i].value;
+        }
+    }
+}
+
 void displayMatrix(Term a[])
 {
     int numTerms = a[0].value;
@@ -70,8 +104,11 @@ int main()
     displayMatrix(a);
 
     transpose(a, b);
+    printf("Simple Transpose:\n");
+    displayMatrix(b);
 
-    printf("Transposed sparse Matrix:\n");
+    fastTranspose(a, b);
+    printf("Fast Transpose:\n");
     displayMatrix(b);
 
     return 0;

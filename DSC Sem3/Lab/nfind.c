@@ -22,7 +22,7 @@ int main(){
     char string[1000];
     printf("Enter a string: ");scanf("%s",string);
     char pat[1000];
-    printf("\nEnter a pattern to check if its present in the entered string: ");
+    printf("\nEnter a pattern: ");
     scanf("%s",pat);
     int x = nfind(string,pat);
     printf("\nPattern found at index %d",x);

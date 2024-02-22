@@ -5,20 +5,20 @@ char expr[max_expr_size];
 typedef enum
 {
     lparen,
+    rparen,
     plus,
     minus,
     times,
     divide,
     mod,
-    rparen,
     eos,
     operand
 } precedence;
 precedence stack[max_expr_size];
 int top = -1;
 //  isp (in-stack precedence) and icp (incoming precedence)
-int isp[] = {0, 12, 12, 13, 13, 13, 19};
-int icp[] = {20, 12, 12, 13, 13, 13, 19};
+int isp[] = {0, 19, 12, 12, 13, 13, 13, 0};
+int icp[] = {20, 19, 12, 12, 13, 13, 13, 0};
 void push(precedence token)
 {
     if (top >= max_expr_size - 1)
