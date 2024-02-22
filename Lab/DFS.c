@@ -8,22 +8,22 @@ typedef struct node
 } node;
 
 int visited[MAX];
-node *G[20]; // heads of the linked list
+node *G[20];
 int n;
 
 void insert(int vi, int vj)
 {
     node *p, *q;
-    // acquire memory for the new node
+
     q = (node *)malloc(sizeof(node));
     q->vertex = vj;
     q->next = NULL;
-    // insert the node in the linked list for the vertex no. vi
+
     if (G[vi] == NULL)
         G[vi] = q;
     else
     {
-        // go to the end of linked list
+
         p = G[vi];
         while (p->next != NULL)
             p = p->next;
@@ -36,10 +36,10 @@ void readgraph()
     int i, vi, vj, no_of_edges;
     printf("\nEnter no. of vertices :");
     scanf("%d", &n);
-    // initialize G[] with NULL
+
     for (i = 0; i < n; i++)
         G[i] = NULL;
-    // read edges and insert them in G[]
+
     printf("\nEnter no of edges :");
     scanf("%d", &no_of_edges);
     for (i = 0; i < no_of_edges; i++)
