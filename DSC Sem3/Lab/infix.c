@@ -109,8 +109,8 @@ void postfix()
             push(token);
         }
     }
-    while ((token = pop()) != eos)
-        printToken(token);
+    while ((stack[top]) != eos)
+        printToken(pop());
     printf("\n");
 }
 int main()
