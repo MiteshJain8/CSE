@@ -1,3 +1,5 @@
+# 6.	Write a Python program to display if the entered number is an Armstrong number or not
+
 def is_armstrong(num):
     num_str = str(num)
     num_len = len(num_str)

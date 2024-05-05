@@ -1,3 +1,5 @@
+# 2.	Write a python program to read 2 numbers from Keyboard. Read the choice (1-Add, 2-Subtract, 3-Multiply, 4-Divide) from the user and perform the operation
+
 def perform_operation(num1, num2, choice):
     if choice == 1:
         return num1 + num2

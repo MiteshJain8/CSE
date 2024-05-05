@@ -1,3 +1,5 @@
+# 3.	Write a python program to read 4 subject marks and display grades. (91-100: S Grade, 81-90: A Grade, 71-80: B Grade, 61-70: C Grade, 51-60: D Grade, 41-50: E Grade, 00-40: F Grade).
+
 def calculate_grade(mark):
     if 91 <= mark <= 100:
         return 'S Grade'

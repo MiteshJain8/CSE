@@ -1,3 +1,5 @@
+# 4.	Write a python program to find the factorial of number using while loop
+
 def calculate_factorial(num):
     factorial = 1
     while num > 1:

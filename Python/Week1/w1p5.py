@@ -1,3 +1,5 @@
+# 5.	Write a python program to display all the prime numbers within an interval using for loop
+
 def is_prime(num):
     if num > 1:
         for i in range(2, num):

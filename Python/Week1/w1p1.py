@@ -1,3 +1,5 @@
+# 1.	Write a python program to check the eligibility for voting using if-else
+
 age = int(input("Enter your age: "))
 
 if age >= 18:

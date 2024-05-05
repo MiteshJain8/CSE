@@ -1,3 +1,14 @@
+# 8.	Write a Python program to construct the following pattern, using a nested for loop
+# * 
+# * * 
+# * * * 
+# * * * * 
+# * * * * * 
+# * * * * 
+# * * * 
+# * * 
+# *
+
 n = 5
 for i in range(n):
     print (i*'* ')
