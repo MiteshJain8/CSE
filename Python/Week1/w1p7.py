@@ -1,6 +1,6 @@
 # 7.	Write a python program to display all the prime numbers between a range
 
-def display_primes(start, end):
+def dispPrimes(start, end):
     for num in range(start, end + 1):
         if num > 1:
             for i in range(2, num):
@@ -9,4 +9,4 @@ def display_primes(start, end):
             else:
                 print(num)
 
-display_primes(10, 50)
+dispPrimes(20, 50)

@@ -1,13 +1,12 @@
 # 4.	Write a python program to find the factorial of number using while loop
 
-def calculate_factorial(num):
-    factorial = 1
+def calcFact(num):
+    fact = 1
     while num > 1:
-        factorial *= num
+        fact *= num
         num -= 1
-    return factorial
+    return fact
 
 num = int(input("Enter a number: "))
-
-factorial = calculate_factorial(num)
-print(f"The factorial of {num} is: {factorial}")
+fact = calcFact(num)
+print(f"The factorial of {num} is: {fact}")

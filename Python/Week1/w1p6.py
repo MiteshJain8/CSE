@@ -1,16 +1,15 @@
 # 6.	Write a Python program to display if the entered number is an Armstrong number or not
 
-def is_armstrong(num):
-    num_str = str(num)
-    num_len = len(num_str)
+def isArmstrong(num):
+    s = str(num)
+    l = len(s)
     
-    sum_of_powers = sum(int(digit) ** num_len for digit in num_str)
+    sumOfPows = sum(int(i) ** l for i in s)
     
-    return sum_of_powers == num
+    return sumOfPows == num
 
-num = int(input("Enter a number: "))
-
-if is_armstrong(num):
-    print(f"{num} is an Armstrong number.")
+n = int(input("Enter a number: "))
+if isArmstrong(n):
+    print(f"{n} is an Armstrong number.")
 else:
-    print(f"{num} is not an Armstrong number.")
+    print(f"{n} is not an Armstrong number.")

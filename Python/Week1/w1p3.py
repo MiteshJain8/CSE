@@ -1,6 +1,6 @@
 # 3.	Write a python program to read 4 subject marks and display grades. (91-100: S Grade, 81-90: A Grade, 71-80: B Grade, 61-70: C Grade, 51-60: D Grade, 41-50: E Grade, 00-40: F Grade).
 
-def calculate_grade(mark):
+def calcGrade(mark):
     if 91 <= mark <= 100:
         return 'S Grade'
     elif 81 <= mark <= 90:
@@ -16,13 +16,14 @@ def calculate_grade(mark):
     elif 0 <= mark <= 40:
         return 'F Grade'
     else:
-        return 'Invalid mark'
+        return 'Invalid marks'
 
 marks = []
-for i in range(1, 5):
-    mark = float(input(f"Enter the mark for subject {i}: "))
-    marks.append(mark)
+print("Enter the marks for 4 subjects: ")
+for i in range(4):
+    m = int(input())
+    marks.append(m)
 
-for i, mark in enumerate(marks, start=1):
-    grade = calculate_grade(mark)
-    print(f"The grade for subject {i} is: {grade}")
+for i in range(4):
+    grade = calcGrade(marks[i])
+    print(f"The grade for subject {i+1} is: {grade}")

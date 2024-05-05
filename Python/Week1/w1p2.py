@@ -1,6 +1,6 @@
 # 2.	Write a python program to read 2 numbers from Keyboard. Read the choice (1-Add, 2-Subtract, 3-Multiply, 4-Divide) from the user and perform the operation
 
-def perform_operation(num1, num2, choice):
+def operate(num1, num2, choice):
     if choice == 1:
         return num1 + num2
     elif choice == 2:
@@ -22,6 +22,6 @@ print("Enter the operation you want to perform:")
 print("1-Add, 2-Subtract, 3-Multiply, 4-Divide")
 choice = int(input())
 
-result = perform_operation(num1, num2, choice)
+result = operate(num1, num2, choice)
 
 print("The result is:", result)
