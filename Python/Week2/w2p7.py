@@ -40,6 +40,6 @@ subjects.remove("New Subject")
 print("\nAfter removing the new subject:")
 print(subjects)
 
-popped_subject = subjects.pop(2)
+subjects.pop(2)
 print("\nAfter popping the subject at the 3rd position: ")
 print(subjects)
