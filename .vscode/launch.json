@@ -5,6 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Client",
+            "request": "launch",
+            "mainClass": "DCN.Lab2.Client",
+            "projectName": "Personal_Code_4a02bbc4"
+        },
+        {
+            "type": "java",
+            "name": "Server",
+            "request": "launch",
+            "mainClass": "DCN.Lab2.Server",
+            "projectName": "Personal_Code_4a02bbc4"
+        },
+        {
             "type": "R-Debugger",
             "name": "Launch R-Workspace",
             "request": "launch",

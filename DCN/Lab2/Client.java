@@ -5,7 +5,7 @@ import java.io.*;
 
 public class Client {
     public static void main(String[] args) throws Exception {
-        Socket sock = new Socket("127.0.01", 4000);
+        Socket sock = new Socket("Enter ip address here", 4000);
         System.out.println("Enter the filename");
         BufferedReader keyRead = new BufferedReader(new InputStreamReader(System.in));
         String fname = keyRead.readLine();
@@ -16,8 +16,8 @@ public class Client {
         BufferedReader socketRead = new BufferedReader(new InputStreamReader(istream));
         String str;
         while ((str = socketRead.readLine()) != null) {
+            System.out.println(str);
         }
-        System.out.println(str);
         pwrite.close();
         socketRead.close();
         keyRead.close();
