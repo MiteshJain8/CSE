@@ -4,9 +4,9 @@ n = int(input("Enter the number of strings: "))
 strings = []
 for i in range(n):
     strings.append(input(f"Enter string {i+1}: "))
-
+sorted_strings = sorted(strings, key=len)
 tuples = []
-for string in strings:
+for string in sorted_strings:
     tuples.append((string, len(string)))
 
 print("Tuples:", tuples)
