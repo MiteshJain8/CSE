@@ -25,14 +25,14 @@ def display_words():
     for word in sorted(dictionary):
         print(f"{word}: {dictionary[word]}")
 
-while True:
-    print("\n1. Add entry")
-    print("2. Search word")
-    print("3. Find words with same meaning")
-    print("4. Remove entry")
-    print("5. Display all words")
-    print("6. Exit")
+print("\n1. Add entry")
+print("2. Search word")
+print("3. Find words with same meaning")
+print("4. Remove entry")
+print("5. Display all words")
+print("6. Exit")
 
+while True:
     choice = int(input("Enter your choice: "))
 
     if choice == 1:
