@@ -1,32 +1,16 @@
-function stable_matching(men_preferences, women_preferences):
-    n = number of men/women
-    free_men = list of all men
-    engagements = array of size n, initialized to -1  # engagements[woman] = man
-    proposals = array of size n, initialized to empty lists  # proposals[man] = list of women proposed to
-
-    while free_men is not empty:
-        man = free_men.remove_first()
-        man's preference list = men_preferences[man]
-
-        for woman in man's preference list:
-            if woman is not in proposals[man]:
-                proposals[man].append(woman)
-                if engagements[woman] == -1:  # woman is free
-                    engagements[woman] = man
-                    break
-                else:
-                    current_partner = engagements[woman]
-                    woman's preference list = women_preferences[woman]
-
-                    if woman prefers man over current_partner:
-                        engagements[woman] = man
-                        free_men.append(current_partner)
-                        break
-                    else:
-                        continue
-
-    result = empty list
-    for woman in 0 to n-1:
-        result.append((engagements[woman], woman))
-
-    return result
+While there is a man m who is free and hasn’t proposed to every woman
+		Choose such a man m
+		 Let w be the highest-ranked woman in m’s preference list to whom m 		has not yet proposed
+		 If w is free then
+			 (m, w) become engaged
+		 Else w is currently engaged to m’
+			If w prefers m to m’ then
+				(m, w) become engaged
+				m’ becomes free
+			Else
+				m remains free
+				
+			Endif
+		Endif
+Endwhile
+Return the set S of engaged pairs
