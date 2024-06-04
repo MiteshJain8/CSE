@@ -1,0 +1,24 @@
+Merge-Sort(L[0,1,...,n-1])
+    if more than 1 elements in L
+        A <- L[mid_term:]
+        B <- L[:mid_term + 1]
+        Merge-Sort(A)
+        Merge-Sort(B)
+    Merge(A,B,L)
+    Return L
+
+Merge(A,B,L)
+    i <- 0
+    j <- 0
+    k <- 0
+    while A and B are not empty
+        if A[i]<B[j]
+            L[k] <- A[i]
+            Increment i and k
+        if A[i]>B[j]
+            L[k] <- B[j]
+            Increment j and k
+    if A is not empty
+        copy leftover A elements to L
+    if B is not empty
+        copy leftover B elements to L

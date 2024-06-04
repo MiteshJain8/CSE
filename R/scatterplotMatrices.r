@@ -1,0 +1,1 @@
+pairs(~wt+mpg+disp+cyl+qsec,data=mtcars, main="Scatter Matrix", col="red")

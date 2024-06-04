@@ -27,7 +27,7 @@ def merge_sort(arr):
             k += 1
     return arr
 
-arr = [random.randint(1,50000) for i in range(20000)]
+arr = [random.randint(1,90000) for i in range(40000)]
 start = time.time()
 merge_sort(arr)
 end = time.time()

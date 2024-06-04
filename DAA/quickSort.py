@@ -17,7 +17,8 @@ def quick_sort(array, low, high):
         quick_sort(array, low, pi - 1)
         quick_sort(array, pi + 1, high)
 
-arr = [random.randint(1,50000) for i in range(20000)]
+arr = [random.randint(1,90000) for i in range(40000)]
+# arr = [1,12,3,14,15,6,7,8,9,5,11,2,13,4,10]
 N = len(arr)
 start = time.time()
 quick_sort(arr, 0, N - 1)

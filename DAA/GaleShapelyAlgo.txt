@@ -1,7 +1,7 @@
 While there is a man m who is free and hasn’t proposed to every woman
 		Choose such a man m
-		 Let w be the highest-ranked woman in m’s preference list to whom m 		has not yet proposed
-		 If w is free then
+		Let w be the highest-ranked woman in m’s preference list to whom m has not yet proposed
+		If w is free then
 			 (m, w) become engaged
 		 Else w is currently engaged to m’
 			If w prefers m to m’ then

@@ -1,0 +1,25 @@
+Sort-and-Count(L)
+    If the list has one element
+        then there are no inversions
+    Else
+        Divide the list into two halves:
+        contains the first _n/2_ elements
+        contains the remaining _n/2 elements  (rA, A) = Sort-and-Count(A)
+        (rB, B) = Sort-and-Count(B)
+        (r , L) = Merge-and-Count(A, B)
+    Endif
+Return r = rA + rB + r, and the sorted list L
+
+Merge-and-Count(A,B)
+    Maintain a Current pointer into each list, initialized to  point to the front elements
+    Maintain a variable Count for the number of inversions, initialized to 0
+    While both lists are nonempty:
+        Let ai and bj be the elements pointed to by the Current pointer
+        Append the smaller of these two to the output list
+        If bj is the smaller element then
+            Increment Count by the number of elements remaining in A
+        Endif
+        Advance the Current pointer in the list from which the  smaller element was selected.
+    EndWhile
+    Once one list is empty, append the remainder of the other list  to the output
+    Return Count and the merged list

@@ -1,0 +1,7 @@
+Sort jobs by finish time (nlogn)
+
+A <- []
+for j <- 1 to n
+    if job j compatible with jobs in A (i.e finish time of previously added job is not more that start time of job j)
+        add job j to A
+Return A

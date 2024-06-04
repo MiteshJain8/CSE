@@ -3,5 +3,6 @@ names <- c("x", "y", "z")
 lang <- c("py", "cpp", "c")
 
 df <- data.frame(age, names, lang)
-
-print(df)
+df$lang
+df
+# print(df)

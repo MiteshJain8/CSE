@@ -1,0 +1,7 @@
+age <- c(18, 15, 13)
+names <- c("x", "y", "z")
+lang <- c("py", "cpp", "c")
+rev<-c(9, 1, 0)
+df <- data.frame(age, names, lang)
+df2 <- data.frame( c(2,5,7,1,7), c(7,9,7,5,8), c(3,1,4,2,5))
+boxplot(rev ~ names, data=df2, boxwex = 2, xlab="cfg", ylab="hgc", varwidth=TRUE)

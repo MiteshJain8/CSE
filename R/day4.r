@@ -35,5 +35,16 @@ arr <- c(3,5,6,3,6,8)
 sort(arr, decreasing = TRUE)
 class(arr)
 typeof(arr)
+order(arr, decreasing = FALSE)
 order(arr, decreasing = TRUE)
 order(-arr)
+
+z <- "mit"
+z
+class(z)
+typeof(z)
+
+w <- TRUE
+w
+class(w)
+typeof(w)

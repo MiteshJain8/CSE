@@ -7,13 +7,13 @@ class BankAccount:
         self.balance = balance
         self.type_of_account = type_of_account
         self.address = address
-        
+    
     def withdraw(self, amount):
         self.balance -= amount
-        
+    
     def deposit(self, amount):
         self.balance += amount
-        
+    
     def display_details(self):
         print("Customer Name:", self.cust_name)
         print("Account Number:", self.account_number)

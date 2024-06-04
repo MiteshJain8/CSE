@@ -1,0 +1,5 @@
+library(scatterplot3d)
+x<-c(2,3,5,6,7,9)
+y<-c(12,14,16,19,17,13)
+z<-c(5, 8, 2, 6, 7, 4)
+scatterplot3d(x, y, z, main="CHART", xlab="jk", ylab="sf", type="b", xlim=c(1,10), ylim=c(10,20))

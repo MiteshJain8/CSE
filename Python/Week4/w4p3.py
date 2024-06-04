@@ -19,9 +19,23 @@ class FourthSem:
         studentAverage = (self.test1Marks[i] + self.test2Marks[i] + self.test3Marks[i]) / 3
         return studentAverage
 
-students = FourthSem([i+1 for i in range(20)], [random.randint(0,100) for j in range(20)], [random.randint(0,100) for k in range(20)], [random.randint(0,100) for l in range(20)])
+t1Marks = [random.randint(0,100) for j in range(20)]
+t2Marks = [random.randint(0,100) for k in range(20)]
+t3Marks = [random.randint(0,100) for k in range(20)]
+
+students = FourthSem([i+1 for i in range(20)], t1Marks, t2Marks, t3Marks)
 
 for i in range(20):
     print(f"Student {i+1} average : {students.calculateStudentAverage(i):.2f}")
 
 print(f"Class averages in three tests :{students.calculateClassAverage()}")
+
+print("Top 5 scores:")
+print("Test 1:", sorted(t1Marks)[15:])
+print("Test 2:", sorted(t2Marks)[15:])
+print("Test 3:", sorted(t3Marks)[15:])
+
+print("Last 5 scores:")
+print("Test 1:", sorted(t1Marks)[:5])
+print("Test 2:", sorted(t2Marks)[:5])
+print("Test 3:", sorted(t3Marks)[:5])
