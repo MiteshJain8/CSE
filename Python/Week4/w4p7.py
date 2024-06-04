@@ -11,7 +11,7 @@ class Quadratic:
         d = (self.b**2) - (4*self.a*self.c)
         root1 = (-self.b + cmath.sqrt(d)) / (2*self.a)
         root2 = (-self.b - cmath.sqrt(d)) / (2*self.a)
-        print("Two roots: are {:.2f} and {:.2f}".format(root1, root2))
+        print("Two roots are {:.2f} and {:.2f}".format(root1, root2))
 
 q = Quadratic(1, 5, 7)
 q.find_roots()

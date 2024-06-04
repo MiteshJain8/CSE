@@ -37,6 +37,7 @@ s.display()
 for i in range(3):
     s.pop()
 s.display()
+
 q = Queue()
 for i in range(5):
     q.enqueue(i)

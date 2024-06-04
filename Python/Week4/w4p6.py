@@ -41,8 +41,7 @@ class Triangle(Shape):
         print("Triangle:")
         super().displayDetails()
         print("Side 3:",self.side3)
-        self.area = self.calculateArea()
-        print("Area:", self.area)
+        print("Area:", self.calculateArea())
 
 r = Rectangle(10, 20)
 t = Triangle(3, 4, 5)
