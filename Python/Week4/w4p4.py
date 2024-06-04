@@ -39,7 +39,7 @@ class Time:
 
     def countSeconds(self):
         count = self.hours*3600+self.minutes*60+self.seconds
-        return abs(count)
+        return count
 
 t1 = Time(30, 20, 10)
 t2 = Time(20, 30, 40)
