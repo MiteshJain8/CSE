@@ -4,5 +4,5 @@ import re
 
 st = input("Enter the text:")
 v = re.findall('[aeiouAEIOU]', st)
-print("Vowel occurences =",len(v))
-print("Consonant occurences =",len(st)-len(v))
+print("Vowel occurrences =",len(v))
+print("Consonant occurrences =",len(st)-len(v))

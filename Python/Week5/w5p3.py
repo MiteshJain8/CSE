@@ -7,4 +7,3 @@ if(re.match('^1MS.{6}0$', USN)):
     print("Valid")
 else:
     print("Invalid")
-print(type(re.match('^1MS.{6}0$', USN)))

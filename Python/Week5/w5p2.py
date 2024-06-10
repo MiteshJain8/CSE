@@ -7,8 +7,8 @@
 import re
 
 text = input("Enter the text: ")
-
-print("'A' or 'a' followed by zero or more 'b's:",re.findall('[aA][bB]*', text))
-print("'A' or 'a' followed by zero or one 'b':",re.findall('[aA][bB]?', text))
-print("'A' or 'a' followed by one or more 'b's:",re.findall('[aA][bB]+', text))
-print("'A' or 'a' followed by four 'b's followed by 'c':",re.findall('[aA][bB]{4}[cC]', text))
+print("'A/a' followed by:")
+print("Zero or more 'b's:",re.findall('[aA][b]*', text))
+print("Zero or one 'b':",re.findall('[aA][b]?', text))
+print("One or more 'b's:",re.findall('[aA][b]+', text))
+print("Four 'b's followed by 'c':",re.findall('[aA][b]{4}[c]', text))
