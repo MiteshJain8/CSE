@@ -18,6 +18,6 @@ for i in range(e):
     arr[vi][vj] = 1
     arr[vj][vi] = 1
 print("Adjacency matrix : ",arr)
-strt = int(input("Enter start ele: "))
+start = int(input("Enter start ele: "))
 print("DFS: ")
-DFS(arr,visited,strt,n)
+DFS(arr,visited,start,n)

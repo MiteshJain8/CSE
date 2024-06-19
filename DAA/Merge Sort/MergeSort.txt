@@ -1,7 +1,7 @@
 Merge-Sort(L[0,1,...,n-1])
     if more than 1 elements in L
         A <- L[mid_term:]
-        B <- L[:mid_term + 1]
+        B <- L[:mid_term]
         Merge-Sort(A)
         Merge-Sort(B)
     Merge(A,B,L)

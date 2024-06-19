@@ -1,4 +1,4 @@
-# Develop a python program to create a text file and ask the user to enter 5-6 lines of text. Display the total number of lines, characters and digits present in the file. Also display how many times a pecific word has appeared in the file
+# Develop a python program to create a text file and ask the user to enter 5-6 lines of text. Display the total number of lines, characters and digits present in the file. Also display how many times a specific word has appeared in the file
 
 print("Enter 5 lines of text:")
 lines = []
