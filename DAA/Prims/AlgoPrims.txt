@@ -1,0 +1,16 @@
+Prims(adjacency matrix G[][], visited[0,0,..], Vertices):
+    Initialize visited[0] = True
+    Initialize edges = 0 and cost = 0
+    While edges < Vertices-1:
+        Set minimum = INF, x = 0, y = 0
+        For each vertex i from 0 to Vertices-1:
+            If visited[i]:
+                For each vertex j from 0 to Vertices-1:
+                    If not visited[j] and G[i][j] != 0:
+                        If G[i][j] < minimum:
+                            minimum = G[i][j], x = i, y = j
+        Print edge (x, y) and weight G[x][y]
+        Set visited[y] = True
+        Add G[x][y] to cost
+        Increment edges by 1
+    Print cost

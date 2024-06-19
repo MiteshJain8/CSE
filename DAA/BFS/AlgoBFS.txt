@@ -1,0 +1,11 @@
+BFS(arr, visited, i, n):
+    Initialize an empty queue
+    Mark visited[i] as 1 (visited) and print i
+    Add i to the queue
+    While queue is not empty:
+        Dequeue vertex from front of queue
+        For each vertex j from 0 to n-1:
+            If there is an edge between vertex and j (arr[vertex][j] == 1):
+                If j is not visited (visited[j] == 0):
+                   Mark visited[j] as 1 (visited) and print j
+                   Add j to the queue

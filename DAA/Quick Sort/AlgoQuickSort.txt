@@ -1,0 +1,8 @@
+quicksort(arr):
+     If length of arr <= 1:
+         Return arr
+     Else:
+         Set pivot to the middle element of arr
+         Initialize left sub-array to elements less than pivot
+         Initialize right sub-array to elements greater than pivot
+         Return quicksort(left) + [pivot] + quicksort(right)

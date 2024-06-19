@@ -9,8 +9,10 @@ def insertion_sort(arr,n):
     return arr
 
 list = [random.randint(1,50000) for i in range(20000)]
-n = len(list)
+arr = [12, 11, 13, 5, 6] 
+n = len(arr)
 start = time.time()
-sorted_list = insertion_sort(list,n)
+sorted_list = insertion_sort(arr,n)
 end = time.time()
 print(end-start)
+print(sorted_list)
