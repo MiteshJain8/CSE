@@ -1,3 +1,6 @@
+import time
+import random
+
 def partition(array, low, high):
     pivot = array[high]
     i = low - 1
@@ -8,12 +11,16 @@ def partition(array, low, high):
     array[i + 1], array[high] = array[high], array[i + 1]
     return i + 1
 
-def quickSort(array, low, high):
+def quick_sort(array, low, high):
     if low < high:
         pi = partition(array, low, high)
-        quickSort(array, low, pi - 1)
-        quickSort(array, pi + 1, high)
+        quick_sort(array, low, pi - 1)
+        quick_sort(array, pi + 1, high)
 
-arr = [64, 25, 12, 22, 11] 
-quickSort(arr, 0, len(arr)-1) 
-print("Sorted array is:", arr) 
+arr = [random.randint(1,90000) for i in range(40000)]
+# arr = [1,12,3,14,15,6,7,8,9,5,11,2,13,4,10]
+N = len(arr)
+start = time.time()
+quick_sort(arr, 0, N - 1)
+end = time.time()
+print(end-start)
