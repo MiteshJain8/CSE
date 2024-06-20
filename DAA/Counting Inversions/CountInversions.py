@@ -1,26 +1,26 @@
 def merge_and_count(arr, left, mid, right):
-    temp_arr = arr[left:right + 1]
-    i, j, k, inv_count = 0, mid - left + 1, left, 0
+    temp_arr = []
+    i, j, inv_count = left, mid + 1, 0
 
-    while i <= mid - left and j < len(temp_arr):
-        if temp_arr[i] <= temp_arr[j]:
-            arr[k] = temp_arr[i]
+    while i <= mid and j <= right:
+        if arr[i] <= arr[j]:
+            temp_arr.append(arr[i])
             i += 1
         else:
-            arr[k] = temp_arr[j]
-            inv_count += (mid - left + 1 - i)
+            temp_arr.append(arr[j])
+            inv_count += (mid - i + 1)
             j += 1
-        k += 1
 
-    while i <= mid - left:
-        arr[k] = temp_arr[i]
+    while i <= mid:
+        temp_arr.append(arr[i])
         i += 1
-        k += 1
 
-    while j < len(temp_arr):
-        arr[k] = temp_arr[j]
+    while j <= right:
+        temp_arr.append(arr[j])
         j += 1
-        k += 1
+
+    for k in range(len(temp_arr)):
+        arr[left + k] = temp_arr[k]
 
     return inv_count
 
