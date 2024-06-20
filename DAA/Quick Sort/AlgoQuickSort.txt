@@ -1,8 +1,15 @@
-quicksort(arr):
-     If length of arr <= 1:
-         Return arr
-     Else:
-         Set pivot to the middle element of arr
-         Initialize left sub-array to elements less than pivot
-         Initialize right sub-array to elements greater than pivot
-         Return quicksort(left) + [pivot] + quicksort(right)
+partition(array, low, high):
+    Set pivot to array[high]
+    Set i to low - 1
+    For j from low to high - 1:
+        If array[j] <= pivot:
+            Increment i
+            Swap array[i] with array[j]
+    Swap array[i + 1] with array[high]
+    Return i + 1
+
+quickSort(array, low, high):
+    If low < high:
+        Set pi to partition(array, low, high)
+        quickSort(array, low, pi-1)
+        quickSort(array, pi+1, high)
