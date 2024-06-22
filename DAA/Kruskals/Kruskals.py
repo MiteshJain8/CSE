@@ -15,8 +15,8 @@ def union(parent, rank, x, y):
 def Kruskals(graph, V):
     mst = []
     graph = sorted(graph, key=lambda item: item[2])
-    parent = [i for i in range(n)]
-    rank = [0 for i in range(n)]
+    parent = [i for i in range(V)]
+    rank = [0 for i in range(V)]
     cost, edges, i = 0, 0, 0
     while edges < V-1:
         u, v, weight = graph[i]
