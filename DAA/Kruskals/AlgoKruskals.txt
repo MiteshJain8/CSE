@@ -1,0 +1,31 @@
+Function find(parent, i):
+    If parent[i] != i:
+        parent[i] = find(parent, parent[i])
+    Return parent[i]
+
+Function union(parent, rank, x, y):
+    If rank[x] < rank[y]:
+        parent[x] = parent[y]
+    Else if rank[x] > rank[y]:
+        parent[y] = parent[x]
+    Else:
+        parent[y] = parent[x]
+        rank[x] += 1
+
+Function Kruskals(graph, V):
+    Initialize mst as an empty list
+    Sort graph by edge weights in non-decreasing order
+    Initialize parent as [i for i in range(V)]
+    Initialize rank as [0 for i in range(V)]
+    Initialize cost, edges, and i to 0
+    
+    While edges < V-1:
+        (u, v, weight) = graph[i]
+        Increment i
+        x = find(parent, u)
+        y = find(parent, v)
+        If x != y:
+            Increment edges
+            Append (u, v, weight) to mst
+            union(parent, rank, x, y)
+            Add weight to cost
