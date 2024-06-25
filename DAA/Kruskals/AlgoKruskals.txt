@@ -1,3 +1,10 @@
+1. Sort all the edges in non-decreasing order of their weight.
+2. Pick the smallest edge. Check if it forms a cycle with the spanning tree formed so far.
+3. If the cycle is not formed, include this edge. Else, discard it.
+4. Repeat steps 2 and 3 until there are (Vertices-1) edges in the spanning tree.
+
+***OR***
+
 Function find(parent, i):
     If parent[i] != i:
         parent[i] = find(parent, parent[i])
