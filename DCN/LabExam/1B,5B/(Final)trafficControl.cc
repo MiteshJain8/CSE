@@ -168,21 +168,21 @@ main(int argc, char* argv[])
     address01.SetBase("10.1.1.0", "255.255.255.0");
     address12.SetBase("10.1.2.0", "255.255.255.0");
 
-//4(copy and duplicate below line and make the changes as shown in next 2 lines)
+//5(copy and duplicate below line and make the changes as shown in next 2 lines)
     //Ipv4InterfaceContainer interfaces = address.Assign(devices);
     Ipv4InterfaceContainer interfaces01 = address01.Assign(devices01);
     Ipv4InterfaceContainer interfaces12 = address12.Assign(devices12);
     
-//5(add line 173 from third.cc) 
+//6(add line 173 from third.cc) 
     Ipv4GlobalRoutingHelper::PopulateRoutingTables();
     
-//4(line 157 to 236 from traffic-control.cc) 
+//7(line 157 to 236 from traffic-control.cc) 
     // Flow
     uint16_t port = 7;
     Address localAddress(InetSocketAddress(Ipv4Address::GetAny(), port));
     PacketSinkHelper packetSinkHelper(socketType, localAddress);
 
-//5( 0 to 2)
+//8( 0 to 2)
     ApplicationContainer sinkApp = packetSinkHelper.Install(nodes.Get(2));
 
     sinkApp.Start(Seconds(0.0));
@@ -198,14 +198,14 @@ main(int argc, char* argv[])
     onoff.SetAttribute("DataRate", StringValue("50Mbps")); // bit/s
     ApplicationContainer apps;
 
-//6( make the change to below line as shown in next line)
+//9( make the change to below line as shown in next line)
     //InetSocketAddress rmt(interfaces.GetAddress(0), port);
     InetSocketAddress rmt(interfaces12.GetAddress(1), port);
     rmt.SetTos(0xb8);
     AddressValue remoteAddress(rmt);
     onoff.SetAttribute("Remote", remoteAddress);
 
-//7( 1 -> 0)
+//10( 1 -> 0)
     apps.Add(onoff.Install(nodes.Get(0)));
     apps.Start(Seconds(1.0));
     apps.Stop(Seconds(simulationTime + 0.1));
@@ -275,7 +275,7 @@ main(int argc, char* argv[])
     std::cout << "  Average Goodput: " << thr << " Mbit/s" << std::endl;
     std::cout << std::endl << "*** TC Layer statistics ***" << std::endl;
 
-//8( comment below line)
+//11( comment below line)
     //std::cout << q->GetStats() << std::endl;
     return 0;
 }
