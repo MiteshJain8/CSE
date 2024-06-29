@@ -191,15 +191,15 @@ main(int argc, char* argv[])
     std::map<FlowId, FlowMonitor::FlowStats> stats = monitor->GetFlowStats();
     std::cout << std::endl << "*** Flow monitor statistics ***" << std::endl;
     std::cout << "  Tx Packets/Bytes:   " << stats[1].txPackets << " / " << stats[1].txBytes
-              << std::endl;
+            << std::endl;
     std::cout << "  Offered Load: "
               << stats[1].txBytes * 8.0 /
-                     (stats[1].timeLastTxPacket.GetSeconds() -
-                      stats[1].timeFirstTxPacket.GetSeconds()) /
-                     1000000
-              << " Mbps" << std::endl;
+                    (stats[1].timeLastTxPacket.GetSeconds() -
+                    stats[1].timeFirstTxPacket.GetSeconds()) /
+                    1000000
+            << " Mbps" << std::endl;
     std::cout << "  Rx Packets/Bytes:   " << stats[1].rxPackets << " / " << stats[1].rxBytes
-              << std::endl;
+            << std::endl;
     uint32_t packetsDroppedByQueueDisc = 0;
     uint64_t bytesDroppedByQueueDisc = 0;
     if (stats[1].packetsDropped.size() > Ipv4FlowProbe::DROP_QUEUE_DISC)
@@ -208,7 +208,7 @@ main(int argc, char* argv[])
         bytesDroppedByQueueDisc = stats[1].bytesDropped[Ipv4FlowProbe::DROP_QUEUE_DISC];
     }
     std::cout << "  Packets/Bytes Dropped by Queue Disc:   " << packetsDroppedByQueueDisc << " / "
-              << bytesDroppedByQueueDisc << std::endl;
+            << bytesDroppedByQueueDisc << std::endl;
     uint32_t packetsDroppedByNetDevice = 0;
     uint64_t bytesDroppedByNetDevice = 0;
     if (stats[1].packetsDropped.size() > Ipv4FlowProbe::DROP_QUEUE)
@@ -217,22 +217,22 @@ main(int argc, char* argv[])
         bytesDroppedByNetDevice = stats[1].bytesDropped[Ipv4FlowProbe::DROP_QUEUE];
     }
     std::cout << "  Packets/Bytes Dropped by NetDevice:   " << packetsDroppedByNetDevice << " / "
-              << bytesDroppedByNetDevice << std::endl;
+            << bytesDroppedByNetDevice << std::endl;
     std::cout << "  Throughput: "
               << stats[1].rxBytes * 8.0 /
-                     (stats[1].timeLastRxPacket.GetSeconds() -
-                      stats[1].timeFirstRxPacket.GetSeconds()) /
-                     1000000
-              << " Mbps" << std::endl;
+                    (stats[1].timeLastRxPacket.GetSeconds() -
+                    stats[1].timeFirstRxPacket.GetSeconds()) /
+                    1000000
+            << " Mbps" << std::endl;
     std::cout << "  Mean delay:   " << stats[1].delaySum.GetSeconds() / stats[1].rxPackets
-              << std::endl;
+            << std::endl;
     std::cout << "  Mean jitter:   " << stats[1].jitterSum.GetSeconds() / (stats[1].rxPackets - 1)
-              << std::endl;
+            << std::endl;
     auto dscpVec = classifier->GetDscpCounts(1);
     for (auto p : dscpVec)
     {
         std::cout << "  DSCP value:   0x" << std::hex << static_cast<uint32_t>(p.first) << std::dec
-                  << "  count:   " << p.second << std::endl;
+<< "    count:   " << p.second << std::endl;
     }
 
     Simulator::Destroy();

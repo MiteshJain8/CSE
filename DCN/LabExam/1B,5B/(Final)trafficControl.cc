@@ -121,7 +121,8 @@ main(int argc, char* argv[])
     }
 
     NodeContainer nodes;
-    // ---------> 2 to 3
+
+//1(2 -> 3)
     nodes.Create(3);
 
     PointToPointHelper pointToPoint;
@@ -129,6 +130,7 @@ main(int argc, char* argv[])
     pointToPoint.SetChannelAttribute("Delay", StringValue("2ms"));
     pointToPoint.SetQueue("ns3::DropTailQueue", "MaxSize", StringValue("1p"));
 
+//2(copy and duplicate below 2 lines and make the changes as shown in next 4 lines)
     //NetDeviceContainer devices;
     //devices = pointToPoint.Install(nodes);
     
@@ -138,13 +140,11 @@ main(int argc, char* argv[])
     NetDeviceContainer devices12;
     devices12 = pointToPoint.Install(nodes.Get(1),nodes.Get(2));
 
-//1---------------- above 2 lines added
-
-
     InternetStackHelper stack;
     stack.Install(nodes);
-/*
-    TrafficControlHelper tch;
+
+//3(comment below part)
+    /*TrafficControlHelper tch;
     tch.SetRootQueueDisc("ns3::RedQueueDisc");
     QueueDiscContainer qdiscs = tch.Install(devices);
 
@@ -160,28 +160,27 @@ main(int argc, char* argv[])
     queue->TraceConnectWithoutContext("PacketsInQueue", MakeCallback(&DevicePacketsInQueueTrace));
 */
 
-//2------------------------------------->commented lines
-
-
     Ipv4AddressHelper address01;
     Ipv4AddressHelper address12;
     
     address01.SetBase("10.1.1.0", "255.255.255.0");
     address12.SetBase("10.1.2.0", "255.255.255.0");
 
+//4(copy and duplicate below line and make the changes as shown in next 2 lines)
     //Ipv4InterfaceContainer interfaces = address.Assign(devices);
     Ipv4InterfaceContainer interfaces01 = address01.Assign(devices01);
     Ipv4InterfaceContainer interfaces12 = address12.Assign(devices12);
     
+//5(add line 173 from third.cc) 
     Ipv4GlobalRoutingHelper::PopulateRoutingTables();
-//3------------------> added lines 
     
-//4----------------------------------> flow added
+//4(line 157 to 236 from traffic-control.cc) 
     // Flow
     uint16_t port = 7;
     Address localAddress(InetSocketAddress(Ipv4Address::GetAny(), port));
     PacketSinkHelper packetSinkHelper(socketType, localAddress);
-//5 -------------------------> sink app 0 to 2
+
+//5( 0 to 2)
     ApplicationContainer sinkApp = packetSinkHelper.Install(nodes.Get(2));
 
     sinkApp.Start(Seconds(0.0));
@@ -197,13 +196,14 @@ main(int argc, char* argv[])
     onoff.SetAttribute("DataRate", StringValue("50Mbps")); // bit/s
     ApplicationContainer apps;
 
-//6 ---------------------> 1 line added
-    InetSocketAddress rmt(interfaces12.GetAddress(1), port);
+//6( make the change to below line as shown in next line)
     //InetSocketAddress rmt(interfaces.GetAddress(0), port);
+    InetSocketAddress rmt(interfaces12.GetAddress(1), port);
     rmt.SetTos(0xb8);
     AddressValue remoteAddress(rmt);
     onoff.SetAttribute("Remote", remoteAddress);
-//7 -------------------> 1 to 0
+
+//7( 1 -> 0)
     apps.Add(onoff.Install(nodes.Get(0)));
     apps.Start(Seconds(1.0));
     apps.Stop(Seconds(simulationTime + 0.1));
@@ -218,19 +218,16 @@ main(int argc, char* argv[])
     std::map<FlowId, FlowMonitor::FlowStats> stats = monitor->GetFlowStats();
     std::cout << std::endl << "*** Flow monitor statistics ***" << std::endl;
     std::cout << "  Tx Packets/Bytes:   " << stats[1].txPackets << " / " << stats[1].txBytes
-              << std::endl;
+            << std::endl;
     std::cout << "  Offered Load: "
               << stats[1].txBytes * 8.0 /
-                     (stats[1].timeLastTxPacket.GetSeconds() -
-                      stats[1].timeFirstTxPacket.GetSeconds()) /
-                     1000000
-              << " Mbps" << std::endl;
+                    (stats[1].timeLastTxPacket.GetSeconds() -
+                    stats[1].timeFirstTxPacket.GetSeconds()) /
+                    1000000
+            << " Mbps" << std::endl;
     std::cout << "  Rx Packets/Bytes:   " << stats[1].rxPackets << " / " << stats[1].rxBytes
-              << std::endl;
-              
-              
-              
-              
+            << std::endl;
+
     uint32_t packetsDroppedByQueueDisc = 0;
     uint64_t bytesDroppedByQueueDisc = 0;
     if (stats[1].packetsDropped.size() > Ipv4FlowProbe::DROP_QUEUE_DISC)
@@ -239,7 +236,7 @@ main(int argc, char* argv[])
         bytesDroppedByQueueDisc = stats[1].bytesDropped[Ipv4FlowProbe::DROP_QUEUE_DISC];
     }
     std::cout << "  Packets/Bytes Dropped by Queue Disc:   " << packetsDroppedByQueueDisc << " / "
-              << bytesDroppedByQueueDisc << std::endl;
+            << bytesDroppedByQueueDisc << std::endl;
     uint32_t packetsDroppedByNetDevice = 0;
     uint64_t bytesDroppedByNetDevice = 0;
     if (stats[1].packetsDropped.size() > Ipv4FlowProbe::DROP_QUEUE)
@@ -248,22 +245,22 @@ main(int argc, char* argv[])
         bytesDroppedByNetDevice = stats[1].bytesDropped[Ipv4FlowProbe::DROP_QUEUE];
     }
     std::cout << "  Packets/Bytes Dropped by NetDevice:   " << packetsDroppedByNetDevice << " / "
-              << bytesDroppedByNetDevice << std::endl;
+            << bytesDroppedByNetDevice << std::endl;
     std::cout << "  Throughput: "
               << stats[1].rxBytes * 8.0 /
-                     (stats[1].timeLastRxPacket.GetSeconds() -
-                      stats[1].timeFirstRxPacket.GetSeconds()) /
-                     1000000
-              << " Mbps" << std::endl;
+                    (stats[1].timeLastRxPacket.GetSeconds() -
+                    stats[1].timeFirstRxPacket.GetSeconds()) /
+                    1000000
+            << " Mbps" << std::endl;
     std::cout << "  Mean delay:   " << stats[1].delaySum.GetSeconds() / stats[1].rxPackets
-              << std::endl;
+            << std::endl;
     std::cout << "  Mean jitter:   " << stats[1].jitterSum.GetSeconds() / (stats[1].rxPackets - 1)
-              << std::endl;
+            << std::endl;
     auto dscpVec = classifier->GetDscpCounts(1);
     for (auto p : dscpVec)
     {
         std::cout << "  DSCP value:   0x" << std::hex << static_cast<uint32_t>(p.first) << std::dec
-                  << "  count:   " << p.second << std::endl;
+                << "  count:   " << p.second << std::endl;
     }
 
     Simulator::Destroy();
@@ -275,7 +272,8 @@ main(int argc, char* argv[])
     std::cout << "  Rx Bytes: " << totalPacketsThr << std::endl;
     std::cout << "  Average Goodput: " << thr << " Mbit/s" << std::endl;
     std::cout << std::endl << "*** TC Layer statistics ***" << std::endl;
-//8 -------------> coment out 1 line below
+
+//8( comment below line)
     //std::cout << q->GetStats() << std::endl;
     return 0;
 }
