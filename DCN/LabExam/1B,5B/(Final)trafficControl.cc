@@ -160,9 +160,11 @@ main(int argc, char* argv[])
     queue->TraceConnectWithoutContext("PacketsInQueue", MakeCallback(&DevicePacketsInQueueTrace));
 */
 
+//4( copy and duplicate below 2 lines and make the changes as shown in next 4 lines)
+    // Ipv4AddressHelper address;
+    // address.SetBase("10.1.1.0", "255.255.255.0");
     Ipv4AddressHelper address01;
     Ipv4AddressHelper address12;
-    
     address01.SetBase("10.1.1.0", "255.255.255.0");
     address12.SetBase("10.1.2.0", "255.255.255.0");
 
