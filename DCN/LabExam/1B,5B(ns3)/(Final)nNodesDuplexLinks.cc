@@ -175,14 +175,13 @@ main(int argc, char* argv[])
     
 //6(add line 173 from third.cc) 
     Ipv4GlobalRoutingHelper::PopulateRoutingTables();
-    
-//7(line 157 to 236 from traffic-control.cc) 
+
     // Flow
     uint16_t port = 7;
     Address localAddress(InetSocketAddress(Ipv4Address::GetAny(), port));
     PacketSinkHelper packetSinkHelper(socketType, localAddress);
 
-//8( 0 to 2)
+//7( 0 to 2)
     ApplicationContainer sinkApp = packetSinkHelper.Install(nodes.Get(2));
 
     sinkApp.Start(Seconds(0.0));
@@ -198,14 +197,14 @@ main(int argc, char* argv[])
     onoff.SetAttribute("DataRate", StringValue("50Mbps")); // bit/s
     ApplicationContainer apps;
 
-//9( make the change to below line as shown in next line)
+//8( make the change to below line as shown in next line)
     //InetSocketAddress rmt(interfaces.GetAddress(0), port);
     InetSocketAddress rmt(interfaces12.GetAddress(1), port);
     rmt.SetTos(0xb8);
     AddressValue remoteAddress(rmt);
     onoff.SetAttribute("Remote", remoteAddress);
 
-//10( 1 -> 0)
+//9( 1 -> 0)
     apps.Add(onoff.Install(nodes.Get(0)));
     apps.Start(Seconds(1.0));
     apps.Stop(Seconds(simulationTime + 0.1));
@@ -275,7 +274,7 @@ main(int argc, char* argv[])
     std::cout << "  Average Goodput: " << thr << " Mbit/s" << std::endl;
     std::cout << std::endl << "*** TC Layer statistics ***" << std::endl;
 
-//11( comment below line)
+//10( comment below line)
     //std::cout << q->GetStats() << std::endl;
     return 0;
 }

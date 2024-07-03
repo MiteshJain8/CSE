@@ -1,8 +1,8 @@
 import numpy as np
 
-lst = list(map(int, input(f"Enter 12 elements separated by space: ").split()))
+lst = list(map(int, input("Enter 12 elements separated by space: ").split()))
 if len(lst) != 12:
-    raise Exception(f"Enter exactly 12 elements.")
+    raise Exception("Enter exactly 12 elements.")
 arr = np.array(lst).reshape(3, 4)
 print("2D Array:\n", arr)
 
