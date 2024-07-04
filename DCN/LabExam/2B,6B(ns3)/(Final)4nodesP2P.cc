@@ -66,7 +66,7 @@ using namespace ns3;
 //1(comment this part till line 101)
     /* NS_LOG_COMPONENT_DEFINE("TrafficControlExample");
 
-/**
+
  * Number of packets in TX queue trace.
  *
  * \param oldValue Old velue.
@@ -78,7 +78,6 @@ TcPacketsInQueueTrace(uint32_t oldValue, uint32_t newValue)
     std::cout << "TcPacketsInQueue " << oldValue << " to " << newValue << std::endl;
 }
 
-/**
  * Packets in the device queue trace.
  *
  * \param oldValue Old velue.
@@ -90,7 +89,7 @@ DevicePacketsInQueueTrace(uint32_t oldValue, uint32_t newValue)
     std::cout << "DevicePacketsInQueue " << oldValue << " to " << newValue << std::endl;
 }
 
-/**
+
  * TC Soujoun time trace.
  *
  * \param sojournTime The soujourn time.
