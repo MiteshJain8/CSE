@@ -272,7 +272,8 @@ main(int argc, char* argv[])
 
     Simulator::Destroy();
 
-    std::cout << std::endl << "*** Application statistics ***" << std::endl;
+//10( comment below part)
+    /*std::cout << std::endl << "*** Application statistics ***" << std::endl;
     double thr = 0;
     uint64_t totalPacketsThr = DynamicCast<PacketSink>(sinkApp.Get(0))->GetTotalRx();
     thr = totalPacketsThr * 8 / (simulationTime * 1000000.0); // Mbit/s
@@ -280,7 +281,6 @@ main(int argc, char* argv[])
     std::cout << "  Average Goodput: " << thr << " Mbit/s" << std::endl;
     std::cout << std::endl << "*** TC Layer statistics ***" << std::endl;
 
-//10( comment below line)
-    //std::cout << q->GetStats() << std::endl;
+    std::cout << q->GetStats() << std::endl;*/
     return 0;
 }
