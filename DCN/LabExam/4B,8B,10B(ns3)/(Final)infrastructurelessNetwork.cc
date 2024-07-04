@@ -61,7 +61,7 @@
 #include "ns3/yans-wifi-channel.h"
 #include "ns3/yans-wifi-helper.h"
 
-// 1(add header files from traffic-control.cc)
+//1( add header files from traffic-control.cc)
 #include "ns3/applications-module.h"
 #include "ns3/core-module.h"
 #include "ns3/flow-monitor-module.h"
@@ -123,7 +123,7 @@ int main(int argc, char *argv[])
     double interval = 1.0; // seconds
     bool verbose = false;
 
-// 2(add this line)
+//2( add this line)
     double simulationTime = 10.0;
 
     CommandLine cmd(__FILE__);
@@ -142,7 +142,7 @@ int main(int argc, char *argv[])
 
     NodeContainer c;
 
-// 3( 2 -> 4)
+//3( 2 -> 4)
     c.Create(4);
 
     // The below set of helpers will help us to put together the wifi NICs we want
@@ -185,7 +185,7 @@ int main(int argc, char *argv[])
     positionAlloc->Add(Vector(0.0, 0.0, 0.0));
     positionAlloc->Add(Vector(10.0, 0.0, 0.0));
 
-// 4(copy paste above 2 lines and make changes as shown)
+//4( copy paste above 2 lines and make changes as shown)
     positionAlloc->Add(Vector(0.0, 10.0, 0.0));
     positionAlloc->Add(Vector(10.0, 10.0, 0.0));
 
@@ -201,7 +201,7 @@ int main(int argc, char *argv[])
     ipv4.SetBase("10.1.1.0", "255.255.255.0");
     Ipv4InterfaceContainer i = ipv4.Assign(devices);
 
-// 5(comment this part)
+//5( comment this part)
     /*TypeId tid = TypeId::LookupByName("ns3::UdpSocketFactory");
     Ptr<Socket> recvSink = Socket::CreateSocket(c.Get(0), tid);
     InetSocketAddress local = InetSocketAddress(Ipv4Address::GetAny(), 80);
@@ -227,15 +227,18 @@ int main(int argc, char *argv[])
                                 numPackets,
                                 interPacketInterval);*/
 
-// 6(line 157 to 202 from traffic-control.cc)
+//6(add line 173 from third.cc)
+    Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+
+//7( line 157 to 202 from traffic-control.cc)
     //  Flow
     uint16_t port = 7;
     Address localAddress(InetSocketAddress(Ipv4Address::GetAny(), port));
 
-// 7(socketType -> "ns3::TcpSocketFactory" from traffic-control.cc)
+//8( socketType -> "ns3::TcpSocketFactory" from traffic-control.cc)
     PacketSinkHelper packetSinkHelper("ns3::TcpSocketFactory", localAddress);
 
-// 8(nodes -> c)
+//9( nodes -> c)
     ApplicationContainer sinkApp = packetSinkHelper.Install(c.Get(0));
 
     sinkApp.Start(Seconds(0.0));
@@ -244,7 +247,7 @@ int main(int argc, char *argv[])
     uint32_t payloadSize = 1448;
     Config::SetDefault("ns3::TcpSocket::SegmentSize", UintegerValue(payloadSize));
 
-// 9(socketType -> "ns3::TcpSocketFactory" from traffic-control.cc)
+//10( socketType -> "ns3::TcpSocketFactory" from traffic-control.cc)
     OnOffHelper onoff("ns3::TcpSocketFactory", Ipv4Address::GetAny());
     onoff.SetAttribute("OnTime", StringValue("ns3::ConstantRandomVariable[Constant=1]"));
     onoff.SetAttribute("OffTime", StringValue("ns3::ConstantRandomVariable[Constant=0]"));
@@ -252,12 +255,12 @@ int main(int argc, char *argv[])
     onoff.SetAttribute("DataRate", StringValue("50Mbps")); // bit/s
     ApplicationContainer apps;
 
-// 10(interfaces -> i)
+//11( interfaces -> i)
     InetSocketAddress rmt(i.GetAddress(0), port);
     rmt.SetTos(0xb8);
     AddressValue remoteAddress(rmt);
     onoff.SetAttribute("Remote", remoteAddress);
-// 11(nodes -> c and 1 -> 2)
+//12( nodes -> c and 1 -> 2)
     apps.Add(onoff.Install(c.Get(2)));
     apps.Start(Seconds(1.0));
     apps.Stop(Seconds(simulationTime + 0.1));
