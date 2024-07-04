@@ -185,6 +185,7 @@ main(int argc, char* argv[])
     Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
 
     // Flow
+//For UDP
     uint16_t port = 7;
     Address localAddress(InetSocketAddress(Ipv4Address::GetAny(), port));
 //11( socketType -> "ns3::UdpSocketFactory")
@@ -216,6 +217,7 @@ main(int argc, char* argv[])
     apps.Start(Seconds(1.0));
     apps.Stop(Seconds(simulationTime + 0.1));
     
+//For TCP
 //15( copy the above part in flow and make changes in the block as shown)
     uint16_t port1 = 9;
     Address localAddress1(InetSocketAddress(Ipv4Address::GetAny(), port1));

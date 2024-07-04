@@ -161,9 +161,11 @@ main(int argc, char* argv[])
     address.SetBase("10.1.3.0", "255.255.255.0");
     address.Assign(staDevices);
     address.Assign(apDevices);
+
+//3( cut from line 173 and paste here)
     Ipv4GlobalRoutingHelper::PopulateRoutingTables();
 
-//3(comment this part)
+//4(comment this part)
     /*UdpEchoServerHelper echoServer(9);
 
     ApplicationContainer serverApps = echoServer.Install(csmaNodes.Get(nCsma));
@@ -179,15 +181,15 @@ main(int argc, char* argv[])
     clientApps.Start(Seconds(2.0));
     clientApps.Stop(Seconds(10.0));*/
 
-//4(line 157 to 202 from traffic-control.cc)
+//5(line 157 to 202 from traffic-control.cc)
     // Flow
     uint16_t port = 7;
     Address localAddress(InetSocketAddress(Ipv4Address::GetAny(), port));
 
-//5( socketType -> "ns3::UdpSocketFactory")
+//6( socketType -> "ns3::UdpSocketFactory")
     PacketSinkHelper packetSinkHelper("ns3::UdpSocketFactory", localAddress);
 
-//6( nodes.Get(0) -> csmaNodes.Get(2))
+//7( nodes.Get(0) -> csmaNodes.Get(2))
     ApplicationContainer sinkApp = packetSinkHelper.Install(csmaNodes.Get(2));
 
     sinkApp.Start(Seconds(0.0));
@@ -196,7 +198,7 @@ main(int argc, char* argv[])
     uint32_t payloadSize = 1448;
     Config::SetDefault("ns3::TcpSocket::SegmentSize", UintegerValue(payloadSize));
 
-//7( socketType -> "ns3::UdpSocketFactory")
+//8( socketType -> "ns3::UdpSocketFactory")
     OnOffHelper onoff("ns3::UdpSocketFactory", Ipv4Address::GetAny());
     onoff.SetAttribute("OnTime", StringValue("ns3::ConstantRandomVariable[Constant=1]"));
     onoff.SetAttribute("OffTime", StringValue("ns3::ConstantRandomVariable[Constant=0]"));
@@ -204,13 +206,13 @@ main(int argc, char* argv[])
     onoff.SetAttribute("DataRate", StringValue("50Mbps")); // bit/s
     ApplicationContainer apps;
 
-//8( interfaces -> csmaInterfaces)
+//9( interfaces -> csmaInterfaces)
     InetSocketAddress rmt(csmaInterfaces.GetAddress(0), port);
     rmt.SetTos(0xb8);
     AddressValue remoteAddress(rmt);
     onoff.SetAttribute("Remote", remoteAddress);
 
-//9( nodes.Get(1) -> wifiStaNodes.Get(0))
+//10( nodes.Get(1) -> wifiStaNodes.Get(0))
     apps.Add(onoff.Install(wifiStaNodes.Get(0)));
     apps.Start(Seconds(1.0));
     apps.Stop(Seconds(simulationTime + 0.1));
