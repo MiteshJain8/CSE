@@ -1,73 +1,56 @@
 import java.util.Scanner;
 
 public class BellmanFord {
-    private int[] distances;
-    private int numVertices;
-    public static final int MAX_VALUE = 999;
+    public static final int maxVal = 999;
 
-    public BellmanFord(int numVertices) {
-        this.numVertices = numVertices;
-        distances = new int[numVertices + 1];
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("\nEnter number of vertices: ");
+        int V = sc.nextInt();
+        int[][] graph = new int[V+1][V+1];
+        System.out.println("\nEnter edge weights of graph[i][j], 0 if no edge between i,j: ");
+        for(int i=1;i<=V;i++){
+            for(int j=1;j<=V;j++){
+                graph[i][j] = sc.nextInt();
+                if (i == j) {
+                    graph[i][j] = 0;
+                    continue;
+                } else if (graph[i][j] == 0) {
+                    graph[i][j] = maxVal;
+                }
+            }
+        }
+        System.out.print("\nEnter source vertex: ");
+        int src = sc.nextInt();
+        Evaluate(graph, src, V);
+        sc.close();
     }
 
-    public void evaluate(int source, int[][] graph) {
-        // Initialize distances
-        for (int i = 1; i <= numVertices; i++) {
-            distances[i] = MAX_VALUE;
+    public static void Evaluate(int[][] graph, int src, int V) {
+        int[] distance = new int[V+1];
+        for (int i = 1; i <= V; i++) {
+            distance[i] = maxVal;
         }
-        distances[source] = 0;
-
-        // Relax edges |V| - 1 times
-        for (int i = 1; i <= numVertices - 1; i++) {
-            for (int u = 1; u <= numVertices; u++) {
-                for (int v = 1; v <= numVertices; v++) {
-                    if (graph[u][v] != MAX_VALUE && distances[u] != MAX_VALUE && distances[u] + graph[u][v] < distances[v]) {
-                        distances[v] = distances[u] + graph[u][v];
+        distance[src] = 0;
+        for (int i = 1; i <= V-1; i++) {
+            for (int u = 1; u <= V; u++) {
+                for (int v = 1; v <= V; v++) {
+                    if (distance[v] > distance[u] + graph[u][v]) {
+                        distance[v] = distance[u] + graph[u][v];
                     }
                 }
             }
         }
-
-        // Check for negative-weight cycles
-        for (int u = 1; u <= numVertices; u++) {
-            for (int v = 1; v <= numVertices; v++) {
-                if (graph[u][v] != MAX_VALUE && distances[u] != MAX_VALUE && distances[u] + graph[u][v] < distances[v]) {
-                    System.out.println("The Graph contains a negative edge cycle");
+        for (int u = 1; u <= V; u++) {
+            for (int v = 1; v <= V; v++) {
+                if (distance[v] > distance[u] + graph[u][v]) {
+                    System.out.println("Negative cycle found");
                     return;
                 }
             }
         }
-
-        // Print distances
-        for (int i = 1; i <= numVertices; i++) {
-            System.out.println("Distance from source " + source + " to " + i + " is " + distances[i]);
+        for (int i = 1; i <= V; i++) {
+            System.out.println("Distance of vertex " + i + " from source " + src + " is " + distance[i]);
         }
-    }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the number of vertices");
-        int numVertices = scanner.nextInt();
-
-        int[][] graph = new int[numVertices + 1][numVertices + 1];
-        System.out.println("Enter the adjacency matrix");
-        for (int i = 1; i <= numVertices; i++) {
-            for (int j = 1; j <= numVertices; j++) {
-                graph[i][j] = scanner.nextInt();
-                if (i == j) {
-                    graph[i][j] = 0;
-                } else if (graph[i][j] == 0) {
-                    graph[i][j] = MAX_VALUE;
-                }
-            }
-        }
-
-        System.out.println("Enter the source vertex");
-        int source = scanner.nextInt();
-        
-        BellmanFord bellmanFord = new BellmanFord(numVertices);
-        bellmanFord.evaluate(source, graph);
-        
-        scanner.close();
     }
 }

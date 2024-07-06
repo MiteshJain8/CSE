@@ -165,11 +165,12 @@ main(int argc, char* argv[])
     devices = pointToPoint.Install(nodes.Get(0),nodes.Get(1));
     Ipv4InterfaceContainer interfaces = address.Assign(devices);
 
+//9( take the above lines and make changes shown in next 3 lines)
     devices = pointToPoint.Install (nodes.Get (1), nodes.Get (2));
     address.SetBase ("10.1.2.0", "255.255.255.0");
     interfaces = address.Assign (devices);
 
-//9(paste from comment 5 and make changes as shown)
+//10(copy above 8 lines of code and make changes as shown)
     Ipv4AddressHelper address1;
     address1.SetBase("10.1.3.0", "255.255.255.0");
 
@@ -181,16 +182,16 @@ main(int argc, char* argv[])
     address1.SetBase ("10.1.4.0", "255.255.255.0");
     interfaces1 = address1.Assign (devices1);
 
-//10(add line 173 from third.cc)
+//11(add line 173 from third.cc)
     Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
 
     // Flow
 //For UDP
     uint16_t port = 7;
     Address localAddress(InetSocketAddress(Ipv4Address::GetAny(), port));
-//11( socketType -> "ns3::UdpSocketFactory")
+//12( socketType -> "ns3::UdpSocketFactory")
     PacketSinkHelper packetSinkHelper("ns3::UdpSocketFactory", localAddress);
-//12( 0 -> 2)
+//13( 0 -> 2)
     ApplicationContainer sinkApp = packetSinkHelper.Install(nodes.Get(2));
 
     sinkApp.Start(Seconds(0.0));
@@ -199,7 +200,7 @@ main(int argc, char* argv[])
     uint32_t payloadSize = 1448;
     Config::SetDefault("ns3::TcpSocket::SegmentSize", UintegerValue(payloadSize));
 
-//13( socketType -> "ns3::UdpSocketFactory")
+//14( socketType -> "ns3::UdpSocketFactory")
     OnOffHelper onoff("ns3::UdpSocketFactory", Ipv4Address::GetAny());
     onoff.SetAttribute("OnTime", StringValue("ns3::ConstantRandomVariable[Constant=1]"));
     onoff.SetAttribute("OffTime", StringValue("ns3::ConstantRandomVariable[Constant=0]"));
@@ -207,18 +208,18 @@ main(int argc, char* argv[])
     onoff.SetAttribute("DataRate", StringValue("50Mbps")); // bit/s
     ApplicationContainer apps;
 
-//13( 0 -> 1)
+//15( 0 -> 1)
     InetSocketAddress rmt(interfaces.GetAddress(1), port);
     rmt.SetTos(0xb8);
     AddressValue remoteAddress(rmt);
     onoff.SetAttribute("Remote", remoteAddress);
-//14( 1 -> 0)
+//16( 1 -> 0)
     apps.Add(onoff.Install(nodes.Get(0)));
     apps.Start(Seconds(1.0));
     apps.Stop(Seconds(simulationTime + 0.1));
     
 //For TCP
-//15( copy the above part in flow and make changes in the block as shown)
+//17( copy the above part in flow and make changes in the block as shown)
     uint16_t port1 = 9;
     Address localAddress1(InetSocketAddress(Ipv4Address::GetAny(), port1));
     PacketSinkHelper packetSinkHelper1("ns3::TcpSocketFactory", localAddress1);
@@ -278,7 +279,7 @@ main(int argc, char* argv[])
 
     Simulator::Destroy();
 
-//16( comment below part)
+//18( comment below part)
     /*std::cout << std::endl << "*** Application statistics ***" << std::endl;
     double thr = 0;
     uint64_t totalPacketsThr = DynamicCast<PacketSink>(sinkApp.Get(0))->GetTotalRx();

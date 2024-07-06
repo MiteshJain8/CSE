@@ -5,6 +5,6 @@ Run Server.java in terminal
 ## step 3:
 Open another terminal and run Client.java
 ## step 4:
-Client.java asks you to enter a file name, either create a text file or use this file instead (howToUse.txt).
+Client.java asks you to enter a file name, either create a text file or use this file instead (howToRun.md).
 ## Note:
 Make sure the file is in the same directory as your current directory or provide the correct path to the file.
