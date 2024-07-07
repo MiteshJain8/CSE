@@ -1,36 +1,40 @@
-def max_profit_with_requests(drama_requests):
-    drama_requests.sort(key=lambda x: x[2])
-    
-    n = len(drama_requests)
-    dp = [0] * n
-    selected_requests = [[] for _ in range(n)]
+def weighted(x):
+    if x == 0:
+        return 0
+    elif M[x - 1]:
+        return M[x - 1]
+    else:
+        M[x - 1] = max(weighted(x - 1), lst[x - 1][2] + weighted(p[x - 1]))
+        return M[x - 1]
 
-    dp[0] = drama_requests[0][3]
-    selected_requests[0] = [drama_requests[0]]
 
-    for i in range(1, n):
-        current_value = drama_requests[i][3]
-        selected_requests[i] = [drama_requests[i]]
+def Selection(k):
+    if k < 1:
+        return
+    i = k
+    while i > 1 and M[i - 1] == M[i - 2]:
+        i -= 1
+    selected.append(lst[i - 1])
+    Selection(p[i - 1])
 
-        for j in range(i - 1, -1, -1):
-            if drama_requests[j][2] <= drama_requests[i][1]:
-                current_value += dp[j]
-                selected_requests[i] = [drama_requests[i]] + selected_requests[j]
-                break
 
-        dp[i] = max(dp[i - 1], current_value)
+n = int(input("Enter number of events: "))
+lst = []
+print("Enter start time, finish time and profit of each event separated by space")
+for i in range(n):
+    tup = tuple(map(int, input(f"Schedule {i+1}: ").split()))
+    lst.append(tup)
+lst = sorted(lst, key=lambda x: x[1])
 
-    return dp[-1], selected_requests[-1]
+p = [0 for i in range(len(lst))]
+for i in range(len(lst) - 1, 0, -1):
+    for j in range(i - 1, -1, -1):
+        if lst[i][0] >= lst[j][1]:
+            p[i] = j + 1
+            break
 
-drama_requests = [
-    (1, 1, 2, 100),
-    (2, 2, 5, 200),
-    (3, 3, 6, 300),
-    (4, 4, 8, 400),
-    (5, 5, 9, 500),
-    (6, 6, 10, 100)
-]
-
-max_profit, selected_requests = max_profit_with_requests(drama_requests)
-print("Maximum Profit:", max_profit)
-print("Selected Requests:", selected_requests)
+M = [0 for i in range(len(lst))]
+selected = []
+print("\nMax profit: ",weighted(len(lst)))
+Selection(len(lst))
+print("\nEvents selected: ",selected)
