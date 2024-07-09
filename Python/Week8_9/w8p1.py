@@ -1,3 +1,13 @@
+# Develop a python program to utilize NumPy and perform the following operations 
+# a. Read and Print 1D array 
+# b. Read  two  1D  array  and  display  the  common  numbers  present  in  both  the arrays. 
+# c. Read 1D array with 12 elements and convert it into 2D array of size (2, 6) and (3, 4). 
+# d. Read 1D array with 12 elements and convert it into 3D array. 
+# e. Split the 1D array into 2, 3 and 4 arrays. 
+# f. Demonstrate the concatenation of two 1D array. 
+# g. Sort the 1D array in ascending and descending order. 
+# h. Display all the even numbers of 1D array.
+
 import numpy as np
 
 arr1 = np.array([int(x) for x in input("Enter array elements separated by space: ").split()])

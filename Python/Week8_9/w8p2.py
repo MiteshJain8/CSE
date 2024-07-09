@@ -1,3 +1,12 @@
+# Develop a python program to utilize NumPy and perform the following operations. 
+# a. Read and Print. 
+# b. Display in the reverse order with and without for loop. 
+# c. Print the sum of all the elements of 2D Array. 
+# d. Display all the elements of principal diagonal elements. 
+# e. Read 2D array with 12 elements and convert it into 1D array. 
+# f. Read 2D array with 12 elements and convert it into 3D array. 
+# g. Sort the 2D array in ascending and descending order.
+
 import numpy as np
 
 lst = list(map(int, input("Enter 12 elements separated by space: ").split()))
