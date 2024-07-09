@@ -15,12 +15,9 @@ def displayMinMax(arr, n):
 
 def displaySecMax(arr, n):
     secMax = arr[0]
-    maxi = arr[0]
+    Max = max(arr)
     for i in range(1,n):
-        if(arr[i]>maxi):
-            maxi = arr[i]
-    for i in range(1,n):
-        if(arr[i]>secMax and arr[i]<maxi):
+        if(arr[i]>secMax and arr[i]<Max):
             secMax = arr[i]
     print("Second largest = ",secMax)
 
