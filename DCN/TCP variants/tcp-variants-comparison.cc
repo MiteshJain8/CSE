@@ -363,11 +363,11 @@ main(int argc, char* argv[])
 
     CommandLine cmd(__FILE__);
     cmd.AddValue("transport_prot",
-                 "Transport protocol to use: TcpNewReno, TcpLinuxReno, "
-                 "TcpHybla, TcpHighSpeed, TcpHtcp, TcpVegas, TcpScalable, TcpVeno, "
-                 "TcpBic, TcpYeah, TcpIllinois, TcpWestwoodPlus, TcpLedbat, "
-                 "TcpLp, TcpDctcp, TcpCubic, TcpBbr",
-                 transport_prot);
+                "Transport protocol to use: TcpNewReno, TcpLinuxReno, "
+                "TcpHybla, TcpHighSpeed, TcpHtcp, TcpVegas, TcpScalable, TcpVeno, "
+                "TcpBic, TcpYeah, TcpIllinois, TcpWestwoodPlus, TcpLedbat, "
+                "TcpLp, TcpDctcp, TcpCubic, TcpBbr",
+                transport_prot);
     cmd.AddValue("error_p", "Packet error rate", error_p);
     cmd.AddValue("bandwidth", "Bottleneck bandwidth", bandwidth);
     cmd.AddValue("delay", "Bottleneck delay", delay);
@@ -383,8 +383,8 @@ main(int argc, char* argv[])
     cmd.AddValue("flow_monitor", "Enable flow monitor", flow_monitor);
     cmd.AddValue("pcap_tracing", "Enable or disable PCAP tracing", pcap);
     cmd.AddValue("queue_disc_type",
-                 "Queue disc type for gateway (e.g. ns3::CoDelQueueDisc)",
-                 queue_disc_type);
+                "Queue disc type for gateway (e.g. ns3::CoDelQueueDisc)",
+                queue_disc_type);
     cmd.AddValue("sack", "Enable or disable SACK option", sack);
     cmd.AddValue("recovery", "Recovery algorithm type to use (e.g., ns3::TcpPrrRecovery", recovery);
     cmd.Parse(argc, argv);
@@ -421,13 +421,13 @@ main(int argc, char* argv[])
     Config::SetDefault("ns3::TcpSocketBase::Sack", BooleanValue(sack));
 
     Config::SetDefault("ns3::TcpL4Protocol::RecoveryType",
-                       TypeIdValue(TypeId::LookupByName(recovery)));
+                    TypeIdValue(TypeId::LookupByName(recovery)));
     // Select TCP variant
     TypeId tcpTid;
     NS_ABORT_MSG_UNLESS(TypeId::LookupByNameFailSafe(transport_prot, &tcpTid),
                         "TypeId " << transport_prot << " not found");
     Config::SetDefault("ns3::TcpL4Protocol::SocketType",
-                       TypeIdValue(TypeId::LookupByName(transport_prot)));
+                    TypeIdValue(TypeId::LookupByName(transport_prot)));
 
     // Create gateways, sources, and sinks
     NodeContainer gateways;
@@ -480,9 +480,9 @@ main(int argc, char* argv[])
                                           ((access_d + bottle_d) * 2).GetSeconds());
 
     Config::SetDefault("ns3::PfifoFastQueueDisc::MaxSize",
-                       QueueSizeValue(QueueSize(QueueSizeUnit::PACKETS, size / mtu_bytes)));
+                    QueueSizeValue(QueueSize(QueueSizeUnit::PACKETS, size / mtu_bytes)));
     Config::SetDefault("ns3::CoDelQueueDisc::MaxSize",
-                       QueueSizeValue(QueueSize(QueueSizeUnit::BYTES, size)));
+                    QueueSizeValue(QueueSize(QueueSizeUnit::BYTES, size)));
 
     for (uint32_t i = 0; i < num_flows; i++)
     {
@@ -504,7 +504,7 @@ main(int argc, char* argv[])
         else
         {
             NS_FATAL_ERROR("Queue not recognized. Allowed values are ns3::CoDelQueueDisc or "
-                           "ns3::PfifoFastQueueDisc");
+                        "ns3::PfifoFastQueueDisc");
         }
         address.NewNetwork();
         interfaces = address.Assign(devices);

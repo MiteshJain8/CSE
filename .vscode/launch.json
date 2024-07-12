@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CRC",
+            "request": "launch",
+            "mainClass": "CRC",
+            "projectName": "Personal_Code_4a02bbc4"
+        },
+        {
+            "type": "java",
             "name": "BellmanFord",
             "request": "launch",
             "mainClass": "BellmanFord",
