@@ -28,16 +28,12 @@ def Kruskals(graph, V):
             mst.append([u, v, weight])
             union(parent, rank, x, y)
             cost += weight
-    print("\nParent array after union: ", parent)
-    print("\nRank array after union: ", rank)
-    print("\nMST: ", mst)
+    print("\Minimum Spanning Tree: ", mst)
     print("\nMinimum Spanning Tree Cost: ", cost)
 
 n = int(input("\nEnter no of vertices: "))
 parent = [i for i in range(n)]
 rank = [0 for i in range(n)]
-print("\nInitially parent array: ", parent)
-print("\nInitially rank array: ", rank)
 graph = []
 e = int(input("\nEnter the no of edges: "))
 for i in range(e):
@@ -46,5 +42,4 @@ for i in range(e):
     v = int(input())
     weight = int(input("Enter its weight: "))
     graph.append([u, v, weight])
-
 Kruskals(graph, n)

@@ -1,0 +1,24 @@
+Function merge(left, right)
+    merged = empty array
+    i = 0
+    j = 0
+    while i < length(left) and j < length(right)
+        if left[i] < right[j]
+            append left[i] to merged
+            i = i + 1
+        else
+            append right[j] to merged
+            j = j + 1
+    append remaining elements from left[i:] to merged
+    append remaining elements from right[j:] to merged
+    return merged
+
+Function mergeSort(arr)
+    if length(arr) <= 1
+        return arr
+    
+    mid = length(arr) // 2
+    left_half = mergeSort(arr[0:mid])
+    right_half = mergeSort(arr[mid:])
+    
+    return merge(left_half, right_half)

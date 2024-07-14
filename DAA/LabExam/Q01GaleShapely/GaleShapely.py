@@ -35,6 +35,6 @@ women_prefs = {
 }
 
 stableMatches = stable_match(men_prefs, women_prefs)
-print("Stable Marriages:")
+print("Stable Matches:")
 for woman, man in stableMatches.items():
     print(f"{man} engaged to {woman}")

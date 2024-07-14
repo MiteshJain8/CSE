@@ -1,12 +1,3 @@
-def merge_sort(arr):
-    if len(arr) <= 1:
-        return arr
-    
-    mid = len(arr) // 2
-    left_half = merge_sort(arr[:mid])
-    right_half = merge_sort(arr[mid:])
-    return merge(left_half, right_half)
-
 def merge(left, right):
     merged = []
     i, j = 0, 0
@@ -17,13 +8,20 @@ def merge(left, right):
         else:
             merged.append(right[j])
             j += 1
-
     # Append any remaining elements from left and right halves
     merged += left[i:]
     merged += right[j:]
-
     return merged
 
+def mergeSort(arr):
+    if len(arr) <= 1:
+        return arr
+    
+    mid = len(arr) // 2
+    left_half = mergeSort(arr[:mid])
+    right_half = mergeSort(arr[mid:])
+    return merge(left_half, right_half)
+
 arr = [12, 11, 13, 5, 6, 7]
-sorted_arr = merge_sort(arr)
+sorted_arr = mergeSort(arr)
 print("Sorted array:", sorted_arr)
