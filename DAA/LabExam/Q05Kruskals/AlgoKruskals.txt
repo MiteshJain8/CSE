@@ -36,3 +36,6 @@ Function Kruskals(graph, V):
             Append (u, v, weight) to mst
             union(parent, rank, x, y)
             Add weight to cost
+
+T = O(E logE) or O(E logV)
+S = O(V + E)

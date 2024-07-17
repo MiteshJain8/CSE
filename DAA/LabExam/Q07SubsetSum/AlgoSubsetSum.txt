@@ -10,3 +10,6 @@ Subset-Sum(n, W)
         Endfor
     Endfor
     Return M[n, W]
+
+T = O(n×W)
+S = O(n×W)

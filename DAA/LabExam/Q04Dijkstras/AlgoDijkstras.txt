@@ -9,3 +9,8 @@ Dijkstra’s Algorithm (G, s)
     Add v to S
     Define d(v) = d'(v)
   EndWhile
+
+T = O((E+V)logV) using min-heap(priority queue)
+    Inserting all vertices into the priority queue takes 𝑂(𝑉 log𝑉)
+    edge relaxation operations is O(E logV)
+S = O(E+V) due to adjacency list

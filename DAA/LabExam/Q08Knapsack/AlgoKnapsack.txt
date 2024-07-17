@@ -11,3 +11,6 @@ Function Knapsack(items, W, n)
         If dp[i][w] is not equal to dp[i-1][w], it means the item i was included in the optimal solution
             Add the item i to the list of selected items and update w to w - weight of item i
     Return maximum value, which is dp[n][W] and list of selected items
+
+T = O(n×W)
+S = O(n×W)

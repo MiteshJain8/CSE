@@ -22,3 +22,6 @@ Function mergeSort(arr)
     right_half = mergeSort(arr[mid:])
     
     return merge(left_half, right_half)
+
+T = O(n log n)
+S = O(n) due auxiliary array of size (n) to merge the sorted halves

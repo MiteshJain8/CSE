@@ -1,0 +1,19 @@
+Function Bellman-Ford(Graph, src, V):
+    dist = array of size V initialized to infinity
+    dist[src] = 0
+
+    // Relaxation
+    for i = 1 to V-1
+        for each edge (u, v) with weight w in Graph
+            if dist[v] > dist[u] + w
+                dist[v] = dist[u] + w
+
+    // Negative Cycle Detection
+    for each edge (u, v) with weight w in Graph
+        if dist[v] > dist[u] + w then Negative cycle exists
+            Return
+
+    Return dist
+
+T = O(V×E)
+S = O(V)

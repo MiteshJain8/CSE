@@ -8,3 +8,6 @@ Function backtrack(r, n)
         If safe, place the queen (update sets)
         Recursively call backtrack for the next row (r+1)
         After the recursive call, remove the queen (update sets)
+
+T = O(n!)
+S = O(n)
