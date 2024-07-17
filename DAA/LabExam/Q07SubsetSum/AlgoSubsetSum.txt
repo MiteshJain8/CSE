@@ -1,0 +1,12 @@
+Subset-Sum(n, W)
+    Array M[0 . . . n,0... W]
+    Initialize M[0, w]= 0 for each w = 0, 1, . . . , W
+    For i = 1 to n
+        For w = 0 to W
+            if w < wi
+                OPT(i, w) = OPT(i − 1, w)
+            else
+                OPT(i, w) = max(OPT(i − 1, w), wi + OPT(i − 1, w − wi)).
+        Endfor
+    Endfor
+    Return M[n, W]

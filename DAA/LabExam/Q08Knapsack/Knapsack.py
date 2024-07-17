@@ -1,5 +1,4 @@
-def knapsack(items, maxWeight):
-    n = len(items)
+def knapsack(items, maxWeight, n):
     dp = [[0] * (maxWeight + 1) for i in range(n + 1)]
     for i in range(1, n + 1):
         for w in range(maxWeight + 1):
@@ -16,8 +15,10 @@ def knapsack(items, maxWeight):
     selected.reverse()
     return dp[n][maxWeight], selected
 
+n = 6
+#items=[tuples(No., weight, value)]
 items = [(1, 5, 100),(2, 7, 300),(3, 8, 200),(4, 10, 100),(5, 5, 200),(6, 2, 100)]
 maxWeight = 20
-maxValue, selected = knapsack(items, maxWeight)
+maxValue, selected = knapsack(items, maxWeight, n)
 print("Maximum Value:", maxValue)
 print("Selected Items:", selected)

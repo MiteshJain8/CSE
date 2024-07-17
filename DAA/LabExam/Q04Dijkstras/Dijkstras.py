@@ -23,8 +23,8 @@ def Dijkstras(graph, src, V):
 
 V = int(input("\nEnter number of vertices: "))
 graph = [[] for i in range(V)]
-e = int(input("Enter the number of edges: "))
-for i in range(e):
+E = int(input("Enter the number of edges: "))
+for i in range(E):
     print("Enter edge (u, v): ")
     u = int(input())
     v = int(input())
