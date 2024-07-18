@@ -1,21 +1,21 @@
-def weighted(x):
+def ComputeOpt(x):
     if x == 0:
         return 0
     elif M[x - 1]:
         return M[x - 1]
     else:
-        M[x - 1] = max(weighted(x - 1), lst[x - 1][2] + weighted(p[x - 1]))
+        M[x - 1] = max(ComputeOpt(x - 1), lst[x - 1][2] + ComputeOpt(p[x - 1]))
         return M[x - 1]
 
 
-def Selection(k):
+def findSolution(k):
     if k < 1:
         return
     i = k
     while i > 1 and M[i - 1] == M[i - 2]:
         i -= 1
     selected.append(lst[i - 1])
-    Selection(p[i - 1])
+    findSolution(p[i - 1])
 
 
 n = int(input("Enter number of events: "))
@@ -35,6 +35,6 @@ for i in range(len(lst) - 1, 0, -1):
 
 M = [0 for i in range(len(lst))]
 selected = []
-print("\nMax profit: ",weighted(len(lst)))
-Selection(len(lst))
+print("\nMax profit: ",ComputeOpt(len(lst)))
+findSolution(len(lst))
 print("\nEvents selected: ",selected)
