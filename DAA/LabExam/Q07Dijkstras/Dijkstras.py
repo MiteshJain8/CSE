@@ -1,22 +1,21 @@
 def Dijkstras(graph, src, V):
     shortest_path = [float('inf')] * V
     shortest_path[src] = 0
-    queue = [(0, src)]  # (distance, vertex)
+    queue = set([src])  # Set of vertices to be processed
     predecessor = [-1] * V  # To store the path
 
     while queue:
-        current_distance, u = queue.pop(0)
+        # Find the vertex with the minimum distance
+        u = min(queue, key=lambda vertex: shortest_path[vertex])
+        queue.remove(u)
 
-        if current_distance > shortest_path[u]:
-            continue
+        for neighbour, weight in graph[u]:
+            distance = shortest_path[u] + weight
 
-        for neighbor, weight in graph[u]:
-            distance = current_distance + weight
-
-            if distance < shortest_path[neighbor]:
-                shortest_path[neighbor] = distance
-                predecessor[neighbor] = u
-                queue.append((distance, neighbor))
+            if distance < shortest_path[neighbour]:
+                shortest_path[neighbour] = distance
+                predecessor[neighbour] = u
+                queue.add(neighbour)
 
     print("\nVertex\tDistance from source\tPath")
     for i in range(V):
@@ -33,14 +32,12 @@ def Dijkstras(graph, src, V):
 
 V = int(input("\nEnter number of vertices: "))
 graph = [[] for i in range(V)]
-E = int(input("Enter the number of edges: "))
+E = int(input("Enter the number of directed edges: "))
+print("Enter directed edges and their weight separated by space (u v weight)")
 for i in range(E):
-    print("Enter edge (u, v): ")
-    u = int(input())
-    v = int(input())
-    weight = int(input("Enter its weight: "))
+    print(f"Edge {i+1}: ")
+    u, v, weight = map(int, input().split())
     graph[u].append((v, weight))
-    graph[v].append((u, weight))
 
 print("\nAdjacency list: ")
 for i in range(V):
