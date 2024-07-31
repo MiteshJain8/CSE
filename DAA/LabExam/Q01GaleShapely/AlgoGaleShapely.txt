@@ -15,5 +15,8 @@ While there is a man m who is free and hasn’t proposed to every woman
 Endwhile
 Return the set S of engaged pairs
 
+Design Strategy: Greedy
+
 T = O(n^2)
+
 S = due to preference lists O(n)

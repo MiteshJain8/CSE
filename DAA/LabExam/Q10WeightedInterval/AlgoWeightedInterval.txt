@@ -1,0 +1,27 @@
+Sort the events based on their finish times
+Create an array '𝑝' where 𝑝[𝑖] gives previous compatible job
+Initialize an array '𝑀' of size n with 0s, where n is the number of events.M[i] will store the maximum profit achievable considering the first i events
+Initialize an empty array 'selected' to store selected intervals
+
+Function Compute_Opt(j)
+    if j < 0
+        Return 0
+    if M[j]
+        Return M[j]
+    M[j] = max(Compute_Opt(j-1), weight(j) + Compute_Opt(p[j]))
+    Return M[j]
+
+Function findSolution(k)
+    if k < 0
+        Return
+    if k == 0 or M[k] != M[k - 1]
+        append lst[k] to 'selected' array
+        findSolution(p[k])
+    else
+        findSolution(k - 1)
+
+Design Strategy: Dynamic Programming
+
+T = O(n^2)
+
+S = O(n)

@@ -1,6 +1,0 @@
-DFS(arr, visited, i, n):
-    Mark visited[i] as 1 (visited) and print i
-    For each vertex j from 0 to n-1:
-        If there is an edge between i and j (arr[i][j] == 1):
-            If j is not visited (visited[j] == 0):
-                Recursively call DFS(arr, visited, j, n)

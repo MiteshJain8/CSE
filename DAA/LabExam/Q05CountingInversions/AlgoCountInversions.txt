@@ -1,0 +1,27 @@
+merge_and_count(left_arr, right_arr):
+    Initialize an empty array 'merged' and two pointers i and j to 0.
+    Initialize an inversion count to 0.
+    While i < len(left_arr) and j < len(right_arr)
+        If left_arr[i] is less than or equal to right_arr[j]
+            append left_arr[i] to merged array and increment i by 1
+        Else
+            append right_arr[j] to merged array, increment j by 1
+            add the number of remaining elements in left_arr to inversion count
+    Append any remaining elements from left_arr and right_arr to merged array.
+    Return merged array and inversion count
+
+
+mergeSort_and_count(array):
+    If the array has one or zero elements
+        Return the array and 0 inversions
+    Divide the array into two halves
+    Recursively call mergeSort_and_count on each half.
+    Merge the two halves using merge_and_count
+    Add the inversion counts from the left half, right half, and merge steps
+    Return the sorted array and the total number of inversions
+
+Design Strategy: Divide and Conquer
+
+T = O(n log n) due to the merge sort process
+
+S = O(n) for the auxiliary arrays used during merging

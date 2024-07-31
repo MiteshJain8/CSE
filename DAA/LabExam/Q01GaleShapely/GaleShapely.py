@@ -22,7 +22,7 @@ def stable_match(men_prefs, women_prefs):
                 # The woman rejects the proposal
                 free_men.append(man)
     return engagements
-
+# Note: Take user input in exam
 men_prefs = {
     'm1': ['w1', 'w2', 'w3'],
     'm2': ['w2', 'w3', 'w1'],

@@ -1,0 +1,17 @@
+Dijkstra’s Algorithm (G, s)
+  Let S be the set of explored nodes
+  For each u ∈ S, we store a distance d(u)
+  Initially, S = {s} and d(s) = 0
+
+  While S ≠ V do
+    Select a node v ∉ S with at least one edge from S for which
+    d'(v) = min_{e=(u,v) : u ∈ S} {d(u) + weight(e)} is as small as possible
+    Add v to S
+    Define d(v) = d'(v)
+  EndWhile
+
+Design Strategy: Greedy
+
+T = O(V^2) without using min-heap
+
+S = O(E+V) due to adjacency list
