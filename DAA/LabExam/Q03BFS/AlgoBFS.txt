@@ -1,13 +1,15 @@
-BFS(arr, visited, i, n):
-    Initialize an empty queue
-    Mark visited[i] as 1 (visited) and print i
-    Add i to the queue
-    While queue is not empty:
-        Dequeue vertex from front of queue
-        For each vertex j from 0 to n-1:
-            If there is an edge between vertex and j (arr[vertex][j] == 1):
-                If j is not visited (visited[j] == 0):
-                   Mark visited[j] as 1 (visited) and print j
-                   Add j to the queue
+BFS(Graph[], visited[], start)
+    Mark the starting vertex as visited (and print)
+    Append the starting vertex to the queue.
+    While the queue is not empty
+        Pop a vertex from the queue
+        For each neighbor of the current vertex
+            If the neighbor has not been visited
+                Mark it as visited (and print)
+                Append it to the queue
 
 Design Strategy: Level-order traversal
+
+T = O(V+E)
+
+S = O(V+E) due to adjacency list

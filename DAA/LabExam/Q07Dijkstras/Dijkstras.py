@@ -9,13 +9,13 @@ def Dijkstras(graph, src, V):
         u = min(queue, key=lambda vertex: shortest_path[vertex])
         queue.remove(u)
 
-        for neighbour, weight in graph[u]:
+        for neighbor, weight in graph[u]:
             distance = shortest_path[u] + weight
 
-            if distance < shortest_path[neighbour]:
-                shortest_path[neighbour] = distance
-                predecessor[neighbour] = u
-                queue.add(neighbour)
+            if distance < shortest_path[neighbor]:
+                shortest_path[neighbor] = distance
+                predecessor[neighbor] = u
+                queue.add(neighbor)
 
     print("\nVertex\tDistance from source\tPath")
     for i in range(V):

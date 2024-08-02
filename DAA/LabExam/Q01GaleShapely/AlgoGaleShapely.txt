@@ -1,9 +1,10 @@
-While there is a man m who is free and hasn’t proposed to every woman
+GaleShapely(womenPreferences{}, menPreferences{})
+	While there is a man m who is free and hasn’t proposed to every woman
 		Choose such a man m
 		Let w be the highest-ranked woman in m’s preference list to whom m has not yet proposed
 		If w is free then
-			 (m, w) become engaged
-		 Else w is currently engaged to m’
+			(m, w) become engaged
+		Else w is currently engaged to m’
 			If w prefers m to m’ then
 				(m, w) become engaged
 				m’ becomes free
@@ -12,9 +13,9 @@ While there is a man m who is free and hasn’t proposed to every woman
 				
 			Endif
 		Endif
-Endwhile
-Return the set S of engaged pairs
-
+	Endwhile
+	Return the set S of engaged pairs
+	
 Design Strategy: Greedy
 
 T = O(n^2)

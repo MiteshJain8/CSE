@@ -1,7 +1,7 @@
-merge_and_count(left_arr, right_arr):
+merge_and_count(left_arr[], right_arr[]):
     Initialize an empty array 'merged' and two pointers i and j to 0.
     Initialize an inversion count to 0.
-    While i < len(left_arr) and j < len(right_arr)
+    While i < length(left_arr) and j < length(right_arr)
         If left_arr[i] is less than or equal to right_arr[j]
             append left_arr[i] to merged array and increment i by 1
         Else

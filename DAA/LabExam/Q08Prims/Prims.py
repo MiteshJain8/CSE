@@ -1,6 +1,6 @@
-def Prims(Graph, visited, V): 
+def Prims(Graph, visited, src, V): 
     edges, cost = 0, 0
-    visited[0] = True
+    visited[src] = True
     print("Edge: Weight")
     while (edges < V-1):
         minimum, x, y = float('inf'), 0, 0
@@ -8,9 +8,9 @@ def Prims(Graph, visited, V):
             if visited[i]:
                 for j in range(V):
                     if ((not visited[j]) and Graph[i][j]):
-                        if minimum > Graph[i][j]:
+                        if Graph[i][j] < minimum:
                             minimum, x, y = Graph[i][j], i, j
-        print(str(x) + " " + str(y) + ":" + str(Graph[x][y]))
+        print(f"{x} - {y}: {Graph[x][y]}")
         visited[y] = True
         cost += Graph[x][y]
         edges += 1
@@ -26,13 +26,15 @@ for i in range(V):
 E = int(input("Enter the no of edges: "))
 print("Enter edges and their weight separated by space(u v weight)")
 for i in range(E):
-    print(f"Edge {i+1}: ")
-    u, v, weight = map(int, input().split())
-    Graph[u][v], Graph[v][u] = weight, weight
+    u, v, weight = map(int, input(f"Edge {i+1}: ").split())
+    Graph[u][v] = weight
+    Graph[v][u] = weight
 
 print("\nAdjacency matrix : ")
 for i in range(V):
     print(Graph[i])
 
+src = int(input("\nEnter the source vertex: "))
+
 print("\nPrims: ")
-Prims(Graph, visited,V)
+Prims(Graph, visited, src, V)

@@ -1,25 +1,25 @@
-def DFS(Graph,visited,i,V):
-    visited[i] = 1
-    print(i)
-    for j in range(V):
-        if(Graph[i][j]==1):
-            if(visited[j]==0):
-                DFS(Graph,visited,j,V)
+def DFS(graph, visited, vertex):
+    visited[vertex] = True
+    print(vertex)
+    for neighbor in graph[vertex]:
+        if not visited[neighbor]:
+            DFS(graph, visited, neighbor)
 
-V = int(input("\nEnter no of vertices: "))
-visited = [0 for i in range(V)]
-Graph = [[0 for i in range(V)] for j in range(V)]
+V = int(input("\nEnter number of vertices: "))
+graph = [[] for _ in range(V)]
+visited = [False] * V
 
-E = int(input("\nEnter the no of edges: "))
+E = int(input("\nEnter number of edges: "))
 for i in range(E):
-    print(f"Enter edge {i+1} separated by spaces: ")
+    print(f"Enter edge {i + 1} separated by spaces: ")
     u, v = map(int, input().split())
-    Graph[u][v], Graph[v][u] = 1, 1
+    graph[u].append(v)
+    graph[v].append(u)  # Remove this line if the graph is directed
 
-print("\nAdjacency matrix : ")
+print("\nAdjacency list: ")
 for i in range(V):
-    print(Graph[i])
+    print(f"{i}: {graph[i]}")
 
-start = int(input("\nEnter start ele: "))
+start = int(input("\nEnter starting vertex: "))
 print("\nDFS: ")
-DFS(Graph,visited,start,V)
+DFS(graph, visited, start)

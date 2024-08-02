@@ -22,9 +22,9 @@ def mergeSort(arr):
     mid = len(arr) // 2
     left_half = mergeSort(arr[:mid])
     right_half = mergeSort(arr[mid:])
-    
+
     return merge(left_half, right_half)
 
-arr = list(map(int, input("Enter the array elements separated by space: ").split()))
+arr = list(map(int, input("Enter the array elements (space separated): ").split()))
 sorted_arr = mergeSort(arr)
 print("Sorted array:", sorted_arr)

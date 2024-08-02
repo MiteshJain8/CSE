@@ -1,4 +1,4 @@
-Function partition(array, low, high):
+Partition(array[], low, high):
     Set pivot to array[low]
     Set i to low + 1
     For j from low + 1 to high + 1:
@@ -8,11 +8,11 @@ Function partition(array, low, high):
     Swap array[i - 1] with array[low]
     Return i - 1
 
-Function quickSort(array, low, high):
+QuickSort(array[], low, high):
     If low < high:
-        Set pi to partition(array, low, high)
-        quickSort(array, low, pi-1)
-        quickSort(array, pi+1, high)
+        Set pi to Partition(array[], low, high)
+        quickSort(array[], low, pi-1)
+        quickSort(array[], pi+1, high)
 
 Design Strategy: Divide and Conquer
 
