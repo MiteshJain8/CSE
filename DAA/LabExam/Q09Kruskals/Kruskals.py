@@ -21,8 +21,7 @@ def Kruskals(graph, V):
     while edges < V-1:
         u, v, weight = graph[i]
         i+=1
-        x = find(parent, u)
-        y = find(parent, v)
+        x, y = find(parent, u), find(parent, v)
         if x != y:
             edges += 1
             mst.append([u, v, weight])
@@ -36,10 +35,8 @@ parent = [i for i in range(V)]
 rank = [0 for i in range(V)]
 graph = []
 E = int(input("\nEnter the no of edges: "))
+print("Enter edges and their weight separated by space(u v weight)")
 for i in range(E):
-    print("Enter edge (u,v): ")
-    u = int(input())
-    v = int(input())
-    weight = int(input("Enter its weight: "))
+    u, v, weight = map(int, input(f"Edge {i+1}: ").split())
     graph.append([u, v, weight])
 Kruskals(graph, V)
