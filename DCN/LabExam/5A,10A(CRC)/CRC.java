@@ -1,5 +1,3 @@
-// package crc;
-
 import java.util.Scanner;
 
 public class CRC {
@@ -8,8 +6,7 @@ public class CRC {
         int x = Integer.parseInt(a, 2);
         int y = Integer.parseInt(b, 2);
         String result = Integer.toBinaryString((x ^ y));
-        result = String.format("%" + len + "s", result).replace(" ",
-                "0");
+        result = String.format("%" + len + "s", result).replace(" ","0");
         return result;
     }
 
@@ -45,7 +42,6 @@ public class CRC {
     }
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
         Scanner s = new Scanner(System.in);
         System.out.println("Using CRC-CCITT");
         String generator = "10001000000100001";
