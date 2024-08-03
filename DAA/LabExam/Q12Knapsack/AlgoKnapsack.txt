@@ -1,16 +1,16 @@
-Function Knapsack(items, W, n)
-    Create a 2D list dp with dimensions (n+1) x (W+1) initialized to 0, where n is the number of items and W is the maximum weight
+Knapsack(items[], maxWeight, n)
+    dp = array of size (n+1) x (maxWeight+1) initialized to 0, where n is the number of items
     For each item i from 1 to n
-        For each weight w from 0 to W
+        For each weight w from 0 to maxWeight
             If the weight of the item i is less than or equal to w
                 dp[i][w] is the maximum of not taking the item i (dp[i-1][w]) or taking the item i (dp[i-1][w - weight of item i] + value of item i)
-            else
+            Else
                 dp[i][w] is the same as dp[i-1][w]
-    Initialize w to W
+    Initialize w to maxWeight
     For each item i from n to 1
         If dp[i][w] is not equal to dp[i-1][w], it means the item i was included in the optimal solution
             Add the item i to the list of selected items and update w to w - weight of item i
-    Return maximum value, which is dp[n][W] and list of selected items
+    Return maximum value, which is dp[n][maxWeight] and list of selected items
 
 Design Strategy: Dynamic Programming
 

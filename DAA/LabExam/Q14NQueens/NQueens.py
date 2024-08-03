@@ -17,7 +17,7 @@ def backtrack(r, n):
         negDiag.remove(r-c)
         board[r][c] = '_'
 
-n = 4
+n = int(input("Enter the number of queens: "))
 col = set()
 negDiag = set() #(r-c) \
 posDiag = set() #(r+c) /

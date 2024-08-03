@@ -7,8 +7,6 @@ Subset-Sum(n, W)
                 OPT(i, w) = OPT(i − 1, w)
             else
                 OPT(i, w) = max(OPT(i − 1, w), wi + OPT(i − 1, w − wi)).
-        Endfor
-    Endfor
     Return M[n, W]
 
 Design Strategy: Dynamic Programming

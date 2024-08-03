@@ -15,10 +15,16 @@ def knapsack(items, maxWeight, n):
     selected.reverse()
     return dp[n][maxWeight], selected
 
-n = 6
-#items=[tuples(No., weight, value)]
-items = [(1, 5, 100),(2, 7, 300),(3, 8, 200),(4, 10, 100),(5, 5, 200),(6, 2, 100)]
-maxWeight = 20
+n = int(input("Enter number of items: "))
+items = []
+
+print("Enter weight and value (space separated):")
+for i in range(n):
+    weight, value = map(int, input(f"Item {i+1}: ").split())
+    items.append((i+1, weight, value))
+
+maxWeight = int(input("Enter maximum weight: "))
+
 maxValue, selected = knapsack(items, maxWeight, n)
 print("Maximum Value:", maxValue)
 print("Selected Items:", selected)

@@ -16,9 +16,10 @@ def BellmanFord(graph, src, V):
 V = int(input("\nEnter number of Vertices: "))
 E = int(input("\nEnter number of directed edges: "))
 graph = []
-print("\nEnter adjacency list edges [u, v, weight] separated by space:")
+
+print("\nEnter edges [u, v, weight] (space separated):")
 for i in range(E):
-    graph.append(list(map(int,input(f"Edge {i+1}: ").split())))
+    graph.append(tuple(map(int,input(f"Edge {i+1}: ").split())))
+
 src = int(input("\nEnter source vertex: "))
-print("\nGraph:",graph)
 BellmanFord(graph, src, V)
