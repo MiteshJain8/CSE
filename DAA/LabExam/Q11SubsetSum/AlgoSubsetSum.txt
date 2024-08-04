@@ -1,13 +1,25 @@
-Subset-Sum(n, W)
-    Array M[0 . . . n,0... W]
-    Initialize M[0, w]= 0 for each w = 0, 1, . . . , W
+SubsetSum(weights[], maxWeight, n)
+    M = array of size (n+1) x (maxWeight+1) initialized to False, where n is the number of items
+    For i = 0 to n
+        M[i][0] = True
     For i = 1 to n
-        For w = 0 to W
-            if w < wi
-                OPT(i, w) = OPT(i − 1, w)
-            else
-                OPT(i, w) = max(OPT(i − 1, w), wi + OPT(i − 1, w − wi)).
-    Return M[n, W]
+        For w = 0 to maxWeight
+            If w < weights[i]
+                M[i][w] = M[i-1][w]
+            Else
+                M[i][w] = M[i-1][w] or M[i-1][w - weights[i-1]]
+    Return M
+
+FindSubsets(weights[], maxWeight, n, M):
+    If M[n][maxWeight] is False:
+        Return empty array since No subset with given sum
+    Initialize an empty array 'selected_items'
+    Initialize w = maxWeight
+    For i = n to 0
+        If M[i][w] is True and M[i-1][w] is False
+            append weights[i-1] to selected_items
+            Decrement w by weights[i-1]
+    Return selected_items
 
 Design Strategy: Dynamic Programming
 
