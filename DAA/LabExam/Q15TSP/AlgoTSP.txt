@@ -1,0 +1,26 @@
+TSP(graph[], visited[], current_pos, Vertices, count, cost, path[])
+    If all nodes have been visited (count == Vertices) and there is an edge from the current node to the starting node (graph[current_pos][path[0]])
+        Return the total cost of the tour and the path (including the return to the starting node)
+
+    ans = infinity
+    best_path = empty array
+
+    For i = 0 to Vertices-1
+
+        If visited[i] is False
+            Mark visited[i] = True
+
+            new_cost, new_path = TSP(graph[], visited[], i, Vertices, count + 1, cost + graph[current_pos][i], path[] + [i])
+
+            If new_cost < ans
+                ans = new_cost
+                best_path = new_path
+
+            Mark visited[i] = False
+    Return the minimum cost (ans) and the best path (best_path) found.
+
+Design Strategy: Backtracking
+
+T = O(n!)
+
+S = O(n×n)
