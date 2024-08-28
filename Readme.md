@@ -1,3 +1,7 @@
-## For Python lab exam programs, go to Python -> LabExam folder
+## For Microcontrollers And IoT programs
+https://github.com/Haksham/SEM-Codes/tree/master/SEM-4/MC-IOT
+## For notes
+https://github.com/Haksham/SEM-Codes/tree/master?tab=readme-ov-file
 
-## CSE lab programs from 3rd to 4th SEM
+Credits: Harshvardhan Mehta https://github.com/Haksham/
+
