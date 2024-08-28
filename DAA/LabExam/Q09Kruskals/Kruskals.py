@@ -10,13 +10,13 @@ def Kruskals(graph, V):
     cost, edges, i = 0, 0, 0
     while edges < V-1:
         u, v, weight = graph[i]
-        i+=1
         x, y = find(parent, u), find(parent, v)
         if x != y:
             edges += 1
-            mst.append([u, v, weight])
+            mst.append(graph[i])
             parent[y] = parent[x]
             cost += weight
+        i += 1
     print("\nMinimum Spanning Tree: ", mst)
     print("\nMinimum Spanning Tree Cost: ", cost)
 
@@ -25,6 +25,6 @@ graph = []
 E = int(input("\nEnter the no of edges: "))
 print("Enter edges and their weight separated by space(u v weight)")
 for i in range(E):
-    u, v, weight = map(int, input(f"Edge {i+1}: ").split())
-    graph.append([u, v, weight])
+    graph.append(tuple(map(int, input(f"Edge {i+1}: ").split())))
+
 Kruskals(graph, V)

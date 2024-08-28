@@ -1,6 +1,6 @@
 Sort the events based on their finish times
 Create an array '𝑝' where 𝑝[𝑖] gives previous compatible job
-Initialize an array '𝑀' of size n with 0s, where n is the number of events.M[i] will store the maximum profit achievable considering the first i events
+Initialize an array '𝑀' of size n with 0s, where n is the number of events. M[i] will store the maximum profit achievable considering the first i events
 Initialize an empty array 'selected' to store selected intervals
 
 Compute_Opt(j)
@@ -15,7 +15,7 @@ FindSolution(k)
     if k < 0
         Return
     if k == 0 or M[k] != M[k - 1]
-        append lst[k] to 'selected' array
+        append events[k] to 'selected' array
         findSolution(p[k])
     else
         findSolution(k - 1)

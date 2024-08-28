@@ -1,14 +1,13 @@
 Dijkstra’s(Graph[], src)
-  Let S be the set of explored nodes
-  For each u ∈ S, we store a distance,   distance(u)
-  Initially, S = {src} and distance(src) = 0
+  Let S be the set of explored nodes and V be set of all nodes
+  For each u ∈ S, we store a shortest path, shortest_path(u)
+  Initially, S = {src} and shortest_path[src] = 0
 
   While S ≠ V do
     Select a node v ∉ S with at least one edge from S for which
-    distance'(v) = min_{e=(u,v) : u ∈ S} {distance(u) + weight(e)} is as small as possible
+    shortest_path'(v) = min_{e=(u,v) : u ∈ S} {shortest_path(u) + weight(e)} is as small as possible
     Add v to S
-    Define distance(v) = distance'(v)
-  EndWhile
+    Update shortest_path(v) = shortest_path'(v)
 
 Design Strategy: Greedy
 

@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TDMSimulator",
+            "request": "launch",
+            "mainClass": "TDMSimulator",
+            "projectName": "Personal_Code_4a02bbc4"
+        },
+        {
+            "type": "java",
             "name": "CRC",
             "request": "launch",
             "mainClass": "CRC",

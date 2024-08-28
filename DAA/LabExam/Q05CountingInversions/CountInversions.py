@@ -1,20 +1,20 @@
-def merge_and_count(left_arr, right_arr):
+def merge_and_count(left, right):
     merged = []
     i, j = 0, 0
     inversions = 0
     
-    while i < len(left_arr) and j < len(right_arr):
-        if left_arr[i] <= right_arr[j]:
-            merged.append(left_arr[i])
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            merged.append(left[i])
             i += 1
         else:
-            merged.append(right_arr[j])
+            merged.append(right[j])
             j += 1
-            inversions += len(left_arr) - i  # Count inversions
+            inversions += len(left) - i  # Count inversions
     
     # Append any remaining elements from left and right halves
-    merged += left_arr[i:]
-    merged += right_arr[j:]
+    merged += left[i:]
+    merged += right[j:]
     return merged, inversions
 
 def mergeSort_and_count(arr):

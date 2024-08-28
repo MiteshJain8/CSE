@@ -2,9 +2,14 @@ def BellmanFord(graph, src, V):
     dist = [float('inf')] * V
     dist[src] = 0
     for i in range(V-1):
+        c = 0
         for edge in graph:
             if (dist[edge[1]] > dist[edge[0]] + edge[2]):
                 dist[edge[1]] = dist[edge[0]] + edge[2]
+            else:
+                c += 1
+        if c == len(graph):
+            break
     for edge in graph:
         if (dist[edge[1]] > dist[edge[0]] + edge[2]):
             print("Negative cycle detected")
@@ -17,7 +22,7 @@ V = int(input("\nEnter number of Vertices: "))
 E = int(input("\nEnter number of directed edges: "))
 graph = []
 
-print("\nEnter edges [u, v, weight] (space separated):")
+print("\nEnter edges (u, v, weight) (space separated):")
 for i in range(E):
     graph.append(tuple(map(int,input(f"Edge {i+1}: ").split())))
 

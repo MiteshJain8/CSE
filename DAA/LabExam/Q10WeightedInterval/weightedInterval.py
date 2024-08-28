@@ -3,38 +3,38 @@ def ComputeOpt(j):
         return 0
     if M[j]:
         return M[j]
-    M[j] = max(ComputeOpt(j - 1), lst[j][2] + ComputeOpt(p[j]))
+    M[j] = max(ComputeOpt(j - 1), events[j][2] + ComputeOpt(p[j]))
     return M[j]
 
 def findSolution(k):
     if k < 0:
         return
     if k == 0 or M[k] != M[k - 1]:
-        selected.append(lst[k])
+        selected.append(events[k])
         findSolution(p[k])
     else:
         findSolution(k - 1)
 
 n = int(input("Enter number of events: "))
-lst = []
-print("Enter start time, finish time, and profit of each event separated by space")
+events = []
+
+print("Enter start time, finish time, and profit of each event (space separated):")
 for i in range(n):
-    tup = tuple(map(int, input(f"Schedule {i + 1}: ").split()))
-    lst.append(tup)
+    events.append(tuple(map(int, input(f"Schedule {i + 1}: ").split())))
 
-lst = sorted(lst, key=lambda x: x[1])
+events = sorted(events, key=lambda x: x[1])
 
-p = [0] * len(lst)
-for i in range(len(lst)):
+p = [0] * n
+for i in range(n):
     for j in range(i - 1, -1, -1):
-        if lst[i][0] >= lst[j][1]:
+        if events[i][0] >= events[j][1]:
             p[i] = j
             break
     else:
         p[i] = -1
 
-M = [0] * len(lst)
+M = [0] * n
 selected = []
-print("\nMax profit:", ComputeOpt(len(lst) - 1))
-findSolution(len(lst) - 1)
+print("\nMax profit:", ComputeOpt(n - 1))
+findSolution(n - 1)
 print("\nEvents selected:", selected)

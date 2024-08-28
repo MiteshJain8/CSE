@@ -3,7 +3,7 @@ def merge(left, right):
     i, j = 0, 0
 
     while i < len(left) and j < len(right):
-        if left[i] < right[j]:
+        if left[i] <= right[j]:
             merged.append(left[i])
             i += 1
         else:

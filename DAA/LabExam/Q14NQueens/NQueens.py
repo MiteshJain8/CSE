@@ -1,4 +1,4 @@
-def backtrack(r, n):
+def backtrack(r):
     if r==n:
         res.append([" ".join(row) for row in board])
         return
@@ -10,7 +10,7 @@ def backtrack(r, n):
         negDiag.add(r-c)
         board[r][c] = 'Q'
 
-        backtrack(r+1, n)
+        backtrack(r+1)
 
         col.remove(c)
         posDiag.remove(r+c)
@@ -22,8 +22,8 @@ col = set()
 negDiag = set() #(r-c) \
 posDiag = set() #(r+c) /
 res = []
-board = [['_']*n for i in range(n)]
-backtrack(0, n)
+board = [['_'] * n for _ in range(n)]
+backtrack(0)
 print("Number of ways:",len(res))
 print("\nPossible arrangements:")
 for r in res:

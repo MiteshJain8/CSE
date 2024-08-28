@@ -1,11 +1,11 @@
 BFS(Graph[], visited[], start)
-    Mark the starting vertex as visited (and print)
+    Mark the starting vertex as visited
     Append the starting vertex to the queue.
     While the queue is not empty
-        Pop a vertex from the queue
+        Pop a vertex from the queue (and print)
         For each neighbor of the current vertex
             If the neighbor has not been visited
-                Mark it as visited (and print)
+                Mark it as visited
                 Append it to the queue
 
 Design Strategy: Level-order traversal

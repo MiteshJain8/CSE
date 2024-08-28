@@ -1,70 +1,58 @@
 import java.util.Scanner;
 
 public class CRC {
-    public static String xor(String a, String b) {
-        int len = Math.max(a.length(), b.length());
-        int x = Integer.parseInt(a, 2);
-        int y = Integer.parseInt(b, 2);
-        String result = Integer.toBinaryString((x ^ y));
-        result = String.format("%" + len + "s", result).replace(" ","0");
-        return result;
-    }
-
-    public static String divide(String dividend, String divisor) {
-        int dLen = divisor.length();
-        int dndLen = dividend.length();
-        while (dndLen >= dLen) {
-            String temp;
-            if (dividend.charAt(0) == '1') {
-                temp = xor(divisor, dividend.substring(0, dLen));
-            } else {
-                temp = xor("0", dividend.substring(0, dLen));
-            }
-            dividend = temp.substring(1) + dividend.substring(dLen);
-            dndLen -= 1;
+    public static void main(String args[]) {
+        //Generate the CRC code for the message bits
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter message bits: ");
+        String message = sc.nextLine();
+        System.out.print("Enter generator: ");
+        String generator = sc.nextLine();
+        int data[] = new int[message.length() + generator.length() - 1];
+        int divisor[] = new int[generator.length()];
+        for (int i = 0; i < message.length(); i++)
+            data[i] = Integer.parseInt(message.charAt(i) + "");
+        for (int i = 0; i < generator.length(); i++)
+            divisor[i] = Integer.parseInt(generator.charAt(i) + "");
+        
+        for (int i = 0; i < message.length(); i++) {
+            if (data[i] == 1)
+                for (int j = 0; j < divisor.length; j++)
+                    data[i + j] ^= divisor[j];
         }
-        return dividend;
-    }
+        System.out.print("The checksum code is: ");
+        for (int i = 0; i < message.length(); i++)
+            data[i] = Integer.parseInt(message.charAt(i) + "");
+        for (int i = 0; i < data.length; i++)
+            System.out.print(data[i]);
+        System.out.println();
 
-    public static String generate(String message, String generator) {
-        int msgLen = message.length();
-        int gtrLen = generator.length();
-
-        String dividend = String.format("%-" + (msgLen + gtrLen - 1)
-                + "s", message).replace(' ', '0');
-        String rem = divide(dividend, generator);
-        return message + rem;
-    }
-
-    public static boolean checkCodeWord(String cw, String gw) {
-        String temp = divide(cw, gw);
-        return (Integer.parseInt(temp) == 0);
-    }
-
-    public static void main(String[] args) {
-        Scanner s = new Scanner(System.in);
-        System.out.println("Using CRC-CCITT");
-        String generator = "10001000000100001";
-        while (true) {
-            System.out.println("1. Generate codeword");
-            System.out.println("2. Check data");
-            int input = s.nextInt();
-            switch (input) {
-                case 1:
-                    System.out.print("Enter dataword: ");
-                    String dataword = s.next();
-                    System.out.println("Codeword: " +
-                            generate(dataword, generator));
-                    break;
-                case 2:
-                    System.out.print("Enter codeword: ");
-                    String codeword = s.next();
-                    if (checkCodeWord(codeword, generator)) {
-                        System.out.println("No Error");
-                    } else {
-                        System.out.println("Error");
-                    }
-            }
+        //Verify the CRC code
+        System.out.print("Enter checksum code: ");
+        String checksum = sc.nextLine();
+        System.out.print("Enter generator: ");
+        generator = sc.nextLine();
+        data = new int[checksum.length() + generator.length() - 1];
+        divisor = new int[generator.length()];
+        for (int i = 0; i < checksum.length(); i++)
+            data[i] = Integer.parseInt(checksum.charAt(i) + "");
+        for (int i = 0; i < generator.length(); i++)
+            divisor[i] = Integer.parseInt(generator.charAt(i) + "");
+        for (int i = 0; i < checksum.length(); i++) {
+            if (data[i] == 1)
+                for (int j = 0; j < divisor.length; j++)
+                    data[i + j] ^= divisor[j];
         }
+        boolean valid = true;
+        for (int i = 0; i < data.length; i++)
+            if (data[i] == 1) {
+                valid = false;
+                break;
+            }
+        if (valid == true)
+            System.out.println("Data stream is valid");
+        else
+            System.out.println("Data stream is invalid. CRC error occurred.");
+        sc.close();
     }
 }

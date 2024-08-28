@@ -16,7 +16,7 @@ mergeSort_and_count(array):
         Return the array and 0 inversions
     Divide the array into two halves
     Recursively call mergeSort_and_count on each half.
-    Merge the two halves using merge_and_count
+    Merge the two halves by calling merge_and_count
     Add the inversion counts from the left half, right half, and merge steps
     Return the sorted array and the total number of inversions
 

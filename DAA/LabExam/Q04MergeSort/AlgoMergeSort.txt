@@ -2,7 +2,7 @@ Merge(left[], right[])
     Initialize an empty array 'merged'
     Initialize pointers i and j to 0
     While i < length(left) and j < length(right)
-        If left[i] < right[j]
+        If left[i] <= right[j]
             Append left[i] to merged
             Increment i by 1
         Else

@@ -2,24 +2,23 @@ SubsetSum(weights[], maxWeight, n)
     M = array of size (n+1) x (maxWeight+1) initialized to False, where n is the number of items
     For i = 0 to n
         M[i][0] = True
-    For i = 1 to n
-        For w = 0 to maxWeight
-            If w < weights[i]
-                M[i][w] = M[i-1][w]
+    For each item i from 1 to n
+        For each weight w from 1 to maxWeight
+            If the weight of the item i is less than or equal to w
+                M[i][w] is either not taking item i (M[i-1][w]) OR taking it (M[i-1][w-weights[i-1]])
             Else
-                M[i][w] = M[i-1][w] or M[i-1][w - weights[i-1]]
+                M[i][w] is the same as M[i-1][w]
     Return M
 
-FindSubsets(weights[], maxWeight, n, M):
+FindSubset(weights[], maxWeight, n, M):
     If M[n][maxWeight] is False:
         Return empty array since No subset with given sum
-    Initialize an empty array 'selected_items'
-    Initialize w = maxWeight
+    Initialize an empty array 'selected'
+    Initialize w to maxWeight
     For i = n to 0
-        If M[i][w] is True and M[i-1][w] is False
-            append weights[i-1] to selected_items
-            Decrement w by weights[i-1]
-    Return selected_items
+        If M[i][w] is True AND M[i-1][w] is False, it means the item i was included in the subset
+            Add the item i to the list of selected items and update w to w - weight of item i
+    Return list of selected items
 
 Design Strategy: Dynamic Programming
 

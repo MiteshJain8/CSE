@@ -7,6 +7,7 @@ Kruskals(Graph, Vertices)
         If the cycle is not formed
             Include this edge in the minimum spanning tree
             Increment the cost by its edge weight
+            Increment edges by 1
 
 Design Strategy: Greedy
 

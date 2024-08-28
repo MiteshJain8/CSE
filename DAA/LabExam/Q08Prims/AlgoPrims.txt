@@ -1,17 +1,17 @@
 Prims(Graph[], visited[], source, Vertices):
     Initialize visited[source] = True
-    Initialize edges = 0 and cost = 0
+    Initialize edges and cost to 0
     While edges < Vertices-1:
         Set minimum = INF, x = 0, y = 0
         For each vertex i from 0 to Vertices-1:
             If visited[i] is True:
                 For each vertex j from 0 to Vertices-1:
-                    If visited[j] is False and Graph[i][j] is  not 0:
+                    If visited[j] is False and Graph[i][j] has an edge:
                         If Graph[i][j] < minimum:
                             minimum = Graph[i][j], x = i, y = j
-        Print edge (x, y) and weight Graph[x][y]
+        Print edge (x, y) and 'minimum' weight
         Set visited[y] as True
-        Add Graph[x][y] to cost
+        Add 'minimum' to cost
         Increment edges by 1
     Print cost
 

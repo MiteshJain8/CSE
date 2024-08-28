@@ -55,7 +55,7 @@ public class TDMSimulator {
             wt[i] = tat[i] - bt[i];
             awt += wt[i];
             atat += tat[i];
-            System.out.println("S" + (i+1) + "\t\t" + bt[i] + "\t\t\t" + tat[i] + "\t\t\t" + wt[i]);
+            System.out.println("S" + (i+1) + "\t\t" + bt[i] + "\t\t" + tat[i] + "\t\t" + wt[i]);
         }
 
         awt /= n;

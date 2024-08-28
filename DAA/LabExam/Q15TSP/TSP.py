@@ -4,7 +4,7 @@ def tsp(graph, visited, curr_pos, V, count, cost, path):
     ans = float('inf')
     best_path = []
     for i in range(V):
-        if not visited[i]:
+        if not visited[i] and graph[curr_pos][i] < float('inf'):
             visited[i] = True
             new_cost, new_path = tsp(graph, visited, i, V, count + 1, cost + graph[curr_pos][i], path + [i])
             if new_cost < ans:
@@ -14,9 +14,9 @@ def tsp(graph, visited, curr_pos, V, count, cost, path):
     return ans, best_path
 
 V = int(input("\nEnter no of vertices: "))
-visited = [False for i in range(V)]
+visited = [False for _ in range(V)]
 
-Graph = [[float('inf') for i in range(V)] for j in range(V)] 
+Graph = [[float('inf')] * V for _ in range(V)] 
 for i in range(V):
     Graph[i][i] = 0
 

@@ -31,17 +31,15 @@ def Dijkstras(graph, src, V):
             print(f"{i}\t\t{shortest_path[i]}\t\t{' -> '.join(map(str, path))}")
 
 V = int(input("\nEnter number of vertices: "))
+E = int(input("Enter the number of edges: "))
+
 graph = [[] for i in range(V)]
-E = int(input("Enter the number of directed edges: "))
-print("Enter directed edges and their weight separated by space (u v weight)")
+print("Enter edges and their weight (space separated) (u v weight)")
 for i in range(E):
     print(f"Edge {i+1}: ")
     u, v, weight = map(int, input().split())
     graph[u].append((v, weight))
-
-print("\nAdjacency list: ")
-for i in range(V):
-    print(f"{i}: {graph[i]}")
+    graph[v].append((u, weight)) # Remove this line for directed graph
 
 src = int(input("\nEnter source vertex: "))
 Dijkstras(graph, src, V)

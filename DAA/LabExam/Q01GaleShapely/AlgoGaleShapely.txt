@@ -10,10 +10,6 @@ GaleShapely(womenPreferences{}, menPreferences{})
 				m’ becomes free
 			Else
 				m remains free
-				
-			Endif
-		Endif
-	Endwhile
 	Return the set S of engaged pairs
 	
 Design Strategy: Greedy

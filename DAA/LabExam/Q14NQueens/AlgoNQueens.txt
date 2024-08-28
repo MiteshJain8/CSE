@@ -1,12 +1,12 @@
 Initialize sets col, posDiag, and negDiag to track columns and diagonals under attack
 Create an empty 'board' of size n×n and an empty list 'res' to store results
 
-Backtrack(r, n)
+Backtrack(r)
     If all queens are placed (r == n), append the current board configuration to 'res'
     For each column c in the current row r, 
         Check if placing a queen there is safe, a position is safe if c is not in col, r+c is not in posDiag, and r-c is not in negDiag
         If safe, place the queen (update sets)
-        Recursively call backtrack for the next row (r+1)
+        Recursively call backtrack for the next row, Backtrack(r+1)
         After the recursive call, remove the queen (update sets)
 
 Design Strategy: Backtracking
