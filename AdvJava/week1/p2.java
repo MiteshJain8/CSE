@@ -1,15 +1,11 @@
 abstract class Shape {
-    // Abstract method to calculate area
     abstract double area();
-
-    // Abstract method to display shape details
     abstract void display();
 }
 class Rectangle extends Shape {
     private double length;
     private double width;
 
-    // Constructor
     public Rectangle(double length, double width) {
         this.length = length;
         this.width = width;
@@ -32,7 +28,6 @@ class Triangle extends Shape {
     private double base;
     private double height;
 
-    // Constructor
     public Triangle(double base, double height) {
         this.base = base;
         this.height = height;
@@ -54,7 +49,6 @@ class Triangle extends Shape {
 class Circle extends Shape {
     private double radius;
 
-    // Constructor
     public Circle(double radius) {
         this.radius = radius;
     }
