@@ -9,14 +9,14 @@ public class P1DepartmentDB {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/dbName", USER = "root", PASS = ""; // Update this
 
     public static void main(String[] args) {
-        Connection connection = null;
-        Statement statement = null;
+        Connection conn = null;
+        Statement stmt = null;
         Scanner sc = new Scanner(System.in);
 
         try {
             // Establish the connection
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            statement = connection.createStatement();
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
 
             // Create the Department table if it does not exist
             String createTableSQL = "CREATE TABLE IF NOT EXISTS Department (" +
@@ -25,7 +25,7 @@ public class P1DepartmentDB {
                     "Year_Established INT, " +
                     "Head_Name VARCHAR(100), " +
                     "No_of_Employees INT)";
-            statement.executeUpdate(createTableSQL);
+            stmt.executeUpdate(createTableSQL);
             System.out.println("Table 'Department' created or already exists.");
 
             // Insert sample data
@@ -34,12 +34,12 @@ public class P1DepartmentDB {
                     "(2, 'ISE', 2000, 'Rahul', 33), " +
                     "(3, 'Mech', 1995, 'Priya', 29), " +
                     "(4, 'Civil', 1995, 'Vivek', 35)";
-            statement.executeUpdate(insertDataSQL);
+            stmt.executeUpdate(insertDataSQL);
             System.out.println("Sample data inserted into 'Department' table.");
 
             // i. Display details of all the Departments using Statement Object
             String queryAllDepartments = "SELECT * FROM Department";
-            try (ResultSet rsAll = statement.executeQuery(queryAllDepartments)) {
+            try (ResultSet rsAll = stmt.executeQuery(queryAllDepartments)) {
                 System.out.println("\nAll Departments:");
                 printResultSet(rsAll);
             }
@@ -48,7 +48,7 @@ public class P1DepartmentDB {
             System.out.print("\nEnter the year to filter departments: ");
             int year = sc.nextInt();
             String queryByYear = "SELECT * FROM Department WHERE Year_Established = ?";
-            try (PreparedStatement pStmt = connection.prepareStatement(queryByYear)) {
+            try (PreparedStatement pStmt = conn.prepareStatement(queryByYear)) {
                 pStmt.setInt(1, year);
                 try (ResultSet rsByYear = pStmt.executeQuery()) {
                     System.out.println("\nDepartments established in the year " + year + ":");
@@ -63,7 +63,7 @@ public class P1DepartmentDB {
             System.out.print("Enter Department Name to filter departments: ");
             String deptName = sc.nextLine();
             String queryByIdAndName = "SELECT * FROM Department WHERE Dept_ID = ? AND Name = ?";
-            try (PreparedStatement pStmt = connection.prepareStatement(queryByIdAndName)) {
+            try (PreparedStatement pStmt = conn.prepareStatement(queryByIdAndName)) {
                 pStmt.setInt(1, deptId);
                 pStmt.setString(2, deptName);
                 try (ResultSet rsByIdAndName = pStmt.executeQuery()) {
@@ -87,7 +87,7 @@ public class P1DepartmentDB {
             int newNoOfEmployees = sc.nextInt();
 
             String insertSQL = "INSERT INTO Department (Dept_ID, Name, Year_Established, Head_Name, No_of_Employees) VALUES (?, ?, ?, ?, ?)";
-            try (PreparedStatement pStmt = connection.prepareStatement(insertSQL)) {
+            try (PreparedStatement pStmt = conn.prepareStatement(insertSQL)) {
                 pStmt.setInt(1, newDeptId);
                 pStmt.setString(2, newDeptName);
                 pStmt.setInt(3, newYearEstablished);
@@ -99,7 +99,7 @@ public class P1DepartmentDB {
 
             // Display the inserted row
             String queryNewDept = "SELECT * FROM Department WHERE Dept_ID = ?";
-            try (PreparedStatement pStmt = connection.prepareStatement(queryNewDept)) {
+            try (PreparedStatement pStmt = conn.prepareStatement(queryNewDept)) {
                 pStmt.setInt(1, newDeptId);
                 try (ResultSet rsNewDept = pStmt.executeQuery()) {
                     System.out.println("\nInserted Department:");
@@ -112,10 +112,10 @@ public class P1DepartmentDB {
         } finally {
             // Close resources
             try {
-                if (statement != null)
-                    statement.close();
-                if (connection != null)
-                    connection.close();
+                if (stmt != null)
+                    stmt.close();
+                if (conn != null)
+                    conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }

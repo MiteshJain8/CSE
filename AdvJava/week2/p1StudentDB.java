@@ -8,13 +8,13 @@ public class P1StudentDB {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/dbName", USER = "root", PASS = ""; // Update this
 
     public static void main(String[] args) {
-        Connection connection = null;
-        Statement statement = null;
+        Connection conn = null;
+        Statement stmt = null;
 
         try {
             // Establish the connection
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            statement = connection.createStatement();
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
 
             // Create the students table if it does not exist
             String createTableSQL = "CREATE TABLE IF NOT EXISTS students (" +
@@ -22,7 +22,7 @@ public class P1StudentDB {
                     "Name VARCHAR(100), " +
                     "Semester INT, " +
                     "CGPA FLOAT)";
-            statement.executeUpdate(createTableSQL);
+            stmt.executeUpdate(createTableSQL);
             System.out.println("Table 'students' created or already exists.");
 
             // Insert sample data
@@ -35,12 +35,12 @@ public class P1StudentDB {
                     "('1MS22CS306', 'Amit Mishra', 5, 9.2), " +
                     "('1MS21CS307', 'Meera Nair', 7, 7.9), " +
                     "('1MS22CS308', 'Rohan Raj', 5, 8.1)";
-            statement.executeUpdate(insertDataSQL);
+            stmt.executeUpdate(insertDataSQL);
             System.out.println("Sample data inserted into 'students' table.");
 
             // i. Display details of all the students
             String queryAllStudents = "SELECT * FROM students";
-            ResultSet rsAll = statement.executeQuery(queryAllStudents);
+            ResultSet rsAll = stmt.executeQuery(queryAllStudents);
             System.out.println("\nAll Students:");
             System.out.println("USN\t\tName\t\tSemester\tCGPA");
             while (rsAll.next()) {
@@ -52,7 +52,7 @@ public class P1StudentDB {
 
             // ii. Display details of all the students who are in the 5th Semester
             String queryFifthSemester = "SELECT * FROM students WHERE Semester = 5";
-            ResultSet rsFifth = statement.executeQuery(queryFifthSemester);
+            ResultSet rsFifth = stmt.executeQuery(queryFifthSemester);
             System.out.println("\nStudents in 5th Semester:");
             System.out.println("USN\t\tName\t\tCGPA");
             while (rsFifth.next()) {
@@ -63,7 +63,7 @@ public class P1StudentDB {
 
             // iii. Display details of all students who have CGPA above 8.0 and are in 5th Semester
             String queryHighCGPA = "SELECT * FROM students WHERE CGPA > 8.0 AND Semester = 5";
-            ResultSet rsHighCGPA = statement.executeQuery(queryHighCGPA);
+            ResultSet rsHighCGPA = stmt.executeQuery(queryHighCGPA);
             System.out.println("\nStudents with CGPA > 8.0 in 5th Semester:");
             System.out.println("USN\t\tName\t\tCGPA");
             while (rsHighCGPA.next()) {
@@ -74,7 +74,7 @@ public class P1StudentDB {
 
             // iv. Display the total number of students who have CGPA above 8.0
             String queryTotalHighCGPA = "SELECT COUNT(*) AS total FROM students WHERE CGPA > 8.0";
-            ResultSet rsTotal = statement.executeQuery(queryTotalHighCGPA);
+            ResultSet rsTotal = stmt.executeQuery(queryTotalHighCGPA);
             if (rsTotal.next()) {
                 System.out.println("\nTotal number of students with CGPA > 8.0: " + rsTotal.getInt("total"));
             }
@@ -84,10 +84,10 @@ public class P1StudentDB {
         } finally {
             // Close resources
             try {
-                if (statement != null)
-                    statement.close();
-                if (connection != null)
-                    connection.close();
+                if (stmt != null)
+                    stmt.close();
+                if (conn != null)
+                    conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }

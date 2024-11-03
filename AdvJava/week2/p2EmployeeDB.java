@@ -8,13 +8,13 @@ public class P2EmployeeDB {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/dbName", USER = "root", PASS = ""; // Update this
 
     public static void main(String[] args) {
-        Connection connection = null;
-        Statement statement = null;
+        Connection conn = null;
+        Statement stmt = null;
 
         try {
             // Establish the connection
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            statement = connection.createStatement();
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
 
             // Create the employees table if it does not exist
             String createTableSQL = "CREATE TABLE IF NOT EXISTS employees (" +
@@ -23,7 +23,7 @@ public class P2EmployeeDB {
                     "LName VARCHAR(50), " +
                     "Project VARCHAR(100), " +
                     "Salary DECIMAL(10, 2))";
-            statement.executeUpdate(createTableSQL);
+            stmt.executeUpdate(createTableSQL);
             System.out.println("Table 'employees' created or already exists.");
 
             // Insert sample data
@@ -36,12 +36,12 @@ public class P2EmployeeDB {
                     "(6, 'Amit', 'Mishra', 'Web Development', 90000), " +
                     "(7, 'Meera', 'Nair', 'Data Analysis', 40000), " +
                     "(8, 'Rohan', 'Raj', 'Web Development', 70000)";
-            statement.executeUpdate(insertDataSQL);
+            stmt.executeUpdate(insertDataSQL);
             System.out.println("Sample data inserted into 'employees' table.");
 
             // i. Display details of all the employees
             String queryAllEmployees = "SELECT * FROM employees";
-            ResultSet rsAll = statement.executeQuery(queryAllEmployees);
+            ResultSet rsAll = stmt.executeQuery(queryAllEmployees);
             System.out.println("\nAll Employees:");
             System.out.println("ID\tFName\tLName\tProject\tSalary");
             while (rsAll.next()) {
@@ -54,7 +54,7 @@ public class P2EmployeeDB {
 
             // ii. Display details of all the employees who work for project “Web Development”
             String queryWebDevelopment = "SELECT * FROM employees WHERE Project = 'Web Development'";
-            ResultSet rsWebDev = statement.executeQuery(queryWebDevelopment);
+            ResultSet rsWebDev = stmt.executeQuery(queryWebDevelopment);
             System.out.println("\nEmployees in 'Web Development':");
             System.out.println("ID\tFName\tLName\tSalary");
             while (rsWebDev.next()) {
@@ -66,7 +66,7 @@ public class P2EmployeeDB {
 
             // iii. Display the IDs of all those employees who have salary above 75,000 and are in “Web Development”
             String queryHighSalaryWebDev = "SELECT ID FROM employees WHERE Salary > 75000 AND Project = 'Web Development'";
-            ResultSet rsHighSalary = statement.executeQuery(queryHighSalaryWebDev);
+            ResultSet rsHighSalary = stmt.executeQuery(queryHighSalaryWebDev);
             System.out.println("\nEmployees in 'Web Development' with Salary > 75,000:");
             System.out.println("ID");
             while (rsHighSalary.next()) {
@@ -75,7 +75,7 @@ public class P2EmployeeDB {
 
             // iv. Display the total number of employees who have salary less than 50,000
             String queryLowSalaryCount = "SELECT COUNT(*) AS total FROM employees WHERE Salary < 50000";
-            ResultSet rsTotalLowSalary = statement.executeQuery(queryLowSalaryCount);
+            ResultSet rsTotalLowSalary = stmt.executeQuery(queryLowSalaryCount);
             if (rsTotalLowSalary.next()) {
                 System.out.println(
                         "\nTotal number of employees with Salary < 50,000: " + rsTotalLowSalary.getInt("total"));
@@ -86,10 +86,10 @@ public class P2EmployeeDB {
         } finally {
             // Close resources
             try {
-                if (statement != null)
-                    statement.close();
-                if (connection != null)
-                    connection.close();
+                if (stmt != null)
+                    stmt.close();
+                if (conn != null)
+                    conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }

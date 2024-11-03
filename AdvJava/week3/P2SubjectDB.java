@@ -8,14 +8,14 @@ public class P2SubjectDB {
     private static final String DB_URL = "jdbc:mysql://localhost:3306/dbName", USER = "root", PASS = ""; // Update this
 
     public static void main(String[] args) {
-        Connection connection = null;
-        Statement statement = null;
+        Connection conn = null;
+        Statement stmt = null;
         PreparedStatement pStmt = null;
 
         try {
             // Establish the connection
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
             // Create the Subject table if it does not exist
             String createTableSQL = "CREATE TABLE IF NOT EXISTS Subject (" +
@@ -23,7 +23,7 @@ public class P2SubjectDB {
                     "Name VARCHAR(100), " +
                     "Department VARCHAR(100), " +
                     "Credits INT)";
-            statement.executeUpdate(createTableSQL);
+            stmt.executeUpdate(createTableSQL);
             System.out.println("Table 'Subject' created or already exists.");
             
             // Insert sample data
@@ -32,12 +32,12 @@ public class P2SubjectDB {
                     "('CSL57', 'Database Sys Lab', 'CSE', 1), " +
                     "('CSL56', 'Java  Programming  Lab', 'CSE', 1), " +
                     "('HS59', 'Environmental Studies', 'Civil', 0)";
-            statement.executeUpdate(insertDataSQL);
+            stmt.executeUpdate(insertDataSQL);
             System.out.println("Sample data inserted into 'Subject' table.");
 
             // i. Update the Name of the subject from “Java Programming Lab” to “Advanced Java Programming Lab” with Code as CSL56
             String selectSQL = "SELECT * FROM Subject WHERE Code = 'CSL56'";
-            ResultSet rs = statement.executeQuery(selectSQL);
+            ResultSet rs = stmt.executeQuery(selectSQL);
             if (rs.next()) {
                 rs.updateString("Name", "Adv Java Prog Lab");
                 rs.updateRow();
@@ -46,7 +46,7 @@ public class P2SubjectDB {
 
             // ii. Delete the subject “System Programming” from the table. Use PreparedStatement Object
             String deleteSQL = "DELETE FROM Subject WHERE Name = ?";
-            pStmt = connection.prepareStatement(deleteSQL);
+            pStmt = conn.prepareStatement(deleteSQL);
             pStmt.setString(1, "System Programming");
             int rowsAffected = pStmt.executeUpdate();
             if (rowsAffected > 0) {
@@ -57,7 +57,7 @@ public class P2SubjectDB {
 
             // iii. Display details of all the Subjects
             String queryAllSubjects = "SELECT * FROM Subject";
-            rs = statement.executeQuery(queryAllSubjects);
+            rs = stmt.executeQuery(queryAllSubjects);
             System.out.println("\nCode\tName\t\t\tDepartment\tCredits");
             while (rs.next()) {
                 System.out.println(rs.getString("Code") + "\t" +
@@ -71,12 +71,12 @@ public class P2SubjectDB {
         } finally {
             // Close resources
             try {
-                if (statement != null)
-                    statement.close();
+                if (stmt != null)
+                    stmt.close();
                 if (pStmt != null)
                     pStmt.close();
-                if (connection != null)
-                    connection.close();
+                if (conn != null)
+                    conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
