@@ -1,17 +1,11 @@
 package AdvJava.week2;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
-public class p1StudentDB {
+public class P1StudentDB {
 
     // Database URL, username, and password
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/dbName"; // Update this
-    private static final String USER = "root"; // Update this
-    private static final String PASS = ""; // Update this
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/dbName", USER = "root", PASS = ""; // Update this
 
     public static void main(String[] args) {
         Connection connection = null;
@@ -48,31 +42,34 @@ public class p1StudentDB {
             String queryAllStudents = "SELECT * FROM students";
             ResultSet rsAll = statement.executeQuery(queryAllStudents);
             System.out.println("\nAll Students:");
+            System.out.println("USN\t\tName\t\tSemester\tCGPA");
             while (rsAll.next()) {
-                System.out.println("USN: " + rsAll.getString("USN") +
-                        ", Name: " + rsAll.getString("Name") +
-                        ", Semester: " + rsAll.getInt("Semester") +
-                        ", CGPA: " + rsAll.getFloat("CGPA"));
+                System.out.println(rsAll.getString("USN") + "\t" +
+                        rsAll.getString("Name") + "\t" +
+                        rsAll.getInt("Semester") + "\t\t" +
+                        rsAll.getFloat("CGPA"));
             }
 
             // ii. Display details of all the students who are in the 5th Semester
             String queryFifthSemester = "SELECT * FROM students WHERE Semester = 5";
             ResultSet rsFifth = statement.executeQuery(queryFifthSemester);
             System.out.println("\nStudents in 5th Semester:");
+            System.out.println("USN\t\tName\t\tCGPA");
             while (rsFifth.next()) {
-                System.out.println("USN: " + rsFifth.getString("USN") +
-                        ", Name: " + rsFifth.getString("Name") +
-                        ", CGPA: " + rsFifth.getFloat("CGPA"));
+                System.out.println(rsFifth.getString("USN") + "\t" +
+                        rsFifth.getString("Name") + "\t" +
+                        rsFifth.getFloat("CGPA"));
             }
 
             // iii. Display details of all students who have CGPA above 8.0 and are in 5th Semester
             String queryHighCGPA = "SELECT * FROM students WHERE CGPA > 8.0 AND Semester = 5";
             ResultSet rsHighCGPA = statement.executeQuery(queryHighCGPA);
             System.out.println("\nStudents with CGPA > 8.0 in 5th Semester:");
+            System.out.println("USN\t\tName\t\tCGPA");
             while (rsHighCGPA.next()) {
-                System.out.println("USN: " + rsHighCGPA.getString("USN") +
-                        ", Name: " + rsHighCGPA.getString("Name") +
-                        ", CGPA: " + rsHighCGPA.getFloat("CGPA"));
+                System.out.println(rsHighCGPA.getString("USN") + "\t" +
+                        rsHighCGPA.getString("Name") + "\t" +
+                        rsHighCGPA.getFloat("CGPA"));
             }
 
             // iv. Display the total number of students who have CGPA above 8.0

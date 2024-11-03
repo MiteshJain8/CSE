@@ -1,17 +1,11 @@
 package AdvJava.week2;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
-public class p3CarDB {
+public class P3CarDB {
 
     // Database URL, username, and password
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/dbName"; // Update this
-    private static final String USER = "root"; // Update this
-    private static final String PASS = ""; // Update this
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/dbName", USER = "root", PASS = ""; // Update this
 
     public static void main(String[] args) {
         Connection connection = null;
@@ -44,12 +38,7 @@ public class p3CarDB {
             String queryAllCars = "SELECT * FROM cars";
             ResultSet rsAll = statement.executeQuery(queryAllCars);
             System.out.println("\nAll Cars:");
-            while (rsAll.next()) {
-                System.out.println("Model: " + rsAll.getString("Model") +
-                        ", Company: " + rsAll.getString("Company") +
-                        ", Price: " + rsAll.getBigDecimal("Price") +
-                        ", Year: " + rsAll.getInt("Year"));
-            }
+            printResultSet(rsAll);
 
             // ii. Insert a new row into the table and display all the details
             String insertNewCar = "INSERT INTO cars (Model, Company, Price, Year) VALUES " +
@@ -57,12 +46,7 @@ public class p3CarDB {
             statement.executeUpdate(insertNewCar);
             System.out.println("\nNew car inserted:");
             ResultSet rsNewCar = statement.executeQuery(queryAllCars);
-            while (rsNewCar.next()) {
-                System.out.println("Model: " + rsNewCar.getString("Model") +
-                        ", Company: " + rsNewCar.getString("Company") +
-                        ", Price: " + rsNewCar.getBigDecimal("Price") +
-                        ", Year: " + rsNewCar.getInt("Year"));
-            }
+            printResultSet(rsNewCar);
 
             // iii. Delete a row from the table where the Model="ABC" and Year=2010
             String deleteCar = "DELETE FROM cars WHERE Model='ABC' AND Year=2010";
@@ -72,12 +56,7 @@ public class p3CarDB {
             // Display all cars after deletion
             ResultSet rsAfterDelete = statement.executeQuery(queryAllCars);
             System.out.println("\nAll Cars after deletion:");
-            while (rsAfterDelete.next()) {
-                System.out.println("Model: " + rsAfterDelete.getString("Model") +
-                        ", Company: " + rsAfterDelete.getString("Company") +
-                        ", Price: " + rsAfterDelete.getBigDecimal("Price") +
-                        ", Year: " + rsAfterDelete.getInt("Year"));
-            }
+            printResultSet(rsAfterDelete);
 
             // iv. Update the price of a row from 150000 to 125000
             String updatePrice = "UPDATE cars SET Price = 125000 WHERE Model='CDE'";
@@ -87,12 +66,7 @@ public class p3CarDB {
             // Display all cars after the update
             ResultSet rsAfterUpdate = statement.executeQuery(queryAllCars);
             System.out.println("\nAll Cars after updating the price:");
-            while (rsAfterUpdate.next()) {
-                System.out.println("Model: " + rsAfterUpdate.getString("Model") +
-                        ", Company: " + rsAfterUpdate.getString("Company") +
-                        ", Price: " + rsAfterUpdate.getBigDecimal("Price") +
-                        ", Year: " + rsAfterUpdate.getInt("Year"));
-            }
+            printResultSet(rsAfterUpdate);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,6 +80,16 @@ public class p3CarDB {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private static void printResultSet(ResultSet rs) throws SQLException {
+        System.out.println("Model\tCompany\tPrice\t\tYear");
+        while (rs.next()) {
+            System.out.println(rs.getString("Model") + "\t" +
+                    rs.getString("Company") + "\t" +
+                    rs.getBigDecimal("Price") + "\t" +
+                    rs.getInt("Year"));
         }
     }
 }

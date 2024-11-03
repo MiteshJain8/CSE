@@ -1,17 +1,11 @@
 package AdvJava.week2;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
-public class p2EmployeeDB {
+public class P2EmployeeDB {
 
     // Database URL, username, and password
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/dbName"; // Update this
-    private static final String USER = "root"; // Update this
-    private static final String PASS = ""; // Update this
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/dbName", USER = "root", PASS = ""; // Update this
 
     public static void main(String[] args) {
         Connection connection = null;
@@ -49,29 +43,34 @@ public class p2EmployeeDB {
             String queryAllEmployees = "SELECT * FROM employees";
             ResultSet rsAll = statement.executeQuery(queryAllEmployees);
             System.out.println("\nAll Employees:");
+            System.out.println("ID\tFName\tLName\tProject\tSalary");
             while (rsAll.next()) {
-                System.out.println("ID: " + rsAll.getInt("ID") +
-                        ", Name: " + rsAll.getString("FName") + " " + rsAll.getString("LName") +
-                        ", Project: " + rsAll.getString("Project") +
-                        ", Salary: " + rsAll.getBigDecimal("Salary"));
+                System.out.println(rsAll.getInt("ID") + "\t" +
+                        rsAll.getString("FName") + "\t" +
+                        rsAll.getString("LName") + "\t" +
+                        rsAll.getString("Project") + "\t" +
+                        rsAll.getBigDecimal("Salary"));
             }
 
             // ii. Display details of all the employees who work for project “Web Development”
             String queryWebDevelopment = "SELECT * FROM employees WHERE Project = 'Web Development'";
             ResultSet rsWebDev = statement.executeQuery(queryWebDevelopment);
             System.out.println("\nEmployees in 'Web Development':");
+            System.out.println("ID\tFName\tLName\tSalary");
             while (rsWebDev.next()) {
-                System.out.println("ID: " + rsWebDev.getInt("ID") +
-                        ", Name: " + rsWebDev.getString("FName") + " " + rsWebDev.getString("LName") +
-                        ", Salary: " + rsWebDev.getBigDecimal("Salary"));
+                System.out.println(rsWebDev.getInt("ID") + "\t" +
+                        rsWebDev.getString("FName") + "\t" +
+                        rsWebDev.getString("LName") + "\t" +
+                        rsWebDev.getBigDecimal("Salary"));
             }
 
             // iii. Display the IDs of all those employees who have salary above 75,000 and are in “Web Development”
             String queryHighSalaryWebDev = "SELECT ID FROM employees WHERE Salary > 75000 AND Project = 'Web Development'";
             ResultSet rsHighSalary = statement.executeQuery(queryHighSalaryWebDev);
             System.out.println("\nEmployees in 'Web Development' with Salary > 75,000:");
+            System.out.println("ID");
             while (rsHighSalary.next()) {
-                System.out.println("ID: " + rsHighSalary.getInt("ID"));
+                System.out.println(rsHighSalary.getInt("ID"));
             }
 
             // iv. Display the total number of employees who have salary less than 50,000
