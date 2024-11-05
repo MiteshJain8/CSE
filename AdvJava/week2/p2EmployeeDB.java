@@ -29,10 +29,10 @@ public class P2EmployeeDB {
             // Insert sample data
             String insertDataSQL = "INSERT INTO employees (ID, FName, LName, Project, Salary) VALUES " +
                     "(1, 'Anika', 'Sharma', 'Web Development', 80000), " +
-                    "(2, 'Rahul', 'Patel', 'Devops', 60000), " +
+                    "(2, 'Rahul', 'Patel', 'Devops Engineer', 60000), " +
                     "(3, 'Priya', 'Gupta', 'Web Development', 75000), " +
                     "(4, 'Vivek', 'Kumar', 'Web Development', 50000), " +
-                    "(5, 'Neha', 'Singh', 'Software Engineer', 45000), " +
+                    "(5, 'Neha', 'Singh', 'Software Engg', 45000), " +
                     "(6, 'Amit', 'Mishra', 'Web Development', 90000), " +
                     "(7, 'Meera', 'Nair', 'Data Analysis', 40000), " +
                     "(8, 'Rohan', 'Raj', 'Web Development', 70000)";
@@ -77,8 +77,7 @@ public class P2EmployeeDB {
             String queryLowSalaryCount = "SELECT COUNT(*) AS total FROM employees WHERE Salary < 50000";
             ResultSet rsTotalLowSalary = stmt.executeQuery(queryLowSalaryCount);
             if (rsTotalLowSalary.next()) {
-                System.out.println(
-                        "\nTotal number of employees with Salary < 50,000: " + rsTotalLowSalary.getInt("total"));
+                System.out.println("\nTotal number of employees with Salary < 50,000: " + rsTotalLowSalary.getInt("total"));
             }
 
         } catch (SQLException e) {

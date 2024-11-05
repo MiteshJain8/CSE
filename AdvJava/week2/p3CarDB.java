@@ -28,9 +28,9 @@ public class P3CarDB {
             // Insert sample data
             String insertDataSQL = "INSERT INTO cars (Model, Company, Price, Year) VALUES " +
                     "('ABC', 'Ford', 150000, 2010), " +
-                    "('BCD', 'Mahindra', 120000, 2015), " +
+                    "('BCD', 'Tata', 120000, 2015), " +
                     "('CDE', 'Kia', 150000, 2018), " +
-                    "('DEF', 'Tata', 200000, 2020)";
+                    "('DEF', 'MG', 200000, 2020)";
             stmt.executeUpdate(insertDataSQL);
             System.out.println("Sample data inserted into 'cars' table.");
 

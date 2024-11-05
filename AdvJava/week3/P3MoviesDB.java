@@ -45,7 +45,7 @@ public class P3MoviesDB {
             // ii. Display details of 5th Movie from the table
             if (rs.absolute(5)) {
                 System.out.println("\nDetails of 5th Movie:");
-                System.out.println("\nAll movies:\nID\tMovie_Name\tGenre\tIMDB_Rating\tYear");
+                System.out.println("ID\tMovie_Name\tGenre\tIMDB_Rating\tYear");
                 System.out.println(rs.getInt("ID") + "\t" +
                         rs.getString("Movie_Name") + "\t" +
                         rs.getString("Genre") + "\t\t" +
