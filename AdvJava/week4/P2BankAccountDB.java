@@ -2,7 +2,7 @@ package AdvJava.week4;
 
 import java.sql.*;
 
-public class P4BankAccountDB {
+public class P2BankAccountDB {
 
     // Database URL, username, and password
     private static final String DB_URL = "jdbc:mysql://localhost:3307/week4", USER = "root", PASS = ""; // Update this
@@ -37,7 +37,7 @@ public class P4BankAccountDB {
 
             pStmt.setInt(1, 2);
             pStmt.setString(2, "Riya");
-            pStmt.setString(3, "Checking");
+            pStmt.setString(3, "Current");
             pStmt.setInt(4, 2500);
             pStmt.executeUpdate();
 
@@ -59,7 +59,7 @@ public class P4BankAccountDB {
 
                 pStmt.setInt(1, 7);
                 pStmt.setString(2, "Sam");
-                pStmt.setString(3, "Checking");
+                pStmt.setString(3, "Current");
                 pStmt.setInt(4, 700);
                 pStmt.executeUpdate();
 
@@ -82,7 +82,7 @@ public class P4BankAccountDB {
 
                 pStmt.setInt(1, 9);
                 pStmt.setString(2, "Tarun");
-                pStmt.setString(3, "Checking");
+                pStmt.setString(3, "Current");
                 pStmt.setInt(4, 1100);
                 pStmt.executeUpdate();
 
@@ -124,7 +124,7 @@ public class P4BankAccountDB {
             System.out.println(rs.getInt("Account_No") + "\t" +
                     rs.getString("Account_Name") + "\t" +
                     rs.getString("Type_of_Account") + "\t" +
-                    rs.getBigDecimal("Balance"));
+                    rs.getInt("Balance"));
         }
     }
 }

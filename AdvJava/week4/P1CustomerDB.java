@@ -2,7 +2,7 @@ package AdvJava.week4;
 
 import java.sql.*;
 
-public class P3CustomerDB {
+public class P1CustomerDB {
 
     // Database URL, username, and password
     private static final String DB_URL = "jdbc:mysql://localhost:3306/dbName", USER = "root", PASS = ""; // Update this
@@ -51,7 +51,7 @@ public class P3CustomerDB {
                 System.out.println(rs.getInt("ID") + "\t" +
                         rs.getString("Name") + "\t" +
                         rs.getString("Type_of_Customer") + "\t\t\t" +
-                        rs.getBigDecimal("Amount_Spent"));
+                        rs.getInt("Amount_Spent"));
             }
 
             // iii. Demonstrate the details of the database by using DatabaseMetaData
