@@ -5,7 +5,7 @@ import java.sql.*;
 public class P2BankAccountDB {
 
     // Database URL, username, and password
-    private static final String DB_URL = "jdbc:mysql://localhost:3307/week4", USER = "root", PASS = ""; // Update this
+    private static final String DB_URL = "jdbc:mysql://localhost:3307/dbName", USER = "root", PASS = ""; // Update this
 
     public static void main(String[] args) {
         Connection conn = null;
