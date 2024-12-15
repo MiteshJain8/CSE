@@ -48,27 +48,20 @@ public class Calculate extends HttpServlet {
     <body>
         <form action = "Calculate" method = "POST">
             <label>First Number (x): </label>
-            <input type = "text" name = "nl" required>
-            <br><br>
+            <input type = "text" name = "nl" required><br><br>
             <label>Second Number:</label>
-            <input type = "text" name = "n2">
-            <br>
+            <input type = "text" name = "n2"><br>
             <p>Select operation: </p>
             <input type="radio" name = "op" value = "Addition">
-            <label>Addition</label>
-            <br>
+            <label>Addition</label><br>
             <input type="radio" name = "op" value = "Subtraction">
-            <label>Subtraction</label>
-            <br>
+            <label>Subtraction</label><br>
             <input type = "radio" name = "op" value = "Multiplication">
-            <label>Multiplication</label>
-            <br>
+            <label>Multiplication</label><br>
             <input type = "radio" name = "op" value = "Division">
-            <label>Division</label>
-            <br>
+            <label>Division</label><br>
             <input type = "radio" name = "op" value = "e^x">
-            <label>e^x</label>
-            <br><br>
+            <label>e^x</label><br><br>
             <input type = "submit" value = "Submit">
         </form>
     </body>
