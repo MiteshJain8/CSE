@@ -1,0 +1,85 @@
+// Login.java
+
+package myPack;
+
+import java.io.*;
+import java.sql.*;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.*;
+import jakarta.servlet.http.*;
+
+@WebServlet("/Login")
+public class Login extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/week6"; // Update this
+    private static final String USER = "root"; // Update this
+    private static final String PASS = ""; // Update this
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+        	Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            out.println("<html><body>");
+            if (rs.next()) {
+                out.println("<h2>Welcome, " + username + "!</h2>");
+            } else {
+                out.println("<h2>Invalid user</h2>");
+            }
+            out.println("</body></html>");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            out.println("<html><body>");
+            out.println("<h2>Database driver not found</h2>");
+            out.println("</body></html>");
+        } finally {
+            try {
+                if (preparedStatement != null)
+                    preparedStatement.close();
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Login</title>
+    </head>
+    <body>
+        <h1>Login</h1>
+        <form action="Login" method="post">
+            <label for="username">Username:</label>
+            <input type="text" name="username" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" name="password" required><br><br>
+            <button type="submit">Login</button>
+        </form>
+    </body>
+</html>

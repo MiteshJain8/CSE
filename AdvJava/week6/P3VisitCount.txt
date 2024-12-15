@@ -1,0 +1,49 @@
+// VisitCount.java
+
+package myPack;
+
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import java.io.*;
+//import jakarta.servlet.annotation.*;
+
+//@WebServlet("/VisitCount")
+public class VisitCount extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        HttpSession session = request.getSession();
+        Integer visitCount = (Integer) session.getAttribute("visitCount");
+
+        out.println("<html><body>");
+        if (visitCount == null) {
+            visitCount = 1;
+            session.setAttribute("visitCount", visitCount);
+            out.println("<h2>Welcome! This is your first visit.</h2>");
+        } else {
+            visitCount++;
+            session.setAttribute("visitCount", visitCount);
+            out.println("<h2>Welcome back! You have visited this page " + visitCount + " times.</h2>");
+        }
+        out.println("</body></html>");
+    }
+}
+
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Visit Counter</title>
+</head>
+<body>
+    <h1>Visit Counter Example</h1>
+    <form action="VisitCount" method="get">
+        <button type="submit">Check Visit Count</button>
+    </form>
+</body>
+</html>

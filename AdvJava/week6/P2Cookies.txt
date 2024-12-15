@@ -1,0 +1,59 @@
+// Cookies.java
+
+package myPack;
+
+import java.io.*;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.*;
+import jakarta.servlet.http.*;
+
+@WebServlet("/Cookies")
+public class Cookies extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        Cookie cookie1 = new Cookie("cookie1", "value1");
+        Cookie cookie2 = new Cookie("cookie2", "value2");
+        Cookie cookie3 = new Cookie("cookie3", "value3");
+        Cookie cookie4 = new Cookie("cookie4", "value4");
+
+        cookie1.setMaxAge(60);
+        cookie2.setMaxAge(60);
+
+        response.addCookie(cookie1);
+        response.addCookie(cookie2);
+        response.addCookie(cookie3);
+        response.addCookie(cookie4);
+
+        out.println("<html><body>");
+        out.println("<h2>All Cookies:</h2>");
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                out.println("Name: " + cookie.getName() + ", Value: " + cookie.getValue() + "<br>");
+            }
+        } else {
+            out.println("No cookies found.<br>");
+        }
+        out.println("</body></html>");
+    }
+}
+
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Cookies</title>
+    </head>
+    <body>
+        <h1>Cookie Servlet Example</h1>
+        <form action="Cookies" method="get">
+            <button type="submit">Load Servlet</button>
+        </form>
+    </body>
+</html>
