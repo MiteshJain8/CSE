@@ -48,9 +48,6 @@ public class Login extends HttpServlet {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            out.println("<html><body>");
-            out.println("<h2>Database driver not found</h2>");
-            out.println("</body></html>");
         } finally {
             try {
                 if (preparedStatement != null)
