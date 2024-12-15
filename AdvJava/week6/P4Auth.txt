@@ -11,7 +11,7 @@ import jakarta.servlet.http.*;
 @WebServlet("/Login")
 public class Login extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/week6"; // Update this
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/dbName"; // Update this
     private static final String USER = "root"; // Update this
     private static final String PASS = ""; // Update this
 
@@ -19,26 +19,26 @@ public class Login extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String user = request.getParameter("user");
+        String pass = request.getParameter("pass");
 
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+        Connection conn = null;
+        PreparedStatement pStmt = null;
 
         try {
         	Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
+            pStmt = conn.prepareStatement(sql);
+            pStmt.setString(1, user);
+            pStmt.setString(2, pass);
 
-            ResultSet rs = preparedStatement.executeQuery();
+            ResultSet rs = pStmt.executeQuery();
 
             out.println("<html><body>");
             if (rs.next()) {
-                out.println("<h2>Welcome, " + username + "!</h2>");
+                out.println("<h2>Welcome, " + user + "!</h2>");
             } else {
                 out.println("<h2>Invalid user</h2>");
             }
@@ -50,10 +50,10 @@ public class Login extends HttpServlet {
             e.printStackTrace();
         } finally {
             try {
-                if (preparedStatement != null)
-                    preparedStatement.close();
-                if (connection != null)
-                    connection.close();
+                if (pStmt != null)
+                    pStmt.close();
+                if (conn != null)
+                    conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -72,10 +72,10 @@ public class Login extends HttpServlet {
     <body>
         <h1>Login</h1>
         <form action="Login" method="post">
-            <label for="username">Username:</label>
-            <input type="text" name="username" required><br><br>
-            <label for="password">Password:</label>
-            <input type="password" name="password" required><br><br>
+            <label>Username:</label>
+            <input type="text" name="user" required><br><br>
+            <label>Password:</label>
+            <input type="password" name="pass" required><br><br>
             <button type="submit">Login</button>
         </form>
     </body>
