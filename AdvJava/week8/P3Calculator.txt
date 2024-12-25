@@ -1,0 +1,48 @@
+// Calculator.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Calculator</title>
+	</head>
+	<body>
+		<h2>Result:</h2>
+		<%
+		double x = Math.toRadians(Double.parseDouble(request.getParameter("x")));
+		String op = request.getParameter("op");
+		if (op.equals("sin(x)")){
+			x = Math.sin(x);
+		}else if(op.equals("cos(x)")){
+			x = Math.cos(x);
+		}else if(op.equals("tan(x)")){
+			x = Math.tan(x);
+		}else if(op.equals("log(x)")){
+			x = Math.log(x);
+		}
+		%>
+		<p><%= op %>: <%= x %></p>
+	</body>
+</html>
+
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Calculator</title>
+	</head>
+	<body>
+		<form action="Calculator.jsp" method="post">
+		x (in degrees): <input type="text" name="x" ><br><br>
+		<input type="radio" name="op" value="sin(x)">sin(x)<br><br>
+		<input type="radio" name="op" value="cos(x)">cos(x)<br><br>
+		<input type="radio" name="op" value="tan(x)">tan(x)<br><br>
+		<input type="radio" name="op" value="log(x)">log(x)<br><br>
+		<input value="Calculate" type="submit">
+		</form>
+	</body>
+</html>

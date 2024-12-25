@@ -1,0 +1,70 @@
+// displayData.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Student Details</title>
+</head>
+<body>
+    <h1>Student Details</h1>
+    <%
+        String URL = "jdbc:mysql://localhost:3306/dbName"; // Update this
+        String User = "root"; // Update this
+        String Pass = ""; // Update this
+
+        String usn = request.getParameter("usn");
+        Connection conn = null;
+        PreparedStatement pStmt = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(URL, User, Pass);
+
+            String sql = "SELECT * FROM Student WHERE USN = ?";
+            pStmt = conn.prepareStatement(sql);
+            pStmt.setString(1, usn);
+            ResultSet rs = pStmt.executeQuery();
+            if (rs.next()) {
+                String name = rs.getString("Name");
+                out.println("<p>USN: " + usn + "</p>");
+                out.println("<p>Name: " + name + "</p>");
+            } else {
+                out.println("<p>Invalid USN</p>");
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pStmt != null)
+                    pStmt.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    %>
+</body>
+</html>
+
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Student Details</title>
+</head>
+<body>
+    <h1>Enter USN</h1>
+    <form action="displayData.jsp" method="post">
+        USN: <input type="text" name="usn" id="usn" required><br><br>
+        <input value="Submit" type="submit">
+    </form>
+</body>
+</html>

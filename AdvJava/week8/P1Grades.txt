@@ -1,0 +1,89 @@
+// GradeReview.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Grade Review</title>
+    </head>
+    <body>
+        <h2>Result</h2>
+        <%!
+        public String getGrade(int marks) {
+            if (marks >= 90) {
+                return "S";
+            } else if (marks >= 80) {
+                return "A";
+            } else if (marks >= 70) {
+                return "B";
+            } else if (marks >= 60) {
+                return "C";
+            } else if (marks >= 50) {
+                return "D";
+            } else {
+                return "FAIL";
+            }
+        }
+        %>
+        <%
+            int javaMarks = Integer.parseInt(request.getParameter("java"));
+            int aimlMarks = Integer.parseInt(request.getParameter("aiml"));
+            int osMarks = Integer.parseInt(request.getParameter("os"));
+            int semMarks = Integer.parseInt(request.getParameter("sem"));
+
+            String javaGrade = getGrade(javaMarks);
+            String aimlGrade = getGrade(aimlMarks);
+            String osGrade = getGrade(osMarks);
+            String semGrade = getGrade(semMarks);
+        %>
+        <table border="1">
+            <tr>
+                <th>Subject</th>
+                <th>Marks</th>
+                <th>Grade</th>
+            </tr>
+            <tr>
+                <td>Java</td>
+                <td><%= javaMarks %></td>
+                <td><%= javaGrade %></td>
+            </tr>
+            <tr>
+                <td>AIML</td>
+                <td><%= aimlMarks %></td>
+                <td><%= aimlGrade %></td>
+            </tr>
+            <tr>
+                <td>OS</td>
+                <td><%= osMarks %></td>
+                <td><%= osGrade %></td>
+            </tr>
+            <tr>
+                <td>SEM</td>
+                <td><%= semMarks %></td>
+                <td><%= semGrade %></td>
+            </tr>
+        </table>
+    </body>
+</html>
+
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Calculate</title>
+	</head>
+	<body>
+		<h1>Grade Review</h1>
+		<form action="GradeReview.jsp" method="post">
+			Java: <input type="text" name="java" ><br><br>
+			AIML: <input type="text" name="aiml"><br><br>
+			OS: <input type="text" name="os"><br><br>
+			SEM: <input type="text" name="sem"><br><br>
+			<input value="Calculate" type="submit">
+		</form>
+	</body>
+</html>
