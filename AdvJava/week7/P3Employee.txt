@@ -23,32 +23,32 @@ public class Employee extends HttpServlet {
         String address = request.getParameter("address");
         String dob = request.getParameter("dob");
 
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+        Connection conn = null;
+        PreparedStatement pStmt = null;
 
         try {
             //Class.forName("com.mysql.cj.jdbc.Driver");
 
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             String sql = "INSERT INTO Employee (Employee_Name, Address, Date_of_Birth) VALUES (?, ?, ?)";
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, empName);
-            preparedStatement.setString(2, address);
-            preparedStatement.setDate(3, java.sql.Date.valueOf(dob));
+            pStmt = conn.prepareStatement(sql);
+            pStmt.setString(1, empName);
+            pStmt.setString(2, address);
+            pStmt.setDate(3, java.sql.Date.valueOf(dob));
 
-            int rowsInserted = preparedStatement.executeUpdate();
+            int rowsInserted = pStmt.executeUpdate();
             if (rowsInserted > 0) {
                 out.println("<h2>Employee details inserted successfully.</h2>");
                 out.println("<table border='1'><tr><th>Emp_ID</th><th>Employee_Name</th><th>Address</th><th>Date_of_Birth</th></tr>");
 
                 String query = "SELECT * FROM Employee WHERE Employee_Name = ? AND Address = ? AND Date_of_Birth = ?";
-                preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1, empName);
-                preparedStatement.setString(2, address);
-                preparedStatement.setDate(3, java.sql.Date.valueOf(dob));
+                pStmt = conn.prepareStatement(query);
+                pStmt.setString(1, empName);
+                pStmt.setString(2, address);
+                pStmt.setDate(3, java.sql.Date.valueOf(dob));
 
-                ResultSet rs = preparedStatement.executeQuery();
+                ResultSet rs = pStmt.executeQuery();
                 while (rs.next()) {
                     out.println("<tr><td>" + rs.getInt("Emp_ID") + "</td><td>" + rs.getString("Employee_Name") + "</td><td>" + rs.getString("Address") + "</td><td>" + rs.getDate("Date_of_Birth") + "</td></tr>");
                 }
@@ -63,10 +63,10 @@ public class Employee extends HttpServlet {
             e.printStackTrace();
         } finally {
             try {
-                if (preparedStatement != null)
-                    preparedStatement.close();
-                if (connection != null)
-                    connection.close();
+                if (pStmt != null)
+                    pStmt.close();
+                if (conn != null)
+                    conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }

@@ -23,28 +23,28 @@ public class Subjects extends HttpServlet {
         String facultyId = request.getParameter("facultyId");
         String subName = request.getParameter("subName");
 
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+        Conneconn = null;
+        PreparedStatement pStmt = null;
 
         try {
             //Class.forName("com.mysql.cj.jdbc.Driver");
 
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             String updateSQL = "UPDATE Subjects SET Sub_Name = ? WHERE Faculty_ID = ?";
-            preparedStatement = connection.prepareStatement(updateSQL);
-            preparedStatement.setString(1, subName);
-            preparedStatement.setInt(2, Integer.parseInt(facultyId));
+            pStmt = conn.prepareStatement(updateSQL);
+            pStmt.setString(1, subName);
+            pStmt.setInt(2, Integer.parseInt(facultyId));
 
-            int rowsUpdated = preparedStatement.executeUpdate();
+            int rowsUpdated = pStmt.executeUpdate();
 
             out.println("<h2>Number of rows updated: " + rowsUpdated + "</h2>");
 
             String querySQL = "SELECT * FROM Subjects WHERE Faculty_ID = ?";
-            preparedStatement = connection.prepareStatement(querySQL);
-            preparedStatement.setInt(1, Integer.parseInt(facultyId));
+            pStmt = conn.prepareStatement(querySQL);
+            pStmt.setInt(1, Integer.parseInt(facultyId));
 
-            ResultSet rs = preparedStatement.executeQuery();
+            ResultSet rs = pStmt.executeQuery();
 
             out.println("<h2>Subjects Allotted for Faculty ID: " + facultyId + "</h2>");
             out.println("<table border='1'><tr><th>Sub_ID</th><th>Sub_Name</th><th>Faculty_ID</th></tr>");
@@ -59,10 +59,10 @@ public class Subjects extends HttpServlet {
             e.printStackTrace();
         } finally {
             try {
-                if (preparedStatement != null)
-                    preparedStatement.close();
-                if (connection != null)
-                    connection.close();
+                if (pStmt != null)
+                    pStmt.close();
+                if (conn != null)
+                    conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
