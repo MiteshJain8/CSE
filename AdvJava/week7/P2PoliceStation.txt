@@ -27,7 +27,7 @@ public class Police extends HttpServlet {
         PreparedStatement pStmt = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            //Class.forName("com.mysql.cj.jdbc.Driver");
 
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
@@ -38,7 +38,6 @@ public class Police extends HttpServlet {
 
             ResultSet rs = pStmt.executeQuery();
 
-            out.println("<html><body>");
             if (rs.next()) {
                 out.println("<h2>Police Station Details:</h2>");
                 out.println("Area: " + rs.getString("area") + "<br>");
@@ -47,10 +46,9 @@ public class Police extends HttpServlet {
             } else {
                 out.println("<h2>No police station found for the given area or phone number.</h2>");
             }
-            out.println("</body></html>");
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        //} catch (ClassNotFoundException e) {
+        //    e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -77,10 +75,8 @@ public class Police extends HttpServlet {
 <body>
     <h1>Police Station</h1>
     <form action="Police" method="post">
-        <label>Area:</label>
-        <input type="text" name="area"><br><br>
-        <label>Phone Number:</label>
-        <input type="text" name="phoneNumber"><br><br>
+        Area: <input type="text" name="area"><br><br>
+        Phone Number: <input type="text" name="phoneNumber"><br><br>
         <button type="submit">Lookup</button>
     </form>
 </body>

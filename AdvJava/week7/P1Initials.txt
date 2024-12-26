@@ -18,18 +18,12 @@ public class Initials extends HttpServlet {
         String fullName = request.getParameter("fullName");
         String initials = getInitials(fullName);
 
-        out.println("<html><body>");
         out.println("<h2>Initials: " + initials + "</h2>");
-        out.println("</body></html>");
     }
 
     private String getInitials(String fullName) {
-        if (fullName == null || fullName.isEmpty()) {
-            return "";
-        }
         String[] words = fullName.split("\\s+");
         StringBuilder initials = new StringBuilder();
-
         for (String word : words) {
             if (!word.isEmpty()) {
                 initials.append(Character.toUpperCase(word.charAt(0)));
@@ -50,8 +44,7 @@ public class Initials extends HttpServlet {
 	<body>
 	    <h1>Get Initials</h1>
 	    <form action="Initials" method="post">
-	        <label>Full Name:</label>
-	        <input type="text" name="fullName" required><br><br>
+	        Full Name: <input type="text" name="fullName" required><br><br>
 	        <button type="submit">Get Initials</button>
 	    </form>
 	</body>

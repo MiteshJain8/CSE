@@ -27,7 +27,7 @@ public class Subjects extends HttpServlet {
         PreparedStatement preparedStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            //Class.forName("com.mysql.cj.jdbc.Driver");
 
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
 
@@ -38,7 +38,6 @@ public class Subjects extends HttpServlet {
 
             int rowsUpdated = preparedStatement.executeUpdate();
 
-            out.println("<html><body>");
             out.println("<h2>Number of rows updated: " + rowsUpdated + "</h2>");
 
             String querySQL = "SELECT * FROM Subjects WHERE Faculty_ID = ?";
@@ -53,7 +52,6 @@ public class Subjects extends HttpServlet {
                 out.println("<tr><td>" + rs.getInt("Sub_ID") + "</td><td>" + rs.getString("Sub_Name") + "</td><td>" + rs.getInt("Faculty_ID") + "</td></tr>");
             }
             out.println("</table>");
-            out.println("</body></html>");
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -83,10 +81,8 @@ public class Subjects extends HttpServlet {
 <body>
     <h1>Update Faculty Subjects</h1>
     <form action="Subjects" method="post">
-        <label>Faculty ID:</label>
-        <input type="text" name="facultyId" required><br><br>
-        <label>Subject Name:</label>
-        <input type="text" name="subName" required><br><br>
+        Faculty ID: <input type="text" name="facultyId" required><br><br>
+        Subject Name: <input type="text" name="subName" required><br><br>
         <button type="submit">Update Subject</button>
     </form>
 </body>

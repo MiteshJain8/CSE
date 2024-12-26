@@ -27,7 +27,7 @@ public class Employee extends HttpServlet {
         PreparedStatement preparedStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            //Class.forName("com.mysql.cj.jdbc.Driver");
 
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
 
@@ -38,7 +38,6 @@ public class Employee extends HttpServlet {
             preparedStatement.setDate(3, java.sql.Date.valueOf(dob));
 
             int rowsInserted = preparedStatement.executeUpdate();
-            out.println("<html><body>");
             if (rowsInserted > 0) {
                 out.println("<h2>Employee details inserted successfully.</h2>");
                 out.println("<table border='1'><tr><th>Emp_ID</th><th>Employee_Name</th><th>Address</th><th>Date_of_Birth</th></tr>");
@@ -57,10 +56,9 @@ public class Employee extends HttpServlet {
             } else {
                 out.println("<h2>Failed to insert employee details.</h2>");
             }
-            out.println("</body></html>");
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        //} catch (ClassNotFoundException e) {
+        //    e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -87,12 +85,9 @@ public class Employee extends HttpServlet {
 <body>
     <h1>Enter Employee Details</h1>
     <form action="Employee" method="post">
-        <label>Employee Name:</label>
-        <input type="text" name="eName" required><br><br>
-        <label>Address:</label>
-        <input type="text" name="address" required><br><br>
-        <label>Date of Birth:</label>
-        <input type="date" name="dob" required><br><br>
+        Employee Name: <input type="text" name="eName" required><br><br>
+        Address: <input type="text" name="address" required><br><br>
+        Date of Birth: <input type="date" name="dob" required><br><br>
         <button type="submit">Submit</button>
     </form>
 </body>
