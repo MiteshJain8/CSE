@@ -1,4 +1,4 @@
-// displayData.jsp
+<!-- displayData.jsp -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -20,7 +20,7 @@
         Connection conn = null;
         PreparedStatement pStmt = null;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            //Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(URL, User, Pass);
 
             String sql = "SELECT * FROM Student WHERE USN = ?";
@@ -34,8 +34,8 @@
             } else {
                 out.println("<p>Invalid USN</p>");
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        //} catch (ClassNotFoundException e) {
+        //    e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
