@@ -1,0 +1,86 @@
+<!-- Employee.jsp -->
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Details</title>
+</head>
+<body>
+    <h1>Employee Details</h1>
+    <%
+        String id = request.getParameter("id");
+        String fname = request.getParameter("fname");
+        String lname = request.getParameter("lname");
+        String project = request.getParameter("project");
+        String salary = request.getParameter("salary");
+
+        String URL = "jdbc:mysql://localhost:3306/dbName"; // Update this
+        String User = "root"; // Update this
+        String Pass = ""; // Update this
+
+        Connection conn = null;
+        PreparedStatement pStmt = null;
+
+        try {
+            conn = DriverManager.getConnection(URL, User, Pass);
+
+            StringBuilder sql = new StringBuilder("SELECT * FROM Employee WHERE 1=1");
+            sql.append(" AND ID = ?");
+            sql.append(" AND FName = ?");
+            sql.append(" AND LName = ?");
+            sql.append(" AND Project = ?");
+            sql.append(" AND Salary = ?");
+            pStmt = conn.prepareStatement(sql.toString());
+            pStmt.setInt(1, Integer.parseInt(id));
+            pStmt.setString(2, fname);
+            pStmt.setString(3, lname);
+            pStmt.setString(4, project);
+            pStmt.setInt(5, Integer.parseInt(salary));
+            ResultSet rs = pStmt.executeQuery();
+
+            out.println("<table border='1'><tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Project</th><th>Salary</th></tr>");
+            while (rs.next()) {
+                out.println("<tr><td>" + rs.getInt("ID") + "</td><td>" + rs.getString("FName") + "</td><td>" + rs.getString("LName") + "</td><td>" + rs.getString("Project") + "</td><td>" + rs.getInt("Salary") + "</td></tr>");
+            }
+            out.println("</table>");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pStmt != null)
+                    pStmt.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    %>
+</body>
+</html>
+
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Details</title>
+</head>
+<body>
+    <h1>Search Employee Details</h1>
+    <form action="Employee.jsp" method="post">
+        ID: <input type="text" name="id" required><br><br>
+        First Name: <input type="text" name="fname" required><br><br>
+        Last Name: <input type="text" name="lname" required><br><br>
+        Project: <input type="text" name="project" required><br><br>
+        Salary: <input type="text" name="salary" required><br><br>
+        <input value="Search" type="submit">
+    </form>
+</body>
+</html>

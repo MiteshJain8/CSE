@@ -53,8 +53,8 @@ public class Subjects extends HttpServlet {
             }
             out.println("</table>");
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        //} catch (ClassNotFoundException e) {
+        //    e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

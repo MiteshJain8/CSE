@@ -13,14 +13,16 @@
 		<%
 		double x = Math.toRadians(Double.parseDouble(request.getParameter("x")));
 		String op = request.getParameter("op");
-		if (op.equals("sin(x)")){
+		if (op.equals("sin(x)")) {
 			x = Math.sin(x);
-		}else if(op.equals("cos(x)")){
+		} else if(op.equals("cos(x)")) {
 			x = Math.cos(x);
-		}else if(op.equals("tan(x)")){
+		} else if(op.equals("tan(x)")) {
 			x = Math.tan(x);
-		}else if(op.equals("log(x)")){
+		} else if(op.equals("log(x)")) {
 			x = Math.log(x);
+		} else if(op.equals("root(x)")) {
+			x = Math.sqrt(x);
 		}
 		%>
 		<p><%= op %>: <%= x %></p>
@@ -42,6 +44,7 @@
 		<input type="radio" name="op" value="cos(x)">cos(x)<br><br>
 		<input type="radio" name="op" value="tan(x)">tan(x)<br><br>
 		<input type="radio" name="op" value="log(x)">log(x)<br><br>
+		<input type="radio" name="op" value="root(x)">root(x)<br><br>
 		<input value="Calculate" type="submit">
 		</form>
 	</body>

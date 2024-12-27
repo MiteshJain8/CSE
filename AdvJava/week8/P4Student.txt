@@ -63,7 +63,7 @@
 <body>
     <h1>Enter USN</h1>
     <form action="displayData.jsp" method="post">
-        USN: <input type="text" name="usn" id="usn" required><br><br>
+        USN: <input type="text" name="usn" required><br><br>
         <input value="Submit" type="submit">
     </form>
 </body>

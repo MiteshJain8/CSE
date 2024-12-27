@@ -39,8 +39,8 @@
 	<body>
 		<h1>Movie Ticket Price</h1>
 		<form action="movie.jsp" method="post">
-			User: <input type="text" name="user" id="user"><br><br>
-			Age: <input type="text" name="age" id="age"><br><br>
+			User: <input type="text" name="user"><br><br>
+			Age: <input type="text" name="age"><br><br>
 			<input value="Get Price" type="submit">
 		</form>
 	</body>
