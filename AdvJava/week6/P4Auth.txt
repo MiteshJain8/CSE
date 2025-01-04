@@ -26,14 +26,12 @@ public class Login extends HttpServlet {
         PreparedStatement pStmt = null;
 
         try {
-        	Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
             pStmt = conn.prepareStatement(sql);
             pStmt.setString(1, user);
             pStmt.setString(2, pass);
-
             ResultSet rs = pStmt.executeQuery();
 
             out.println("<html><body>");
@@ -43,10 +41,7 @@ public class Login extends HttpServlet {
                 out.println("<h2>Invalid user</h2>");
             }
             out.println("</body></html>");
-
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
             try {

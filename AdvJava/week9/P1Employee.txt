@@ -28,13 +28,8 @@
         try {
             conn = DriverManager.getConnection(URL, User, Pass);
 
-            StringBuilder sql = new StringBuilder("SELECT * FROM Employee WHERE 1=1");
-            sql.append(" AND ID = ?");
-            sql.append(" AND FName = ?");
-            sql.append(" AND LName = ?");
-            sql.append(" AND Project = ?");
-            sql.append(" AND Salary = ?");
-            pStmt = conn.prepareStatement(sql.toString());
+            String query = "SELECT * FROM Employee WHERE ID = ? AND FName = ? AND LName = ? AND Project = ? AND Salary = ?";
+            pStmt = connection.prepareStatement(query);
             pStmt.setInt(1, Integer.parseInt(id));
             pStmt.setString(2, fname);
             pStmt.setString(3, lname);
