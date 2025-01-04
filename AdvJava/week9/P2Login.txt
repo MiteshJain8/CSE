@@ -37,8 +37,7 @@
     <title>Error Page</title>
 </head>
 <body>
-    <h3>Sorry, an exception occurred!</h3>
-    <p>Exception is: <%= exception %></p>
+    <p>Exception occurred: <%= exception %></p>
     <a href="index.html">Back to Login</a>
 </body>
 </html>
