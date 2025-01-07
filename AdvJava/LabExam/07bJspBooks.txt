@@ -1,0 +1,79 @@
+<!-- insertBook.jsp -->
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Book Details</title>
+</head>
+<body>
+    <h1>Book Details</h1>
+    <%
+        String bookNo = request.getParameter("bookNo");
+        String title = request.getParameter("title");
+        String author = request.getParameter("author");
+        String publication = request.getParameter("publication");
+        String price = request.getParameter("price");
+
+        String URL = "jdbc:mysql://localhost:3306/dbName";
+        String User = "root";
+        String Pass = "";
+
+        Connection conn = null;
+        PreparedStatement pStmt = null;
+
+        try {
+            conn = DriverManager.getConnection(URL, User, Pass);
+
+            String insert = "INSERT INTO Books (Book_No, Title, Author, Publication, Price) VALUES (?, ?, ?, ?, ?)";
+            pStmt = conn.prepareStatement(insert);
+            pStmt.setInt(1, Integer.parseInt(bookNo));
+            pStmt.setString(2, title);
+            pStmt.setString(3, author);
+            pStmt.setString(4, publication);
+            pStmt.setInt(5, Integer.parseInt(price));
+            pStmt.executeUpdate();
+
+            out.println("<p>Book details inserted successfully.</p>");
+
+            String query = "SELECT * FROM Books WHERE Title = ?";
+            pStmt = conn.prepareStatement(query);
+            pStmt.setString(1, title);
+
+            ResultSet rs = pStmt.executeQuery();
+
+            out.println("<table border='1'><tr><th>Book No</th><th>Title</th><th>Author</th><th>Publication</th><th>Price</th></tr>");
+            while (rs.next()) {
+                out.println("<tr><td>" + rs.getInt("Book_No") + "</td><td>" + rs.getString("Title") + "</td><td>" + rs.getString("Author") + "</td><td>" + rs.getString("Publication") + "</td><td>" + rs.getInt("Price") + "</td></tr>");
+            }
+            out.println("</table>");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    %>
+</body>
+</html>
+
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Book Entry Form</title>
+</head>
+<body>
+    <h1>Enter Book Details</h1>
+    <form action="insertBook.jsp" method="post">
+        Book No: <input type="text" name="bookNo" required><br><br>
+        Title: <input type="text" name="title" required><br><br>
+        Author: <input type="text" name="author" required><br><br>
+        Publication: <input type="text" name="publication" required><br><br>
+        Price: <input type="text" name="price" required><br><br>
+        <input value="Submit" type="submit">
+    </form>
+</body>
+</html>

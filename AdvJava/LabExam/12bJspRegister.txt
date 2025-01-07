@@ -1,0 +1,44 @@
+<!-- welcome.jsp -->
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="jakarta.servlet.http.*, jakarta.servlet.*" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body>
+    <%
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        session.setAttribute("username", username);
+
+        if ("Admin".equals(username) && "Admin123".equals(password)) {
+            out.println("<h1>Welcome, " + username + "!</h1>");
+        } else {
+            out.println("<h1>Invalid username or password.</h1>");
+        }
+    %>
+</body>
+</html>
+
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+    <h1>Register</h1>
+    <form action="welcome.jsp" method="post">
+        Username: <input type="text" name="username" required><br><br>
+        Password: <input type="password" name="password" required><br><br>
+        <input value="Register" type="submit">
+    </form>
+</body>
+</html>

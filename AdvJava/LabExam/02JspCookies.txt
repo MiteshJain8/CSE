@@ -1,0 +1,74 @@
+<!-- setCookies.jsp -->
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Set Cookies</title>
+</head>
+<body>
+    <h1>Setting Cookies</h1>
+    <%
+        Cookie cookie1 = new Cookie("cookie1", "value1");
+        Cookie cookie2 = new Cookie("cookie2", "value2");
+        Cookie cookie3 = new Cookie("cookie3", "value3");
+
+        cookie1.setMaxAge(60);
+        cookie2.setMaxAge(60 * 60);
+        cookie3.setMaxAge(60 * 60 * 24);
+
+        response.addCookie(cookie1);
+        response.addCookie(cookie2);
+        response.addCookie(cookie3);
+
+        out.println("<p>Cookies have been set.</p>");
+    %>
+    <a href="index.html">Back to Home</a>
+</body>
+</html>
+
+<!-- getCookies.jsp -->
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Get Cookies</title>
+</head>
+<body>
+    <h1>Getting Cookies</h1>
+    <%
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+            out.println("<table border='1'><tr><th>Name</th><th>Value</th><th>Secure</th><th>HttpOnly</th></tr>");
+            for (Cookie cookie : cookies) {
+                out.println("<tr><td>" + cookie.getName() + "</td><td>" + cookie.getValue() + "</td><td>" + cookie.getSecure() + "</td><td>" + cookie.isHttpOnly() + "</td></tr>");
+            }
+            out.println("</table>");
+        } else {
+            out.println("<p>No cookies found.</p>");
+        }
+    %>
+    <a href="index.html">Back to Home</a>
+</body>
+</html>
+
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cookie Example</title>
+</head>
+<body>
+    <h1>Cookie Example</h1>
+    <a href="setCookies.jsp">Set Cookies</a><br><br>
+    <a href="getCookies.jsp">Get Cookies</a>
+</body>
+</html>

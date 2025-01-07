@@ -12,9 +12,9 @@
 <body>
     <h1>Student Details</h1>
     <%
-        String URL = "jdbc:mysql://localhost:3306/dbName"; // Update this
-        String User = "root"; // Update this
-        String Pass = ""; // Update this
+        String URL = "jdbc:mysql://localhost:3306/dbName";
+        String User = "root";
+        String Pass = "";
 
         String usn = request.getParameter("usn");
         Connection conn = null;
