@@ -1,0 +1,47 @@
+<!-- movie.jsp -->
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Ticket Price</title>
+</head>
+<body>
+    <h1>Movie Ticket Price</h1>
+    <%
+        String user = request.getParameter("user");
+        int age = Integer.parseInt(request.getParameter("age"));
+        int price;
+        if (age > 62) {
+            price = 50;
+        } else if (age < 10) {
+            price = 30;
+        } else {
+            price = 80;
+        }
+    %>
+    <p>Name: <%= user %></p>
+    <p>Age: <%= age %></p>
+    <p>Movie Ticket Price: Rs. <%= price %></p>
+</body>
+</html>
+
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Movie Ticket Price</title>
+	</head>
+	<body>
+		<h1>Movie Ticket Price</h1>
+		<form action="movie.jsp" method="post">
+			User: <input type="text" name="user"><br><br>
+			Age: <input type="text" name="age"><br><br>
+			<input value="Get Price" type="submit">
+		</form>
+	</body>
+</html>
