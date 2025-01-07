@@ -4,10 +4,10 @@ package myPack;
 
 import java.io.*;
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
+//import jakarta.servlet.annotation.*;
 
-@WebServlet("/Cookies")
+//@WebServlet("/Cookies")
 public class Cookies extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -28,7 +28,6 @@ public class Cookies extends HttpServlet {
         response.addCookie(cookie3);
         response.addCookie(cookie4);
 
-        out.println("<html><body>");
         out.println("<h2>All Cookies:</h2>");
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -38,7 +37,6 @@ public class Cookies extends HttpServlet {
         } else {
             out.println("No cookies found.<br>");
         }
-        out.println("</body></html>");
     }
 }
 
@@ -53,7 +51,7 @@ public class Cookies extends HttpServlet {
     <body>
         <h1>Cookie Servlet Example</h1>
         <form action="Cookies" method="get">
-            <button type="submit">Load Servlet</button>
+            <input type = "submit" value = "Load Cookies">
         </form>
     </body>
 </html>

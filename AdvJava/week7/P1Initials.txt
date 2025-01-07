@@ -22,7 +22,7 @@ public class Initials extends HttpServlet {
     }
 
     private String getInitials(String fullName) {
-        String[] words = fullName.split("\\s+");
+        String[] words = fullName.split(" ");
         StringBuilder initials = new StringBuilder();
         for (String word : words) {
             if (!word.isEmpty()) {
@@ -45,7 +45,7 @@ public class Initials extends HttpServlet {
 	    <h1>Get Initials</h1>
 	    <form action="Initials" method="post">
 	        Full Name: <input type="text" name="fullName" required><br><br>
-	        <button type="submit">Get Initials</button>
+            <input value="Submit" type="submit">
 	    </form>
 	</body>
 </html>

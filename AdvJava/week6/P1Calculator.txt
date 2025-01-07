@@ -31,9 +31,7 @@ public class Calculate extends HttpServlet {
 		} else if (op.equals("e^x")) {
 			r = Math.exp(a);
 		}
-		out.println("<html><body>");
 		out.println("<h1>Result is: " + String.valueOf(r) + "</h1>");
-		out.println("</body></html>");
 	}
 }
 
@@ -46,23 +44,16 @@ public class Calculate extends HttpServlet {
         <title>Calculator</title>
     </head>
     <body>
-        <form action = "Calculate" method = "POST">
-            <label>First Number (x): </label>
-            <input type = "text" name = "nl" required><br><br>
-            <label>Second Number:</label>
-            <input type = "text" name = "n2"><br>
-            <p>Select operation: </p>
-            <input type="radio" name = "op" value = "Addition">
-            <label>Addition</label><br>
-            <input type="radio" name = "op" value = "Subtraction">
-            <label>Subtraction</label><br>
-            <input type = "radio" name = "op" value = "Multiplication">
-            <label>Multiplication</label><br>
-            <input type = "radio" name = "op" value = "Division">
-            <label>Division</label><br>
-            <input type = "radio" name = "op" value = "e^x">
-            <label>e^x</label><br><br>
-            <input type = "submit" value = "Submit">
-        </form>
+		<form action = "Calculate" method = "post">
+				First Number (x): <input type = "text" name = "nl" required><br><br>
+				Second Number: <input type = "text" name = "n2">
+				<p>Select operation: </p>
+				<input type="radio" name = "op" value = "Addition"> Addition<br><br>
+				<input type="radio" name = "op" value = "Subtraction"> Subtraction<br><br>
+				<input type = "radio" name = "op" value = "Multiplication"> Multiplication<br><br>
+				<input type = "radio" name = "op" value = "Division"> Division<br><br>
+				<input type = "radio" name = "op" value = "e^x"> e^x<br><br>
+				<input type = "submit" value = "Submit">
+		</form>
     </body>
 </html>

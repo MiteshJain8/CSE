@@ -29,7 +29,7 @@
             conn = DriverManager.getConnection(URL, User, Pass);
 
             String query = "SELECT * FROM Employee WHERE ID = ? AND FName = ? AND LName = ? AND Project = ? AND Salary = ?";
-            pStmt = connection.prepareStatement(query);
+            pStmt = conn.prepareStatement(query);
             pStmt.setInt(1, Integer.parseInt(id));
             pStmt.setString(2, fname);
             pStmt.setString(3, lname);
@@ -45,15 +45,6 @@
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (pStmt != null)
-                    pStmt.close();
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     %>
 </body>

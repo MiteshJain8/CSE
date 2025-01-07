@@ -12,15 +12,14 @@ public class Calculate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
 		float sum = 0;
 		float avg = 0;
 		for(int i =0;i<4;i++) {
 			sum+= Float.parseFloat(request.getParameter("cgpa"+Integer.toString(i+1)));
 		}
 		avg = sum/ 4;
-		response.getWriter().println("<html><body>");
 		response.getWriter().println("<h1> the CGPA is  " + String.valueOf(avg) + "</h1>");
-		response.getWriter().println("</body></html>");
 	}
 
 }
@@ -35,16 +34,13 @@ public class Calculate extends HttpServlet {
 	</head>
 	<body>
 		<form method = "post" action ="Calculate">
-			<h1>CGPA DETAILS :</h1>
-			<p>Enter USN :</p>
-			<input name = "usn" type = "text" required>
-			<p>Enter name :</p>
-			<input name = "name" type = "text" required>
+			USN: <input name = "usn" type = "text" required><br><br>
+			Name: <input name = "name" type = "text" required>
 			<p>Enter all SGPAS's :</p>
-			<input name = "cgpa1" type = "text" required>
-			<input name = "cgpa2" type = "text" required>
-			<input name = "cgpa3" type = "text" required>
-			<input name = "cgpa4" type = "text" required>
+			SGPA1: <input name = "sgpa1" type = "text" required><br><br>
+			SGPA2: <input name = "sgpa2" type = "text" required><br><br>
+			SGPA3: <input name = "sgpa3" type = "text" required><br><br>
+			SGPA4: <input name = "sgpa4" type = "text" required><br><br>
 			<input type = "submit" value ="submit">
 		</form>
 	</body>

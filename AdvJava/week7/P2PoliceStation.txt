@@ -12,7 +12,7 @@ import jakarta.servlet.http.*;
 public class Police extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/dbName"; // Update this
+    private static final String URL = "jdbc:mysql://localhost:3306/dbName"; // Update this
     private static final String USER = "root"; // Update this
     private static final String PASS = ""; // Update this
 
@@ -27,12 +27,10 @@ public class Police extends HttpServlet {
         PreparedStatement pStmt = null;
 
         try {
-            //Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(URL, USER, PASS);
 
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-            String sql = "SELECT * FROM police_station WHERE area = ? OR phone_number = ?";
-            pStmt = conn.prepareStatement(sql);
+            String query = "SELECT * FROM police_station WHERE area = ? OR phone_number = ?";
+            pStmt = conn.prepareStatement(query);
             pStmt.setString(1, area);
             pStmt.setString(2, phoneNumber);
 
@@ -46,9 +44,6 @@ public class Police extends HttpServlet {
             } else {
                 out.println("<h2>No police station found for the given area or phone number.</h2>");
             }
-
-        //} catch (ClassNotFoundException e) {
-        //    e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -77,7 +72,7 @@ public class Police extends HttpServlet {
     <form action="Police" method="post">
         Area: <input type="text" name="area"><br><br>
         Phone Number: <input type="text" name="phoneNumber"><br><br>
-        <button type="submit">Lookup</button>
+        <input value="Submit" type="submit">
     </form>
 </body>
 </html>

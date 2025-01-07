@@ -18,7 +18,6 @@ public class VisitCount extends HttpServlet {
         HttpSession session = request.getSession();
         Integer visitCount = (Integer) session.getAttribute("visitCount");
 
-        out.println("<html><body>");
         if (visitCount == null) {
             visitCount = 1;
             session.setAttribute("visitCount", visitCount);
@@ -28,7 +27,6 @@ public class VisitCount extends HttpServlet {
             session.setAttribute("visitCount", visitCount);
             out.println("<h2>Welcome back! You have visited this page " + visitCount + " times.</h2>");
         }
-        out.println("</body></html>");
     }
 }
 
@@ -43,7 +41,7 @@ public class VisitCount extends HttpServlet {
 <body>
     <h1>Visit Counter Example</h1>
     <form action="VisitCount" method="get">
-        <button type="submit">Check Visit Count</button>
+        <input value="Check Visit Count" type="submit">
     </form>
 </body>
 </html>

@@ -12,7 +12,7 @@ import jakarta.servlet.http.*;
 public class Subjects extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/dbName"; // Update this
+    private static final String URL = "jdbc:mysql://localhost:3306/dbName"; // Update this
     private static final String USER = "root"; // Update this
     private static final String PASS = ""; // Update this
 
@@ -27,7 +27,7 @@ public class Subjects extends HttpServlet {
         PreparedStatement pStmt = null;
 
         try {
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(URL, USER, PASS);
 
             String updateSQL = "UPDATE Subjects SET Sub_Name = ? WHERE Faculty_ID = ?";
             pStmt = conn.prepareStatement(updateSQL);
@@ -50,15 +50,6 @@ public class Subjects extends HttpServlet {
             out.println("</table>");
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (pStmt != null)
-                    pStmt.close();
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 }
@@ -76,7 +67,7 @@ public class Subjects extends HttpServlet {
     <form action="Subjects" method="post">
         Faculty ID: <input type="text" name="facultyId" required><br><br>
         Subject Name: <input type="text" name="subName" required><br><br>
-        <button type="submit">Update Subject</button>
+        <input value="Update" type="submit">
     </form>
 </body>
 </html>

@@ -22,8 +22,8 @@
         try {
             conn = DriverManager.getConnection(URL, User, Pass);
 
-            String sql = "SELECT * FROM Student WHERE USN = ?";
-            pStmt = conn.prepareStatement(sql);
+            String query = "SELECT * FROM Student WHERE USN = ?";
+            pStmt = conn.prepareStatement(query);
             pStmt.setString(1, usn);
             ResultSet rs = pStmt.executeQuery();
             if (rs.next()) {
@@ -35,15 +35,6 @@
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (pStmt != null)
-                    pStmt.close();
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     %>
 </body>
