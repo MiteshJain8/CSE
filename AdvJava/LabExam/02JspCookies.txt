@@ -45,9 +45,9 @@
         Cookie[] cookies = request.getCookies();
 
         if (cookies != null) {
-            out.println("<table border='1'><tr><th>Name</th><th>Value</th><th>Secure</th><th>HttpOnly</th></tr>");
+            out.println("<table border='1'><tr><th>Name</th><th>Value</th><th>Max Age</th><th>Secure</th><th>HttpOnly</th></tr>");
             for (Cookie cookie : cookies) {
-                out.println("<tr><td>" + cookie.getName() + "</td><td>" + cookie.getValue() + "</td><td>" + cookie.getSecure() + "</td><td>" + cookie.isHttpOnly() + "</td></tr>");
+                out.println("<tr><td>" + cookie.getName() + "</td><td>" + cookie.getValue() + "</td><td>" + cookie.getMaxAge() + "</td><td>" + cookie.getSecure() + "</td><td>" + cookie.isHttpOnly() + "</td></tr>");
             }
             out.println("</table>");
         } else {
