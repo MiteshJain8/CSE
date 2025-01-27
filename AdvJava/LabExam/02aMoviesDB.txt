@@ -1,0 +1,90 @@
+package myPack;
+
+import java.sql.*;
+
+public class MoviesDB {
+    private static final String URL = "jdbc:mysql://localhost:3306/dbName", USER = "root", PASS = "";
+
+    public static void main(String[] args) {
+        Connection conn = null;
+        Statement stmt = null;
+        PreparedStatement pStmt = null;
+
+        try {
+            conn = DriverManager.getConnection(URL, USER, PASS);
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS Movies (" +
+                    "ID INT PRIMARY KEY, " +
+                    "Movie_Name VARCHAR(100), " +
+                    "Genre VARCHAR(50), " +
+                    "IMDB_Rating FLOAT, " +
+                    "Year INT)";
+            stmt.executeUpdate(createTableSQL);
+            System.out.println("Table 'Movies' created or already exists.");
+
+            String insertDataSQL = "INSERT INTO Movies (ID, Movie_Name, Genre, IMDB_Rating, Year) VALUES " +
+                    "(1, 'Inception', 'Sci-fi', 8.8, 2010), " +
+                    "(2, 'Orphan   ', 'Mystery', 4.9, 2009), " +
+                    "(3, 'Interstellar', 'Sci-fi', 8.6, 2014), " +
+                    "(4, 'La La Land', 'Musical', 8.0, 2016), " +
+                    "(10, 'Gifted   ', 'Drama', 7.6, 2017)";
+            stmt.executeUpdate(insertDataSQL);
+            System.out.println("Sample data inserted into 'Movies' table.");
+
+            // i. Display details of all the Movies from the table
+            String queryAllMovies = "SELECT * FROM Movies";
+            ResultSet rs = stmt.executeQuery(queryAllMovies);
+            printResultSet(rs);
+
+            // ii. Display details of 5th Movie from the table
+            if (rs.absolute(5)) {
+                System.out.println("\nDetails of 5th Movie:");
+                System.out.println("ID\tMovie_Name\tGenre\tIMDB_Rating\tYear");
+                System.out.println(rs.getInt("ID") + "\t" +
+                        rs.getString("Movie_Name") + "\t" +
+                        rs.getString("Genre") + "\t\t" +
+                        rs.getFloat("IMDB_Rating") + "\t" +
+                        rs.getInt("Year"));
+            }
+
+            // iii. Insert a new row into the table using PreparedStatement and display all the details
+            String insertSQL = "INSERT INTO Movies (ID, Movie_Name, Genre, IMDB_Rating, Year) VALUES (?, ?, ?, ?, ?)";
+            pStmt = conn.prepareStatement(insertSQL);
+            pStmt.setInt(1, 6);
+            pStmt.setString(2, "Morning Glory");
+            pStmt.setString(3, "Rom-Com");
+            pStmt.setFloat(4, 6.5f);
+            pStmt.setInt(5, 2010);
+            pStmt.executeUpdate();
+            System.out.println("\nNew movie inserted successfully.");
+
+            // iv. Delete a row from the table where the IMDB_Rating is less than 5
+            String deleteSQL = "DELETE FROM Movies WHERE IMDB_Rating < 5";
+            int rowsDeleted = statement.executeUpdate(deleteSQL);
+            System.out.println("\nRows deleted where IMDB_Rating is less than 5: " + rowsDeleted);
+            
+            // v. Update the Genre of a movie with ID as 10 to “Sci-fi”
+            String updateSQL = "UPDATE Movies SET Genre = 'Sci-fi' WHERE ID = 10";
+            int rowsUpdated = statement.executeUpdate(updateSQL);
+            System.out.println("\nRows updated where ID is 10: " + rowsUpdated);
+
+            // Display all the details
+            rs = stmt.executeQuery(queryAllMovies);
+            printResultSet(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void printResultSet(ResultSet rs) throws SQLException {
+        System.out.println("\nAll movies:\nID\tMovie_Name\tGenre\tIMDB_Rating\tYear");
+        while (rs.next()) {
+            System.out.println(rs.getInt("ID") + "\t" +
+                    rs.getString("Movie_Name") + "\t" +
+                    rs.getString("Genre") + "\t\t" +
+                    rs.getFloat("IMDB_Rating") + "\t" +
+                    rs.getInt("Year"));
+        }
+    }
+}

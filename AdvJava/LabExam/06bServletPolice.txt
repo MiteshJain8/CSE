@@ -10,9 +10,7 @@ import jakarta.servlet.http.*;
 public class Police extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private static final String URL = "jdbc:mysql://localhost:3306/dbName";
-    private static final String USER = "root";
-    private static final String PASS = "";
+    private static final String URL = "jdbc:mysql://localhost:3306/dbName", USER = "root", PASS = "";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");

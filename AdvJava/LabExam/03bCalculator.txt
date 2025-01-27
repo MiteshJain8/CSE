@@ -5,9 +5,7 @@ package myPack;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import java.io.*;
-//import jakarta.servlet.annotation.*;
 
-//@WebServlet("/Calculate")
 public class Calculate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

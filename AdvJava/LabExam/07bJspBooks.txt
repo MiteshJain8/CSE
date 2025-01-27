@@ -18,9 +18,7 @@
         String publication = request.getParameter("publication");
         String price = request.getParameter("price");
 
-        String URL = "jdbc:mysql://localhost:3306/dbName";
-        String User = "root";
-        String Pass = "";
+        String URL = "jdbc:mysql://localhost:3306/dbName", User = "root", Pass = "";
 
         Connection conn = null;
         PreparedStatement pStmt = null;

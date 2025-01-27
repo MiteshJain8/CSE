@@ -12,15 +12,13 @@
 <body>
     <h1>Student Details</h1>
     <%
-        String URL = "jdbc:mysql://localhost:3306/dbName";
-        String User = "root";
-        String Pass = "";
+        String URL = "jdbc:mysql://localhost:3306/dbName", USER = "root", PASS = "";
 
         String usn = request.getParameter("usn");
         Connection conn = null;
         PreparedStatement pStmt = null;
         try {
-            conn = DriverManager.getConnection(URL, User, Pass);
+            conn = DriverManager.getConnection(URL, USER, PASS);
 
             String query = "SELECT * FROM Student WHERE USN = ?";
             pStmt = conn.prepareStatement(query);
