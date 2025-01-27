@@ -1,0 +1,49 @@
+// Voting.java
+
+package myPack;
+
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import java.io.*;
+import java.time.*;
+
+public class Voting extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String fname = request.getParameter("fname");
+        String lname = request.getParameter("lname");
+        String dob = request.getParameter("dob");
+
+        LocalDate birthDate = LocalDate.parse(dob);
+        LocalDate currentDate = LocalDate.now();
+        int age = Period.between(birthDate, currentDate).getYears();
+
+        response.setContentType("text/html");
+        if (age >= 18) {
+	        response.getWriter().println("<h1>You are eligible, " + fname + " " + lname + "!</h1>");
+        } else {
+	        response.getWriter().println("<h1>You are not eligible, " + fname + " " + lname + "!</h1>");
+        }
+    }
+}
+
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Vote</title>
+    </head>
+    <body>
+        <h1>Voting Page</h1>
+        <form action="Voting" method="post">
+            First Name: <input type="text" id="fname" name="fname" required><br><br>
+            Last Name: <input type="text" id="lname" name="lname" required><br><br>
+            E-mail: <input type="text" id="mail" name="mail" required><br><br>
+            Date of Birth: <input type="date" id="dob" name="dob" required><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>

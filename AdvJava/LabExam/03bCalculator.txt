@@ -1,0 +1,59 @@
+// Calculate.java
+
+package myPack;
+
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import java.io.*;
+//import jakarta.servlet.annotation.*;
+
+//@WebServlet("/Calculate")
+public class Calculate extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		String nl = req.getParameter("nl"), n2 = req.getParameter("n2"), op = req.getParameter("op");
+		res.setContentType("text/html");
+		PrintWriter out = res.getWriter();
+		double r= 0, a = Double.parseDouble(nl), b = Double.parseDouble(n2);
+		if (op.equals("Addition")) {
+			r = a + b;
+		} else if (op.equals("Subtraction")) {
+			r = a - b;
+		} else if (op.equals("Multiplication")) {
+			r = a * b;
+		} else if (op.equals("Division")) {
+			if (b!= 0) {
+				r = a / b;
+			} else {
+				r = Double.MAX_VALUE;
+			}
+		} else if (op.equals("e^x")) {
+			r = Math.exp(a);
+		}
+		out.println("<h1>Result is: " + String.valueOf(r) + "</h1>");
+	}
+}
+
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Calculator</title>
+    </head>
+    <body>
+		<form action = "Calculate" method = "post">
+				First Number (x): <input type = "text" name = "nl" required><br><br>
+				Second Number: <input type = "text" name = "n2">
+				<p>Select operation: </p>
+				<input type="radio" name = "op" value = "Addition"> Addition<br><br>
+				<input type="radio" name = "op" value = "Subtraction"> Subtraction<br><br>
+				<input type = "radio" name = "op" value = "Multiplication"> Multiplication<br><br>
+				<input type = "radio" name = "op" value = "Division"> Division<br><br>
+				<input type = "radio" name = "op" value = "e^x"> e^x<br><br>
+				<input type = "submit" value = "Submit">
+		</form>
+    </body>
+</html>

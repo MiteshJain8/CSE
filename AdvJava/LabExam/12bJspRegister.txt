@@ -14,8 +14,9 @@
         String password = request.getParameter("password");
 
         session.setAttribute("username", username);
+        session.setAttribute("password", pass);
 
-        if ("Admin".equals(username) && "Admin123".equals(password)) {
+        if ("Admin".equals(session.getAttribute("username")) && "Admin123".equals(session.getAttribute("password"))) {
             out.println("<h1>Welcome, " + username + "!</h1>");
         } else {
             out.println("<h1>Invalid username or password.</h1>");
