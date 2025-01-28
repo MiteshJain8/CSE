@@ -1,0 +1,49 @@
+package myPack;
+
+import java.sql.*;
+
+public class CountriesDB {
+	private static final String URL = "jdbc:mysql://localhost:3306/dbName", USER = "root", PASS = "";
+	
+	public static void main(String[] args) {
+        Connection conn = null;
+        Statement stmt = null;
+        PreparedStatement pStmt = null;
+
+        try {
+            conn = DriverManager.getConnection(URL, USER, PASS);
+            stmt = conn.createStatement();
+
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS Country (" +
+                    "country_code VARCHAR(10) PRIMARY KEY, " +
+                    "capital VARCHAR(100), " +
+                    "continent VARCHAR(50), " +
+                    "population INT)";
+            stmt.executeUpdate(createTableSQL);
+            System.out.println("Table 'Country' created or already exists.");
+
+            String insertDataSQL = "INSERT INTO Country (country_code, capital, continent, population) VALUES " +
+                    "('IN', 'Delhi', 'Asia', 1380004385), " +
+                    "('US', 'W.D.C.', 'America', 331002651), " +
+                    "('CN', 'Beijing', 'Asia', 1439323776), " +
+                    "('EG', 'Cairo', 'Africa', 117576725), " +
+                    "('RU', 'Moscow', 'Europe', 145934462)";
+            stmt.executeUpdate(insertDataSQL);
+            System.out.println("Sample data inserted into 'Country' table.");
+
+            String querySQL = "SELECT * FROM Country ORDER BY population ASC";
+            ResultSet rs = stmt.executeQuery(querySQL);
+
+            System.out.println("\nCountry Details in Ascending Order of Population:");
+            System.out.println("Country Code\tCapital\t\tContinent\tPopulation");
+            while (rs.next()) {
+                System.out.println(rs.getString("country_code") + "\t\t" +
+                        rs.getString("capital") + "\t\t" +
+                        rs.getString("continent") + "\t\t" +
+                        rs.getInt("population"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}

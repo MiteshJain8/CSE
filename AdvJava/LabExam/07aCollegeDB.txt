@@ -1,0 +1,64 @@
+package myPack;
+
+import java.sql.*;
+
+public class CollegeDB {
+    private static final String URL = "jdbc:mysql://localhost:3306/dbName", USER = "root", PASS = "";
+
+    public static void main(String[] args) {
+        Connection conn = null;
+        Statement stmt = null;
+
+        try {
+            conn = DriverManager.getConnection(URL, USER, PASS);
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS Student (" +
+                    "id INT PRIMARY KEY AUTO_INCREMENT, " +
+                    "name VARCHAR(100), " +
+                    "dept VARCHAR(100), " +
+                    "cgpa FLOAT)";
+            stmt.executeUpdate(createTableSQL);
+            System.out.println("Table 'Student' created or already exists.");
+
+            String insertDataSQL = "INSERT INTO Student (name, dept, cgpa) VALUES " +
+                    "('John', 'CSE', 8.50), " +
+                    "('Alice', 'CSE', 9.20), " +
+                    "('Bob', 'CSE', 8.80)" ;
+            stmt.executeUpdate(insertDataSQL);
+            System.out.println("Sample data inserted into 'Student' table.");
+
+            String querySQL = "SELECT * FROM Student WHERE cgpa < 9";
+            ResultSet rs = stmt.executeQuery(querySQL);
+
+            System.out.println("\nStudents with CGPA less than 9:");
+            System.out.println("ID\tName\tDept\tCGPA");
+            while (rs.next()) {
+                System.out.println(rs.getInt("id") + "\t" +
+                        rs.getString("name") + "\t" +
+                        rs.getString("dept") + "\t" +
+                        rs.getFloat("cgpa"));
+            }
+
+            rs = stmt.executeQuery("SELECT * FROM Student WHERE name = 'John'");
+            if (rs.next()) {
+                rs.updateFloat("cgpa", 9.4f);
+                rs.updateRow();
+                System.out.println("\nCGPA of 'John' updated to 9.4.");
+            }
+
+            rs = stmt.executeQuery("SELECT * FROM Student");
+
+            System.out.println("\nUpdated Student Details:");
+            System.out.println("ID\tName\tDept\tCGPA");
+            while (rs.next()) {
+                System.out.println(rs.getInt("id") + "\t" +
+                        rs.getString("name") + "\t" +
+                        rs.getString("dept") + "\t" +
+                        rs.getFloat("cgpa"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}

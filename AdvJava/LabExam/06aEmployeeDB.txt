@@ -1,0 +1,51 @@
+package myPack;
+
+import java.sql.*;
+
+public class EmployeeDetailsDB {
+	private static final String URL = "jdbc:mysql://localhost:3306/dbName", USER = "root", PASS = "";
+
+    public static void main(String[] args) {
+        Connection conn = null;
+        Statement stmt = null;
+
+        try {
+            conn = DriverManager.getConnection(URL, USER, PASS);
+            stmt = conn.createStatement();
+
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS Employee (" +
+                    "name VARCHAR(100), " +
+                    "designation VARCHAR(100), " +
+                    "dept VARCHAR(100), " +
+                    "salary INT)";
+            stmt.executeUpdate(createTableSQL);
+            System.out.println("Table 'Employee' created or already exists.");
+
+            String insertDataSQL = "INSERT INTO Employee (name, designation, dept, salary) VALUES " +
+                    "('Anika', 'Assistant Professor', 'Chem', 60000), " +
+                    "('Rahul', 'Associate Professor', 'Math', 62000), " +
+                    "('Priya', 'Associate Professor', 'Phy', 70000), " +
+                    "('Vivek', 'Assistant Professor', 'Bio', 61000)";
+            stmt.executeUpdate(insertDataSQL);
+            System.out.println("Sample data inserted into 'Employee' table.");
+
+            String updateSQL = "UPDATE Employee SET designation = 'Associate Professor' WHERE name = 'Anika'";
+            int rowsUpdated = stmt.executeUpdate(updateSQL);
+            System.out.println("\nRows updated: " + rowsUpdated);
+
+            String querySQL = "SELECT * FROM Employee";
+            ResultSet rs = stmt.executeQuery(querySQL);
+
+            System.out.println("\nUpdated Employee Details:");
+            System.out.println("Name\tDesignation\t\tDept\tSalary");
+            while (rs.next()) {
+                System.out.println(rs.getString("name") + "\t" +
+                        rs.getString("designation") + "\t" +
+                        rs.getString("dept") + "\t" +
+                        rs.getInt("salary"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}

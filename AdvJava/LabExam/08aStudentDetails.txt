@@ -1,0 +1,67 @@
+package myPack;
+
+import java.sql.*;
+
+public class StudentDetailsDB {
+	private static final String URL = "jdbc:mysql://localhost:3306/dbName", USER = "root", PASS = "";
+
+    public static void main(String[] args) {
+        Connection conn = null;
+        Statement stmt = null;
+        PreparedStatement pStmt = null;
+
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS Student (" +
+                    "name VARCHAR(20), " +
+                    "usn VARCHAR(20) PRIMARY KEY, " +
+                    "sem INT, " +
+                    "course VARCHAR(20), " +
+                    "grade CHAR(1))";
+            stmt.executeUpdate(createTableSQL);
+            System.out.println("Table 'Student' created or already exists.");
+
+            String insertDataSQL = "INSERT INTO Student (name, usn, sem, course, grade) VALUES " +
+                    "('Ram', '1MS22CS901', 5, 'CSE', 'A'), " +
+                    "('Anika', '1MS22CS902', 5, 'CSE', 'B'), " +
+                    "('Rahul', '1MS22CS903', 5, 'CSE', 'A')";
+            stmt.executeUpdate(insertDataSQL);
+            System.out.println("Sample data inserted into 'Student' table.");
+
+            String querySQL = "SELECT * FROM Student";
+            ResultSet rs = stmt.executeQuery(querySQL);
+
+            System.out.println("\nStudent Details:");
+            System.out.println("Name\tUSN\t\tSem\tCourse\tGrade");
+            while (rs.next()) {
+                System.out.println(rs.getString("name") + "\t" +
+                        rs.getString("usn") + "\t" +
+                        rs.getInt("sem") + "\t" +
+                        rs.getString("course") + "\t" +
+                        rs.getString("grade"));
+            }
+
+            String updateSQL = "UPDATE Student SET grade = ? WHERE name = ?";
+            pStmt = conn.prepareStatement(updateSQL);
+            pStmt.setString(1, "S");
+            pStmt.setString(2, "Ram");
+            int rowsUpdated = pStmt.executeUpdate();
+            System.out.println("\nRows updated: " + rowsUpdated);
+
+            rs = stmt.executeQuery(querySQL);
+            System.out.println("\nUpdated Student Details:");
+            System.out.println("Name\tUSN\t\tSem\tCourse\tGrade");
+            while (rs.next()) {
+                System.out.println(rs.getString("name") + "\t" +
+                        rs.getString("usn") + "\t" +
+                        rs.getInt("sem") + "\t" +
+                        rs.getString("course") + "\t" +
+                        rs.getString("grade"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
