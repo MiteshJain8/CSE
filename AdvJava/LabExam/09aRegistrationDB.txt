@@ -1,0 +1,53 @@
+package myPack;
+
+import java.sql.*;
+
+public class RegistrationDB {
+	private static final String URL = "jdbc:mysql://localhost:3306/dbName", USER = "root", PASS = "";
+
+    public static void main(String[] args) {
+        Connection conn = null;
+        Statement stmt = null;
+
+        try {
+            conn = DriverManager.getConnection(URL, USER, PASS);
+            stmt = conn.createStatement();
+
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS student (" +
+                    "Roll_No INT PRIMARY KEY, " +
+                    "Name VARCHAR(20), " +
+                    "Program VARCHAR(10), " +
+                    "Year_of_Admission INT)";
+            stmt.executeUpdate(createTableSQL);
+            System.out.println("Table 'student' created or already exists.");
+
+            String insertDataSQL = "INSERT INTO student (Roll_No, Name, Program, Year_of_Admission) VALUES " +
+                    "(1, 'Rohan', 'BE', 2023), " +
+                    "(2, 'Meera', 'ME', 2022), " +
+                    "(3, 'Amit', 'ME', 2023), " +
+                    "(4, 'Neha', 'BE', 2021)" ;
+            stmt.executeUpdate(insertDataSQL);
+            System.out.println("Sample data inserted into 'student' table.");
+
+            // i Students enrolled in the year 2023
+            String query2023SQL = "SELECT Roll_No, Name FROM student WHERE Year_of_Admission = 2023";
+            ResultSet rs = stmt.executeQuery(query2023SQL);
+            System.out.println("\nStudents enrolled in the year 2023:");
+            System.out.println("Roll_No\tName");
+            while (rs.next()) {
+                System.out.println(rs.getInt("Roll_No") + "\t" + rs.getString("Name"));
+            }
+
+            // ii Students in the BE program
+            String queryBESQL = "SELECT Roll_No, Name FROM student WHERE Program = 'BE'";
+            rs = stmt.executeQuery(queryBESQL);
+            System.out.println("\nStudents in the BE program:");
+            System.out.println("Roll_No\tName");
+            while (rs.next()) {
+                System.out.println(rs.getInt("Roll_No") + "\t" + rs.getString("Name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}

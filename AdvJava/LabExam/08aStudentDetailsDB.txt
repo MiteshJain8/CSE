@@ -11,7 +11,7 @@ public class StudentDetailsDB {
         PreparedStatement pStmt = null;
 
         try {
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(URL, USER, PASS);
             stmt = conn.createStatement();
 
             String createTableSQL = "CREATE TABLE IF NOT EXISTS Student (" +

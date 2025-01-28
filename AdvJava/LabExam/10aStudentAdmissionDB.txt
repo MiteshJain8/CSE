@@ -1,0 +1,64 @@
+package myPack;
+
+import java.sql.*;
+import java.util.*;
+
+public class StudentAdmissionDB {
+	private static final String URL = "jdbc:mysql://localhost:3306/dbName", USER = "root", PASS = "";
+
+    public static void main(String[] args) {
+        Connection conn = null;
+        PreparedStatement pStmt = null;
+        Statement stmt = null;
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            conn = DriverManager.getConnection(URL, USER, PASS);
+            stmt = conn.createStatement();
+
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS student (" +
+                    "name VARCHAR(20), " +
+                    "usn VARCHAR(10) PRIMARY KEY, " +
+                    "branch VARCHAR(10), " +
+                    "admission_type VARCHAR(20))";
+            stmt.executeUpdate(createTableSQL);
+            System.out.println("Table 'student' created or already exists.");
+            
+            String insertDataSQL = "INSERT INTO student (name, usn, branch, admission_type) VALUES " +
+                    "('Rohan', '1MS22CS901', 'CSE', 'CET'), " +
+                    "('Meera', '1MS22EC902', 'ECE', 'COMED_K'), " +
+                    "('Amit', '1MS22CS903', 'CSE', 'CET'), " +
+                    "('Neha', '1MS22CS905', 'CSE', 'COMED_K')";
+            stmt.executeUpdate(insertDataSQL);
+            System.out.println("Sample data inserted into 'student' table.");
+
+            System.out.print("Enter student name: ");
+            String name = sc.nextLine();
+            System.out.print("Enter student USN: ");
+            String usn = sc.nextLine();
+            System.out.print("Enter student branch: ");
+            String branch = sc.nextLine();
+            System.out.print("Enter admission type (CET/COMED_K): ");
+            String admissionType = sc.nextLine();
+
+            String insertSQL = "INSERT INTO student (name, usn, branch, admission_type) VALUES (?, ?, ?, ?)";
+            pStmt = conn.prepareStatement(insertSQL);
+            pStmt.setString(1, name);
+            pStmt.setString(2, usn);
+            pStmt.setString(3, branch);
+            pStmt.setString(4, admissionType);
+            pStmt.executeUpdate();
+            System.out.println("Student details inserted into 'student' table.");
+
+            String querySQL = "SELECT name, usn FROM student WHERE admission_type = 'CET' AND branch = 'CSE'";
+            ResultSet rs = stmt.executeQuery(querySQL);
+            System.out.println("\nStudents admitted through CET and branch is CSE:");
+            System.out.println("Name\t\tUSN");
+            while (rs.next()) {
+                System.out.println(rs.getString("name") + "\t\t" + rs.getString("usn"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}

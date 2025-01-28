@@ -1,0 +1,59 @@
+package myPack;
+
+import java.sql.*;
+import java.util.*;
+
+public class EmployeeOperationsDB {
+	private static final String URL = "jdbc:mysql://localhost:3306/dbName", USER = "root", PASS = "";
+
+    public static void main(String[] args) {
+        Connection conn = null;
+        Statement stmt = null;
+        PreparedStatement pStmt = null;
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            conn = DriverManager.getConnection(URL, USER, PASS);
+            stmt = conn.createStatement();
+
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS Employee (" +
+                    "name VARCHAR(20), " +
+                    "dept VARCHAR(20), " +
+                    "project VARCHAR(20), " +
+                    "salary INT)";
+            stmt.executeUpdate(createTableSQL);
+            System.out.println("Table 'Employee' created or already exists.");
+
+            String insertDataSQL = "INSERT INTO Employee (name, dept, project, salary) VALUES " +
+                    "('Anika', 'Sales', 'ProjectA', 75000), " +
+                    "('Rahul', 'HR', 'ProjectB', 65000), " +
+                    "('Priya', 'IT', 'ProjectC', 85000), " +
+                    "('Vivek', 'IT', 'ProjectA', 55000)";
+            stmt.executeUpdate(insertDataSQL);
+            System.out.println("Sample data inserted into 'Employee' table.");
+
+            // i. Delete records of employees working on a project
+            System.out.print("Enter the project name to delete employees: ");
+            String projectName = sc.nextLine();
+            String deleteSQL = "DELETE FROM Employee WHERE project = ?";
+            pStmt = conn.prepareStatement(deleteSQL);
+            pStmt.setString(1, projectName);
+            int rowsDeleted = pStmt.executeUpdate();
+            System.out.println("\nRows deleted: " + rowsDeleted);
+
+            // ii. All employees sorted by their salary in descending order
+            String querySQL = "SELECT * FROM Employee ORDER BY salary DESC";
+            ResultSet rs = stmt.executeQuery(querySQL);
+            System.out.println("\nEmployee Details (sorted by salary in descending order):");
+            System.out.println("Name\tDept\tProject\tSalary");
+            while (rs.next()) {
+                System.out.println(rs.getString("name") + "\t" +
+                        rs.getString("dept") + "\t" +
+                        rs.getString("project") + "\t" +
+                        rs.getInt("salary"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
