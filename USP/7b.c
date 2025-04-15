@@ -12,9 +12,9 @@ int main(void)
     }
     else if (pid == 0)
     {
-        if ((pid3 = fork()) < 0)
+        if ((pid1 = fork()) < 0)
             printf("fork error");
-        else if (pid3 == 0)
+        else if (pid1 == 0)
         {
             sleep(5);
             printf("Child pid is: %d\n", getpid());
