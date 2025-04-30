@@ -6,6 +6,7 @@
 int main(void)
 {
     pid_t pid, pid1, pid2;
+    printf("Parent process started. PID: %d\n", getpid());
     if ((pid = fork()) < 0)
     {
         printf("fork error");
@@ -17,13 +18,13 @@ int main(void)
         else if (pid1 == 0)
         {
             sleep(5);
-            printf("Child pid is: %d\n", getpid());
+            printf("Second child pid: %d\n", getpid());
             printf("second child, parent pid = %ld\n", (long)getppid());
             exit(0);
         }
         else
         {
-            printf("Child pid: %d\n", getpid());
+            printf("First child pid: %d\n", getpid());
             exit(0);
         }
     }

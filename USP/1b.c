@@ -4,34 +4,27 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 
-int main()
-{
-    int fd = open("test.txt", O_RDWR);
-    if (fd == -1)
-    {
+int main() {
+	int fd = open("test.txt", O_RDWR);
+    if (fd == -1) {
         perror("open");
-        return 1;
+        exit(1);
     }
     pid_t pid = fork();
-    if (pid == -1)
-    {
+    if (pid == -1) {
         perror("fork");
-        return 1;
-    }
-    else if (pid == 0)
-    {
-        char buffer[10];
-        read(fd, buffer, 5);
-        buffer[5] = '\0';
-        printf("Child read: %s\n", buffer);
-    }
-    else
-    {
+        exit(1);
+    } else if (pid == 0) {
+        char buf[10];
+        read(fd, buf, 5);
+        buf[5] = '\0'; 
+        printf("Child process read: %s\n", buf);
+    } else {
         wait(NULL);
-        char buffer[10];
-        read(fd, buffer, 5);
-        buffer[5] = '\0';
-        printf("Parent read: %s\n", buffer);
+        char buf[10];
+        read(fd, buf, 5);
+        buf[5] = '\0'; 
+        printf("Parent process read: %s\n", buf);
     }
     close(fd);
     return 0;

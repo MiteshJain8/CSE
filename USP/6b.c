@@ -14,7 +14,7 @@ int main()
         write(STDOUT_FILENO, buffer, 20);
     printf("\n");
     if (lseek(file, 10, SEEK_SET) < 0)
-        printf("lseek operation to beginning of file failed\n");
+        printf("lseek operation from beginning of file failed\n");
     if (read(file, buffer, 20) != 20)
         printf("file read operation failed\n");
     else
@@ -22,7 +22,7 @@ int main()
     printf("\n");
 
     if (lseek(file, 10, SEEK_CUR) < 0)
-        printf("lseek operation to beginning of file failed\n");
+        printf("lseek operation from current position of file failed\n");
     if (read(file, buffer, 20) != 20)
         printf("file read operation failed\n");
     else

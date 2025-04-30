@@ -12,10 +12,10 @@ int main(int argc, char *argv[])
     struct utimbuf times;
 
     if (stat(argv[1], &statbuf_1) < 0) /*Destination file status*/
-        printf("Error!\n");
+        printf("Error Destination!\n");
 
     if (stat(argv[2], &statbuf_2) < 0) /* Source file status*/
-        printf("Error!\n");
+        printf("Error Source!\n");
 
     printf("Before Copying ...\n");
     printf("Access Time %s\nModification Time%s\n", ctime(&statbuf_1.st_atime), ctime(&statbuf_1.st_mtime));
